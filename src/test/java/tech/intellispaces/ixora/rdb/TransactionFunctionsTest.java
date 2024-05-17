@@ -1,5 +1,6 @@
 package tech.intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.TransactionFactoryHandle;
 import intellispaces.ixora.rdb.TransactionHandle;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link TransactionFunctions} class.
@@ -20,16 +22,18 @@ public class TransactionFunctionsTest {
   @Test
   public void testTransactional_whenNoException() {
     // Given
+    TransactionFactoryHandle transactionFactory = mock(TransactionFactoryHandle.class);
     TransactionHandle tx = mock(TransactionHandle.class);
+    when(transactionFactory.getTransaction()).thenReturn(tx);
 
-    List<TransactionHandle> aaa = new ArrayList<>();
-    Consumer<TransactionHandle> operation = aaa::add;
+    List<TransactionHandle> appliedTransactions = new ArrayList<>();
+    Consumer<TransactionHandle> operation = appliedTransactions::add;
 
     // When
-    TransactionFunctions.transactional(tx, operation);
+    TransactionFunctions.transactional(transactionFactory, operation);
 
     // Then
-    assertThat(aaa).containsExactly(tx);
+    assertThat(appliedTransactions).containsExactly(tx);
     verify(tx).commit();
     verify(tx, never()).rollback();
   }

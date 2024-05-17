@@ -2,12 +2,20 @@ package tech.intellispaces.ixora.rdb;
 
 import intellispaces.ixora.rdb.TransactionFactoryHandle;
 import intellispaces.ixora.rdb.TransactionHandle;
-import tech.intellispaces.ixora.rdb.exception.TransactionException;
+import intellispaces.ixora.rdb.exception.TransactionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import tech.intellispacesframework.commons.exception.CoveredCheckedException;
 import tech.intellispacesframework.commons.function.ThrowingConsumer;
 
 import java.util.function.Consumer;
 
+/**
+ * Transaction functions.
+ */
 public class TransactionFunctions {
+
+  private static final Logger LOG = LoggerFactory.getLogger(TransactionFunctions.class);
 
   public static void transactional(
       TransactionFactoryHandle transactionFactory, Consumer<TransactionHandle> operation
@@ -19,7 +27,7 @@ public class TransactionFunctions {
       commit(tx);
     } catch (TransactionException e) {
       throw e;
-    } catch (RuntimeException e) {
+    } catch (RuntimeException | Error e) {
       rollback(tx, e);
       throw TransactionException.withCauseAndMessage(e, "Runtime exception {} occurred while transaction was executed. Transaction has been rolled back",
           e.getClass().getSimpleName());
@@ -36,14 +44,14 @@ public class TransactionFunctions {
       tx.commit();
     } catch (TransactionException e) {
       throw e;
-    } catch (RuntimeException e) {
+    } catch (RuntimeException | Error e) {
       rollback(tx, e);
       throw TransactionException.withCauseAndMessage(e, "Runtime exception {} occurred while transaction was executed. Transaction has been rolled back",
           e.getClass().getSimpleName());
     } catch (Throwable e) {
+      LOG.info("Checked exception " + e.getClass().getCanonicalName() + " occurred while transaction was executed. Transaction will be committed");
       commit(tx, e);
-      throw TransactionException.withCauseAndMessage(e, "Checked exception {} occurred while transaction was executed. Transaction has been committed",
-          e.getClass().getSimpleName());
+      throw CoveredCheckedException.withCause(e);
     }
   }
 
