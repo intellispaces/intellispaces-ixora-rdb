@@ -28,10 +28,10 @@
     </build>
 
     <dependencies>
-        <!-- Intellispaces Ixora -->
+        <!-- Ixora -->
         <dependency>
             <groupId>intellispaces</groupId>
-            <artifactId>intellispaces-ixora-rdb</artifactId>
+            <artifactId>ixora-rdb-ontology</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

@@ -1,9 +1,5 @@
 package tech.intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.ConnectionPoolHandle;
-import intellispaces.ixora.rdb.JdbcDataSourceHandle;
-import intellispaces.ixora.rdb.JdbcDataSourceProperties;
-import intellispaces.ixora.rdb.TransactionFactoryHandle;
 import tech.intellispacesframework.core.annotation.ModuleProperties;
 import tech.intellispacesframework.core.annotation.Projection;
 import tech.intellispacesframework.core.annotation.Unit;

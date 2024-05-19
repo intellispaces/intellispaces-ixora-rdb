@@ -1,10 +1,8 @@
 package tech.intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.TransactionFactoryHandle;
-import intellispaces.ixora.rdb.TransactionHandle;
-import intellispaces.ixora.rdb.exception.TransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tech.intellispaces.ixora.rdb.exception.TransactionException;
 import tech.intellispacesframework.commons.exception.CoveredCheckedException;
 import tech.intellispacesframework.commons.function.ThrowingConsumer;
 
