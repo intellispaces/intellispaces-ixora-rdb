@@ -3,8 +3,8 @@ package tech.intellispaces.ixora.rdb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.intellispaces.ixora.rdb.exception.TransactionException;
-import tech.intellispacesframework.commons.exception.CoveredCheckedException;
-import tech.intellispacesframework.commons.function.ThrowingConsumer;
+import tech.intellispaces.framework.commons.exception.CoveredCheckedException;
+import tech.intellispaces.framework.commons.function.ThrowingConsumer;
 
 import java.util.function.Consumer;
 

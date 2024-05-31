@@ -1,14 +1,14 @@
 package tech.intellispaces.ixora.rdb;
 
-import tech.intellispacesframework.core.annotation.ModuleProperties;
-import tech.intellispacesframework.core.annotation.Projection;
-import tech.intellispacesframework.core.annotation.Unit;
+import tech.intellispaces.framework.core.annotation.Properties;
+import tech.intellispaces.framework.core.annotation.Projection;
+import tech.intellispaces.framework.core.annotation.Unit;
 
 @Unit
 public abstract class DefaultJdbcUnit {
 
   @Projection
-  @ModuleProperties("datasource.jdbc")
+  @Properties("datasource.jdbc")
   public abstract JdbcDataSourceProperties jdbcDataSourceProperties();
 
   @Projection
