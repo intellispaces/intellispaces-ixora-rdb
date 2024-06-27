@@ -24,8 +24,8 @@ public class TransactionFunctionsTest {
     TransactionHandle tx = mock(TransactionHandle.class);
     when(transactionFactory.getTransaction()).thenReturn(tx);
 
-    List<TransactionHandle> appliedTransactions = new ArrayList<>();
-    Consumer<TransactionHandle> operation = appliedTransactions::add;
+    List<Transaction> appliedTransactions = new ArrayList<>();
+    Consumer<Transaction> operation = appliedTransactions::add;
 
     // When
     TransactionFunctions.transactional(transactionFactory, operation);

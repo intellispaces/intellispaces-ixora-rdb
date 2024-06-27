@@ -15,10 +15,8 @@ public class TransactionFunctions {
 
   private static final Logger LOG = LoggerFactory.getLogger(TransactionFunctions.class);
 
-  public static void transactional(
-      TransactionFactoryHandle transactionFactory, Consumer<TransactionHandle> operation
-  ) {
-    TransactionHandle tx = null;
+  public static void transactional(TransactionFactory transactionFactory, Consumer<Transaction> operation) {
+    Transaction tx = null;
     try {
       tx = transactionFactory.getTransaction();
       operation.accept(tx);
@@ -27,15 +25,16 @@ public class TransactionFunctions {
       throw e;
     } catch (RuntimeException | Error e) {
       rollback(tx, e);
-      throw TransactionException.withCauseAndMessage(e, "Runtime exception {} occurred while transaction was executed. Transaction has been rolled back",
+      throw TransactionException.withCauseAndMessage(e, "Runtime exception {} occurred while transaction was executed. " +
+              "Transaction has been rolled back",
           e.getClass().getSimpleName());
     }
   }
 
   public static <E extends Throwable> void transactional(
-      TransactionFactoryHandle transactionFactory, ThrowingConsumer<TransactionHandle, E> operation
+      TransactionFactory transactionFactory, ThrowingConsumer<Transaction, E> operation
   ) {
-    TransactionHandle tx = null;
+    Transaction tx = null;
     try {
       tx = transactionFactory.getTransaction();
       operation.accept(tx);
@@ -44,20 +43,22 @@ public class TransactionFunctions {
       throw e;
     } catch (RuntimeException | Error e) {
       rollback(tx, e);
-      throw TransactionException.withCauseAndMessage(e, "Runtime exception {} occurred while transaction was executed. Transaction has been rolled back",
+      throw TransactionException.withCauseAndMessage(e, "Runtime exception {} occurred while transaction was executed. " +
+              "Transaction has been rolled back",
           e.getClass().getSimpleName());
     } catch (Throwable e) {
-      LOG.info("Checked exception " + e.getClass().getCanonicalName() + " occurred while transaction was executed. Transaction will be committed");
+      LOG.info("Checked exception " + e.getClass().getCanonicalName() + " occurred while transaction was executed. " +
+          "Transaction will be committed");
       commit(tx, e);
       throw CoveredCheckedException.withCause(e);
     }
   }
 
-  public static void commit(TransactionHandle tx) {
+  public static void commit(Transaction tx) {
     commit(tx, null);
   }
 
-  public static void commit(TransactionHandle tx, Throwable reason) {
+  public static void commit(Transaction tx, Throwable reason) {
     try {
       tx.commit();
     } catch (Throwable e) {
@@ -71,11 +72,11 @@ public class TransactionFunctions {
     }
   }
 
-  public static void rollback(TransactionHandle tx) {
+  public static void rollback(Transaction tx) {
     rollback(tx, null);
   }
 
-  public static void rollback(TransactionHandle tx, Throwable reason) {
+  public static void rollback(Transaction tx, Throwable reason) {
     try {
       tx.rollback();
     } catch (Throwable e) {
