@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -24,11 +23,10 @@ public class TransactionFunctionsTest {
     TransactionHandle tx = mock(TransactionHandle.class);
     when(transactionFactory.getTransaction()).thenReturn(tx);
 
-    List<Transaction> appliedTransactions = new ArrayList<>();
-    Consumer<Transaction> operation = appliedTransactions::add;
+    List<TransactionHandle> appliedTransactions = new ArrayList<>();
 
     // When
-    TransactionFunctions.transactional(transactionFactory, operation);
+    TransactionFunctions.transactional(transactionFactory, appliedTransactions::add);
 
     // Then
     assertThat(appliedTransactions).containsExactly(tx);
