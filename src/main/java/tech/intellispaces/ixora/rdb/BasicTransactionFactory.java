@@ -23,6 +23,8 @@ public abstract class BasicTransactionFactory implements TransactionFactoryMovab
   @MoverWithBacklash
   public TransactionMovableHandle getTransaction() throws TransactionException {
     ConnectionMovableHandle connection = (ConnectionMovableHandle) dataSource.getConnection();
+    //connection.disableAutoCommit();
+    //connection.beginTransaction();
     return new BasicTransactionHandleImpl(connection);
   }
 }
