@@ -1,7 +1,7 @@
 package tech.intellispaces.ixora.rdb;
 
 import tech.intellispaces.framework.core.annotation.Mapper;
-import tech.intellispaces.framework.core.annotation.MoverWithBacklash;
+import tech.intellispaces.framework.core.annotation.Mover;
 import tech.intellispaces.framework.core.annotation.ObjectHandle;
 import tech.intellispaces.ixora.rdb.exception.TransactionException;
 
@@ -13,14 +13,14 @@ public abstract class BasicTransactionFactory implements TransactionFactoryMovab
     this.dataSource = dataSource;
   }
 
-  @Override
   @Mapper
+  @Override
   public DataSourceHandle dataSource() {
     return dataSource;
   }
 
+  @Mover
   @Override
-  @MoverWithBacklash
   public TransactionMovableHandle getTransaction() throws TransactionException {
     ConnectionMovableHandle connection = (ConnectionMovableHandle) dataSource.getConnection();
     //connection.disableAutoCommit();
