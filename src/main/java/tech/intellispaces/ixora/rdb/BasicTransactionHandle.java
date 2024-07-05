@@ -45,13 +45,13 @@ public abstract class BasicTransactionHandle implements TransactionMovableHandle
 
   @Mapper
   @Override
-  public <T> CursorHandle<T> query(Class<T> type, String sql) {
+  public <T> CursorHandle<T> queryData(Class<T> type, String sql) {
     return null;
   }
 
   @Mapper
   @Override
-  public <T> T fetch(Class<T> type, String sql) {
+  public <T> T fetchData(Class<T> type, String sql) {
     return null;
   }
 }

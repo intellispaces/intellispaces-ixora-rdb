@@ -1,6 +1,6 @@
 package tech.intellispaces.ixora.rdb;
 
-import tech.intellispaces.framework.core.annotation.Mover;
+import tech.intellispaces.framework.core.annotation.Mapper;
 import tech.intellispaces.framework.core.annotation.ObjectHandle;
 import tech.intellispaces.framework.core.exception.TraverseException;
 
@@ -15,7 +15,7 @@ public abstract class BasicStatementHandle implements StatementMovableHandle {
     this.statement = statement;
   }
 
-  @Mover
+  @Mapper
   @Override
   public ResultSetHandle executeQuery(String sql) {
     try {
