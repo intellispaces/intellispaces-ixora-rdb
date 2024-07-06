@@ -1,4 +1,4 @@
-package tech.intellispaces.ixora.rdb.annitation;
+package tech.intellispaces.ixora.rdb.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
