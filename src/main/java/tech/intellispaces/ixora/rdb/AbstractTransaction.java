@@ -5,11 +5,11 @@ import tech.intellispaces.framework.core.annotation.Mover;
 import tech.intellispaces.framework.core.annotation.ObjectHandle;
 import tech.intellispaces.ixora.structures.collection.CursorHandle;
 
-@ObjectHandle
-public abstract class BasicTransactionHandle implements TransactionMovableHandle {
+@ObjectHandle("BasicTransaction")
+public abstract class AbstractTransaction implements TransactionMovableHandle {
   private final ConnectionMovableHandle connection;
 
-  public BasicTransactionHandle(ConnectionMovableHandle connection) {
+  public AbstractTransaction(ConnectionMovableHandle connection) {
     this.connection = connection;
   }
 

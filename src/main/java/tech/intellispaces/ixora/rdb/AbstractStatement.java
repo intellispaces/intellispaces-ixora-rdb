@@ -7,11 +7,11 @@ import tech.intellispaces.framework.core.exception.TraverseException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@ObjectHandle
-public abstract class BasicStatementHandle implements StatementMovableHandle {
+@ObjectHandle("BasicStatement")
+public abstract class AbstractStatement implements StatementMovableHandle {
   private final Statement statement;
 
-  public BasicStatementHandle(Statement statement) {
+  public AbstractStatement(Statement statement) {
     this.statement = statement;
   }
 

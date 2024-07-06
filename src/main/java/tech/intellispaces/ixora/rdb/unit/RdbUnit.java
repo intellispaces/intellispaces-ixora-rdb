@@ -3,7 +3,7 @@ package tech.intellispaces.ixora.rdb.unit;
 import tech.intellispaces.framework.core.annotation.Projection;
 import tech.intellispaces.framework.core.annotation.Properties;
 import tech.intellispaces.framework.core.annotation.Unit;
-import tech.intellispaces.ixora.rdb.BasicTransactionFactoryImpl;
+import tech.intellispaces.ixora.rdb.BasicTransactionFactory;
 import tech.intellispaces.ixora.rdb.DataSourceMovableHandle;
 import tech.intellispaces.ixora.rdb.DataSourcePropertiesHandle;
 import tech.intellispaces.ixora.rdb.TransactionFactoryMovableHandle;
@@ -23,6 +23,6 @@ public abstract class RdbUnit {
    */
   @Projection
   public TransactionFactoryMovableHandle transactionFactory(DataSourceMovableHandle dataSource) {
-    return new BasicTransactionFactoryImpl(dataSource);
+    return new BasicTransactionFactory(dataSource);
   }
 }
