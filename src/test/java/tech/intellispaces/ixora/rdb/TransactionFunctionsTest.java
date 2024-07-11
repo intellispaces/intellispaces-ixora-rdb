@@ -1,5 +1,7 @@
 package tech.intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.TransactionFactoryHandle;
+import intellispaces.ixora.rdb.TransactionHandle;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

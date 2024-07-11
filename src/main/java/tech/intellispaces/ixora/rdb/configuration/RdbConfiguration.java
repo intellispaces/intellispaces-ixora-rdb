@@ -1,12 +1,12 @@
 package tech.intellispaces.ixora.rdb.configuration;
 
+import intellispaces.ixora.rdb.MovableDataSourceHandle;
+import intellispaces.ixora.rdb.MovableTransactionFactoryHandle;
 import tech.intellispaces.framework.core.annotation.Configuration;
 import tech.intellispaces.framework.core.annotation.Projection;
 import tech.intellispaces.framework.core.annotation.Properties;
 import tech.intellispaces.ixora.rdb.BasicTransactionFactory;
-import tech.intellispaces.ixora.rdb.DataSourceMovableHandle;
-import tech.intellispaces.ixora.rdb.DataSourcePropertiesHandle;
-import tech.intellispaces.ixora.rdb.TransactionFactoryMovableHandle;
+import intellispaces.ixora.rdb.DataSourcePropertiesHandle;
 
 @Configuration
 public abstract class RdbConfiguration {
@@ -22,7 +22,7 @@ public abstract class RdbConfiguration {
    * Transaction factory.
    */
   @Projection
-  public TransactionFactoryMovableHandle transactionFactory(DataSourceMovableHandle dataSource) {
+  public MovableTransactionFactoryHandle transactionFactory(MovableDataSourceHandle dataSource) {
     return new BasicTransactionFactory(dataSource);
   }
 }

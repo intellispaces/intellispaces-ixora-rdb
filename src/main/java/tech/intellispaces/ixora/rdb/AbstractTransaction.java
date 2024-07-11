@@ -1,15 +1,19 @@
 package tech.intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.ConnectionHandle;
+import intellispaces.ixora.rdb.MovableConnectionHandle;
+import intellispaces.ixora.rdb.MovableTransactionHandle;
+import intellispaces.ixora.rdb.ResultSetHandle;
 import tech.intellispaces.framework.core.annotation.Mapper;
 import tech.intellispaces.framework.core.annotation.Mover;
 import tech.intellispaces.framework.core.annotation.ObjectHandle;
-import tech.intellispaces.ixora.structures.collection.CursorHandle;
+import intellispaces.ixora.structures.collection.CursorHandle;
 
 @ObjectHandle("BasicTransaction")
-public abstract class AbstractTransaction implements TransactionMovableHandle {
-  private final ConnectionMovableHandle connection;
+public abstract class AbstractTransaction implements MovableTransactionHandle {
+  private final MovableConnectionHandle connection;
 
-  public AbstractTransaction(ConnectionMovableHandle connection) {
+  public AbstractTransaction(MovableConnectionHandle connection) {
     this.connection = connection;
   }
 
@@ -21,19 +25,19 @@ public abstract class AbstractTransaction implements TransactionMovableHandle {
 
   @Mover
   @Override
-  public TransactionMovableHandle commit() {
+  public MovableTransactionHandle commit() {
     return null;
   }
 
   @Mover
   @Override
-  public TransactionMovableHandle rollback() {
+  public MovableTransactionHandle rollback() {
     return null;
   }
 
   @Mover
   @Override
-  public TransactionMovableHandle update(String sql) {
+  public MovableTransactionHandle update(String sql) {
     return null;
   }
 
