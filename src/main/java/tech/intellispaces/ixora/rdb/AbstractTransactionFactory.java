@@ -4,11 +4,11 @@ import intellispaces.ixora.rdb.DataSourceHandle;
 import intellispaces.ixora.rdb.MovableConnectionHandle;
 import intellispaces.ixora.rdb.MovableDataSourceHandle;
 import intellispaces.ixora.rdb.MovableTransactionFactoryHandle;
-import intellispaces.ixora.rdb.MovableTransactionHandle;
+import intellispaces.ixora.rdb.TransactionHandle;
+import intellispaces.ixora.rdb.exception.TransactionException;
 import tech.intellispaces.framework.core.annotation.Mapper;
 import tech.intellispaces.framework.core.annotation.Mover;
 import tech.intellispaces.framework.core.annotation.ObjectHandle;
-import intellispaces.ixora.rdb.exception.TransactionException;
 
 @ObjectHandle("BasicTransactionFactory")
 public abstract class AbstractTransactionFactory implements MovableTransactionFactoryHandle {
@@ -26,7 +26,7 @@ public abstract class AbstractTransactionFactory implements MovableTransactionFa
 
   @Mover
   @Override
-  public MovableTransactionHandle getTransaction() throws TransactionException {
+  public TransactionHandle getTransaction() throws TransactionException {
     MovableConnectionHandle connection = (MovableConnectionHandle) dataSource.getConnection();
     //connection.disableAutoCommit();
     //connection.beginTransaction();

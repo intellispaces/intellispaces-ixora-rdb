@@ -1,5 +1,6 @@
 package tech.intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.ConnectionHandle;
 import intellispaces.ixora.rdb.MovableConnectionHandle;
 import intellispaces.ixora.rdb.StatementHandle;
 import tech.intellispaces.framework.core.annotation.Mover;
@@ -29,7 +30,7 @@ public abstract class AbstractConnection implements MovableConnectionHandle {
 
   @Mover
   @Override
-  public MovableConnectionHandle close() {
+  public ConnectionHandle close() {
 
     return null;
   }

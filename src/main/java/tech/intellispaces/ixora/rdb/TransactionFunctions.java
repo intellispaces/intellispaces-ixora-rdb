@@ -2,11 +2,11 @@ package tech.intellispaces.ixora.rdb;
 
 import intellispaces.ixora.rdb.TransactionFactoryHandle;
 import intellispaces.ixora.rdb.TransactionHandle;
+import intellispaces.ixora.rdb.exception.TransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.intellispaces.framework.commons.exception.CoveredCheckedException;
 import tech.intellispaces.framework.commons.function.ThrowingConsumer;
-import intellispaces.ixora.rdb.exception.TransactionException;
 
 /**
  * Transaction functions.
