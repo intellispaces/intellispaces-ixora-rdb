@@ -6,7 +6,7 @@ import intellispaces.ixora.rdb.exception.TransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.intellispaces.framework.commons.exception.CoveredCheckedException;
-import tech.intellispaces.framework.commons.function.ThrowingConsumer;
+import tech.intellispaces.framework.commons.function.ThrowableConsumer;
 
 /**
  * Transaction functions.
@@ -16,7 +16,7 @@ public class TransactionFunctions {
   private static final Logger LOG = LoggerFactory.getLogger(TransactionFunctions.class);
 
   public static <E extends Throwable> void transactional(
-      TransactionFactoryHandle transactionFactory, ThrowingConsumer<TransactionHandle, E> operation
+      TransactionFactoryHandle transactionFactory, ThrowableConsumer<TransactionHandle, E> operation
   ) {
     TransactionHandle tx = null;
     try {
