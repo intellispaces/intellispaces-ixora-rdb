@@ -1,11 +1,11 @@
-package tech.intellispaces.ixora.rdb;
+package tech.mindstructs.rdb;
 
-import intellispaces.ixora.rdb.DataSourceHandle;
-import intellispaces.ixora.rdb.MovableConnectionHandle;
-import intellispaces.ixora.rdb.MovableDataSourceHandle;
-import intellispaces.ixora.rdb.MovableTransactionFactoryHandle;
-import intellispaces.ixora.rdb.TransactionHandle;
-import intellispaces.ixora.rdb.exception.TransactionException;
+import intellispaces.ixora.mindstructs.rdb.DataSourceHandle;
+import intellispaces.ixora.mindstructs.rdb.MovableConnectionHandle;
+import intellispaces.ixora.mindstructs.rdb.MovableDataSourceHandle;
+import intellispaces.ixora.mindstructs.rdb.MovableTransactionFactoryHandle;
+import intellispaces.ixora.mindstructs.rdb.TransactionHandle;
+import intellispaces.ixora.mindstructs.rdb.exception.TransactionException;
 import tech.intellispaces.framework.core.annotation.Mapper;
 import tech.intellispaces.framework.core.annotation.Mover;
 import tech.intellispaces.framework.core.annotation.ObjectHandle;

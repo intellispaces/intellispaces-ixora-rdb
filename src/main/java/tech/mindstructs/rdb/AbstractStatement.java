@@ -1,7 +1,7 @@
-package tech.intellispaces.ixora.rdb;
+package tech.mindstructs.rdb;
 
-import intellispaces.ixora.rdb.MovableStatementHandle;
-import intellispaces.ixora.rdb.ResultSetHandle;
+import intellispaces.ixora.mindstructs.rdb.MovableStatementHandle;
+import intellispaces.ixora.mindstructs.rdb.ResultSetHandle;
 import tech.intellispaces.framework.core.annotation.Mapper;
 import tech.intellispaces.framework.core.annotation.ObjectHandle;
 import tech.intellispaces.framework.core.exception.TraverseException;

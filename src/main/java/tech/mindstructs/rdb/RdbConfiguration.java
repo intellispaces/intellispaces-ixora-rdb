@@ -1,8 +1,8 @@
-package tech.intellispaces.ixora.rdb;
+package tech.mindstructs.rdb;
 
-import intellispaces.ixora.rdb.DataSourcePropertiesHandle;
-import intellispaces.ixora.rdb.MovableDataSourceHandle;
-import intellispaces.ixora.rdb.MovableTransactionFactoryHandle;
+import intellispaces.ixora.mindstructs.rdb.DataSourcePropertiesHandle;
+import intellispaces.ixora.mindstructs.rdb.MovableDataSourceHandle;
+import intellispaces.ixora.mindstructs.rdb.MovableTransactionFactoryHandle;
 import tech.intellispaces.framework.core.annotation.Configuration;
 import tech.intellispaces.framework.core.annotation.Projection;
 import tech.intellispaces.framework.core.annotation.Properties;

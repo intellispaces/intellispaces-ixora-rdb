@@ -1,8 +1,8 @@
-package tech.intellispaces.ixora.rdb;
+package tech.mindstructs.rdb;
 
-import intellispaces.ixora.rdb.ConnectionHandle;
-import intellispaces.ixora.rdb.MovableConnectionHandle;
-import intellispaces.ixora.rdb.StatementHandle;
+import intellispaces.ixora.mindstructs.rdb.ConnectionHandle;
+import intellispaces.ixora.mindstructs.rdb.MovableConnectionHandle;
+import intellispaces.ixora.mindstructs.rdb.StatementHandle;
 import tech.intellispaces.framework.core.annotation.Mover;
 import tech.intellispaces.framework.core.annotation.ObjectHandle;
 import tech.intellispaces.framework.core.exception.TraverseException;
