@@ -1,7 +1,7 @@
-package tech.mindstructs.rdb;
+package tech.intellispaces.ixora.rdb;
 
-import intellispaces.ixora.mindstructs.rdb.TransactionFactoryHandle;
-import intellispaces.ixora.mindstructs.rdb.TransactionHandle;
+import intellispaces.ixora.rdb.TransactionFactoryHandle;
+import intellispaces.ixora.rdb.TransactionHandle;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

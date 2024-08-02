@@ -1,15 +1,15 @@
-package tech.mindstructs.rdb;
+package tech.intellispaces.ixora.rdb;
 
-import intellispaces.ixora.mindstructs.rdb.MovableStatementHandle;
-import intellispaces.ixora.mindstructs.rdb.ResultSetHandle;
-import tech.intellispaces.framework.core.annotation.Mapper;
-import tech.intellispaces.framework.core.annotation.ObjectHandle;
-import tech.intellispaces.framework.core.exception.TraverseException;
+import intellispaces.ixora.rdb.MovableStatementHandle;
+import intellispaces.ixora.rdb.ResultSetHandle;
+import tech.intellispaces.core.annotation.Mapper;
+import tech.intellispaces.core.annotation.MovableObjectHandle;
+import tech.intellispaces.core.exception.TraverseException;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@ObjectHandle("BasicStatement")
+@MovableObjectHandle("BasicStatement")
 public abstract class AbstractStatement implements MovableStatementHandle {
   private final Statement statement;
 

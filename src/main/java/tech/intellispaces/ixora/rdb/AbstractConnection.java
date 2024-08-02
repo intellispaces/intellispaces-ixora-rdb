@@ -1,16 +1,16 @@
-package tech.mindstructs.rdb;
+package tech.intellispaces.ixora.rdb;
 
-import intellispaces.ixora.mindstructs.rdb.ConnectionHandle;
-import intellispaces.ixora.mindstructs.rdb.MovableConnectionHandle;
-import intellispaces.ixora.mindstructs.rdb.StatementHandle;
-import tech.intellispaces.framework.core.annotation.Mover;
-import tech.intellispaces.framework.core.annotation.ObjectHandle;
-import tech.intellispaces.framework.core.exception.TraverseException;
+import intellispaces.ixora.rdb.ConnectionHandle;
+import intellispaces.ixora.rdb.MovableConnectionHandle;
+import intellispaces.ixora.rdb.StatementHandle;
+import tech.intellispaces.core.annotation.MovableObjectHandle;
+import tech.intellispaces.core.annotation.Mover;
+import tech.intellispaces.core.exception.TraverseException;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@ObjectHandle("BasicConnection")
+@MovableObjectHandle("BasicConnection")
 public abstract class AbstractConnection implements MovableConnectionHandle {
   private final Connection connection;
 
