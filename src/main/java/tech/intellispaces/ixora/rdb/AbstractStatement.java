@@ -22,10 +22,9 @@ public abstract class AbstractStatement implements MovableStatementHandle {
   public ResultSetHandle executeQuery(String sql) {
     try {
       java.sql.ResultSet rs = statement.executeQuery(sql);
-      System.out.println(rs);
-      return null;
+      return new BasicResultSet(rs);
     } catch (SQLException e) {
-      throw TraverseException.withCauseAndMessage(e, "Could not execute query");
+      throw TraverseException.withCauseAndMessage(e, "Could not execute query {}", sql);
     }
   }
 }
