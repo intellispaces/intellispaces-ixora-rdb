@@ -9,7 +9,7 @@ import java.util.Deque;
 public final class Transactions {
   private static final ThreadLocal<Deque<TransactionHandle>> CURRENT_TRANSACTIONS = new ThreadLocal<>();
 
-  public static TransactionHandle getCurrent() {
+  public static TransactionHandle current() {
     TransactionHandle tx = null;
     Deque<TransactionHandle> transactions = CURRENT_TRANSACTIONS.get();
     if (transactions != null) {

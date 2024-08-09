@@ -33,13 +33,13 @@ public class TransactionFunctionsTest {
 
     // When
     TransactionFunctions.transactional(transactionFactory,
-        () -> appliedTransactions.add(Transactions.getCurrent())
+        () -> appliedTransactions.add(Transactions.current())
     );
 
     // Then
     assertThat(appliedTransactions).containsExactly(tx);
     verify(tx).commit();
     verify(tx, never()).rollback();
-    assertThrows(TraverseException.class, Transactions::getCurrent, "Current transaction is not defined");
+    assertThrows(TraverseException.class, Transactions::current, "Current transaction is not defined");
   }
 }

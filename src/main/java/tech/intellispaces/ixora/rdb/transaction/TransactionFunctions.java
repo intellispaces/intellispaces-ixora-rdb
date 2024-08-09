@@ -29,10 +29,12 @@ public class TransactionFunctions {
     );
   }
 
-  public static void transactional(TransactionFactoryHandle transactionFactory, Consumer<TransactionHandle> operation) {
+  public static void transactional(
+      TransactionFactoryHandle transactionFactory, Consumer<TransactionHandle> operation
+  ) {
     transactional(transactionFactory,
         data -> {
-          operation.accept(Transactions.getCurrent());
+          operation.accept(Transactions.current());
           return null;
         },
         null
