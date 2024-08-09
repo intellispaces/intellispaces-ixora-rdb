@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import tech.intellispaces.commons.exception.CoveredCheckedException;
 import tech.intellispaces.commons.function.ThrowableFunction;
 
+import java.util.function.Consumer;
+
 /**
  * Transaction functions.
  */
@@ -21,6 +23,16 @@ public class TransactionFunctions {
     transactional(transactionFactory,
         data -> {
           operation.run();
+          return null;
+        },
+        null
+    );
+  }
+
+  public static void transactional(TransactionFactoryHandle transactionFactory, Consumer<TransactionHandle> operation) {
+    transactional(transactionFactory,
+        data -> {
+          operation.accept(Transactions.getCurrent());
           return null;
         },
         null
