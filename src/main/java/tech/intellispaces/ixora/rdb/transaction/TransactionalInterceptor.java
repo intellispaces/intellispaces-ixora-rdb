@@ -19,8 +19,7 @@ public class TransactionalInterceptor extends InterceptorAdvice {
 
   private TransactionFactoryHandle getDefaultTransactionFactory() {
     List<TransactionFactoryHandle> transactionFactories = Modules.current()
-        .projectionRegistry()
-        .getProjectionTargets(TransactionFactoryHandle.class);
+        .getProjections(TransactionFactoryHandle.class);
     if (transactionFactories.isEmpty()) {
       throw TransactionException.withMessage("Transaction factory is not found");
     }
