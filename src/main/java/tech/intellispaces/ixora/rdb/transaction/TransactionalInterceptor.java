@@ -5,10 +5,15 @@ import intellispaces.ixora.rdb.exception.TransactionException;
 import tech.intellispaces.actions.Action;
 import tech.intellispaces.core.aop.InterceptorAdvice;
 import tech.intellispaces.core.system.Modules;
+import tech.intellispaces.javastatements.method.MethodStatement;
 
 import java.util.List;
 
 public class TransactionalInterceptor extends InterceptorAdvice {
+
+  public TransactionalInterceptor(MethodStatement joinPoint, Action nextAction) {
+    super(joinPoint, nextAction);
+  }
 
   @Override
   public Object execute(Object[] data) {
