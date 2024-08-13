@@ -1,7 +1,7 @@
 package tech.intellispaces.ixora.rdb.annotation;
 
 import tech.intellispaces.core.annotation.ApplyAdvice;
-import tech.intellispaces.ixora.rdb.transaction.TransactionalInterceptor;
+import tech.intellispaces.ixora.rdb.aop.TransactionalInterceptor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

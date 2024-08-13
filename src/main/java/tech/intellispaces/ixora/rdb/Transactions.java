@@ -1,4 +1,4 @@
-package tech.intellispaces.ixora.rdb.transaction;
+package tech.intellispaces.ixora.rdb;
 
 import intellispaces.ixora.rdb.TransactionHandle;
 import tech.intellispaces.core.exception.TraverseException;

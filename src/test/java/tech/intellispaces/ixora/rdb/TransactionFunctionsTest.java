@@ -4,8 +4,6 @@ import intellispaces.ixora.rdb.TransactionFactoryHandle;
 import intellispaces.ixora.rdb.TransactionHandle;
 import org.junit.jupiter.api.Test;
 import tech.intellispaces.core.exception.TraverseException;
-import tech.intellispaces.ixora.rdb.transaction.TransactionFunctions;
-import tech.intellispaces.ixora.rdb.transaction.Transactions;
 
 import java.util.ArrayList;
 import java.util.List;
