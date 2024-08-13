@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.intellispaces.commons.exception.CoveredCheckedException;
 import tech.intellispaces.commons.function.ThrowableFunction;
+import tech.intellispaces.core.system.ModuleProjections;
 
 import java.util.function.Consumer;
 
@@ -14,7 +15,7 @@ import java.util.function.Consumer;
  * Transaction functions.
  */
 public class TransactionFunctions {
-
+  private static final String TRANSACTION_PROJECTION_NAME = "tx";
   private static final Logger LOG = LoggerFactory.getLogger(TransactionFunctions.class);
 
   private TransactionFunctions() {}
@@ -50,7 +51,7 @@ public class TransactionFunctions {
     TransactionHandle tx = null;
     try {
       tx = transactionFactory.getTransaction();
-      Transactions.setCurrent(tx);
+      storeTransactionInContext(tx);
       result = operation.apply(data);
       tx.commit();
     } catch (TransactionException e) {
@@ -75,10 +76,20 @@ public class TransactionFunctions {
       throw CoveredCheckedException.withCause(e);
     } finally {
       if (tx != null) {
-        Transactions.setCurrent(null);
+        removeTransactionFromContext();
       }
     }
     return result;
+  }
+
+  private static void storeTransactionInContext(TransactionHandle tx) {
+    Transactions.setCurrent(tx);
+    ModuleProjections.addContextProjection(TRANSACTION_PROJECTION_NAME, TransactionHandle.class, tx);
+  }
+
+  private static void removeTransactionFromContext() {
+    Transactions.setCurrent(null);
+    ModuleProjections.removeContextProjection(TRANSACTION_PROJECTION_NAME);
   }
 
   private static void commit(TransactionHandle tx, Throwable reason) {
