@@ -1,9 +1,9 @@
-package tech.intellispaces.ixora.rdb;
+package intellispaces.ixora.rdb;
 
 import intellispaces.ixora.rdb.TransactionFactoryHandle;
 import intellispaces.ixora.rdb.TransactionHandle;
 import org.junit.jupiter.api.Test;
-import tech.intellispaces.core.exception.TraverseException;
+import intellispaces.core.exception.TraverseException;
 
 import java.util.ArrayList;
 import java.util.List;

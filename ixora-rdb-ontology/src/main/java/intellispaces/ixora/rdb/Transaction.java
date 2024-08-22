@@ -1,8 +1,8 @@
 package intellispaces.ixora.rdb;
 
-import tech.intellispaces.core.annotation.Domain;
-import tech.intellispaces.core.annotation.Transition;
-import tech.intellispaces.core.traverse.TraverseTypes;
+import intellispaces.core.annotation.Domain;
+import intellispaces.core.annotation.Transition;
+import intellispaces.core.traverse.TraverseTypes;
 import intellispaces.ixora.structures.collection.Cursor;
 
 @Domain("8f174862-2fab-48cb-af12-b8e264f19257")

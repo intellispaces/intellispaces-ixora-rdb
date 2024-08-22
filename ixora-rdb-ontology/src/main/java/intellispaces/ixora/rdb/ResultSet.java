@@ -1,8 +1,8 @@
 package intellispaces.ixora.rdb;
 
-import tech.intellispaces.core.annotation.Domain;
-import tech.intellispaces.core.annotation.Transition;
-import tech.intellispaces.core.traverse.TraverseTypes;
+import intellispaces.core.annotation.Domain;
+import intellispaces.core.annotation.Transition;
+import intellispaces.core.traverse.TraverseTypes;
 
 @Domain("80898b0a-6a68-4693-bc86-17d7c5bb6a64")
 public interface ResultSet {

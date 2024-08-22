@@ -1,9 +1,9 @@
 package intellispaces.ixora.rdb;
 
-import tech.intellispaces.core.annotation.Domain;
-import tech.intellispaces.core.annotation.Factory;
-import tech.intellispaces.core.annotation.Transition;
-import tech.intellispaces.core.traverse.TraverseTypes;
+import intellispaces.core.annotation.Domain;
+import intellispaces.core.annotation.Factory;
+import intellispaces.core.annotation.Transition;
+import intellispaces.core.traverse.TraverseTypes;
 import intellispaces.ixora.rdb.exception.TransactionException;
 
 @Factory

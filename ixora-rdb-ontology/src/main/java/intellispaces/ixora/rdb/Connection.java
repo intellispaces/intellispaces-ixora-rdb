@@ -1,9 +1,9 @@
 package intellispaces.ixora.rdb;
 
-import tech.intellispaces.core.annotation.Domain;
-import tech.intellispaces.core.annotation.Factory;
-import tech.intellispaces.core.annotation.Transition;
-import tech.intellispaces.core.traverse.TraverseTypes;
+import intellispaces.core.annotation.Domain;
+import intellispaces.core.annotation.Factory;
+import intellispaces.core.annotation.Transition;
+import intellispaces.core.traverse.TraverseTypes;
 
 @Factory
 @Domain("f72b8a37-6f1e-4c98-93b5-9d5bb959cb80")

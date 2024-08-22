@@ -1,10 +1,10 @@
-package tech.intellispaces.ixora.rdb;
+package intellispaces.ixora.rdb;
 
 import intellispaces.ixora.rdb.MovableStatementHandle;
 import intellispaces.ixora.rdb.ResultSetHandle;
-import tech.intellispaces.core.annotation.Mapper;
-import tech.intellispaces.core.annotation.MovableObjectHandle;
-import tech.intellispaces.core.exception.TraverseException;
+import intellispaces.core.annotation.Mapper;
+import intellispaces.core.annotation.MovableObjectHandle;
+import intellispaces.core.exception.TraverseException;
 
 import java.sql.SQLException;
 import java.sql.Statement;

@@ -1,11 +1,11 @@
-package tech.intellispaces.ixora.rdb;
+package intellispaces.ixora.rdb;
 
 import intellispaces.ixora.rdb.DataSourcePropertiesHandle;
 import intellispaces.ixora.rdb.MovableDataSourceHandle;
 import intellispaces.ixora.rdb.MovableTransactionFactoryHandle;
-import tech.intellispaces.core.annotation.Configuration;
-import tech.intellispaces.core.annotation.Projection;
-import tech.intellispaces.core.annotation.Properties;
+import intellispaces.core.annotation.Configuration;
+import intellispaces.core.annotation.Projection;
+import intellispaces.core.annotation.Properties;
 
 @Configuration
 public abstract class RdbConfiguration {

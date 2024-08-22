@@ -1,7 +1,7 @@
-package tech.intellispaces.ixora.rdb;
+package intellispaces.ixora.rdb;
 
 import intellispaces.ixora.rdb.TransactionHandle;
-import tech.intellispaces.core.exception.TraverseException;
+import intellispaces.core.exception.TraverseException;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
