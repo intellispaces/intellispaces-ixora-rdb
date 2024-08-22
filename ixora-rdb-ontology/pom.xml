@@ -3,19 +3,13 @@
 
     <parent>
         <groupId>intellispaces</groupId>
-        <artifactId>intellispaces-parent-pom</artifactId>
+        <artifactId>ixora-rdb-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>intellispaces</groupId>
-    <artifactId>ixora-rdb-parent</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>ixora-rdb-ontology</module>
-        <module>ixora-rdb</module>
-    </modules>
-
+    <artifactId>ixora-rdb-ontology</artifactId>
+    <packaging>jar</packaging>
+	
     <build>
         <plugins>
             <plugin>
@@ -26,10 +20,22 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <!-- Intellispaces -->
+        <dependency>
+            <groupId>intellispaces</groupId>
+            <artifactId>intellispaces-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Ixora -->
+        <dependency>
+            <groupId>intellispaces</groupId>
+            <artifactId>ixora-structures-ontology</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
