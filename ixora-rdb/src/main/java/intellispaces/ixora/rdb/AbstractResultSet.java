@@ -1,6 +1,8 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.commons.collection.ArraysFunctions;
 import intellispaces.commons.exception.UnexpectedViolationException;
+import intellispaces.commons.string.StringFunctions;
 import intellispaces.commons.type.TypeFunctions;
 import intellispaces.core.annotation.Data;
 import intellispaces.core.annotation.Mapper;
@@ -13,12 +15,15 @@ import intellispaces.core.object.DataFunctions;
 import intellispaces.core.object.ObjectFunctions;
 import intellispaces.ixora.structures.collection.JavaList;
 import intellispaces.ixora.structures.collection.List;
+import jakarta.persistence.Column;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @MovableObjectHandle("BasicResultSet")
 public abstract class AbstractResultSet implements MovableResultSet {
@@ -81,8 +86,9 @@ public abstract class AbstractResultSet implements MovableResultSet {
   @Mapper
   @Override
   public <D> D value(Class<D> dataClass) {
-    Constructor<D> constructor = getDataHandleConstructor(dataClass);
-    Object[] arguments = makeDataHandleArguments(dataClass, constructor);
+    Class<?> domainClass = getDomainClass(dataClass);
+    Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);
+    Object[] arguments = makeDataHandleArguments(dataClass, domainClass, constructor);
     try {
       return constructor.newInstance(arguments);
     } catch (Exception e) {
@@ -93,10 +99,11 @@ public abstract class AbstractResultSet implements MovableResultSet {
   @Mover
   @Override
   public <D> List<D> values(Class<D> dataClass) {
-    Constructor<D> constructor = getDataHandleConstructor(dataClass);
+    Class<?> domainClass = getDomainClass(dataClass);
+    Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);
     java.util.List<D> values = new ArrayList<>();
     while (next()) {
-      Object[] arguments = makeDataHandleArguments(dataClass, constructor);
+      Object[] arguments = makeDataHandleArguments(dataClass, domainClass, constructor);
       try {
         values.add(constructor.newInstance(arguments));
       } catch (Exception e) {
@@ -107,12 +114,7 @@ public abstract class AbstractResultSet implements MovableResultSet {
   }
 
   @SuppressWarnings("unchecked")
-  private <D> Constructor<D> getDataHandleConstructor(Class<D> dataClass) {
-    Class<?> domainClass = ObjectFunctions.getDomainClassOfObjectHandle(dataClass);
-    if (!DataFunctions.isDataDomain(domainClass)) {
-      throw UnexpectedViolationException.withMessage("Expected object handle class of the data domain. " +
-          "Data domain should be annotated with @{}", Data.class.getSimpleName());
-    }
+  private <D> Constructor<D> getDataHandleConstructor(Class<D> dataClass, Class<?> domainClass) {
     String dataHandleClassName = NameConventionFunctions.getDataClassName(domainClass.getCanonicalName());
     Class<D> dataHandleClass = (Class<D>) TypeFunctions.getClass(dataHandleClassName).orElseThrow(() ->
         UnexpectedViolationException.withMessage("Could not find data handle class by name {} ",
@@ -126,7 +128,20 @@ public abstract class AbstractResultSet implements MovableResultSet {
     return (Constructor<D>) constructors[0];
   }
 
-  private <D> Object[] makeDataHandleArguments(Class<D> dataClass, Constructor<D> constructor) {
+  private <D> Class<?> getDomainClass(Class<D> dataClass) {
+    Class<?> domainClass = ObjectFunctions.getDomainClassOfObjectHandle(dataClass);
+    if (!DataFunctions.isDataDomain(domainClass)) {
+      throw UnexpectedViolationException.withMessage("Expected object handle class of the data domain. " +
+          "Data domain should be annotated with @{}", Data.class.getSimpleName());
+    }
+    return domainClass;
+  }
+
+  private <D> Object[] makeDataHandleArguments(
+      Class<D> dataClass, Class<?> domainClass, Constructor<D> constructor
+  ) {
+    Map<String, String> mapping = makeTransitionAliasToColumnNameMapping(domainClass);
+
     Object[] arguments = new Object[constructor.getParameterCount()];
     for (int index = 0; index < constructor.getParameterCount(); index++) {
       Parameter param = constructor.getParameters()[index];
@@ -137,18 +152,38 @@ public abstract class AbstractResultSet implements MovableResultSet {
       }
       String alias = name.value();
       Class<?> paramClass = param.getType();
-      setArgument(arguments, index, alias, paramClass);
+      setArgument(arguments, index, mapping.get(alias), paramClass);
     }
     return arguments;
   }
 
-  private void setArgument(Object[] arguments, int index, String alias, Class<?> aClass) {
-    if (aClass == int.class) {
-      arguments[index] = intValue(alias);
-    } else if (aClass == Integer.class) {
-      arguments[index] = integerValue(alias);
-    } else if (aClass == String.class) {
-      arguments[index] = stringValue(alias);
+  private void setArgument(Object[] arguments, int index, String columnName, Class<?> paramClass) {
+    if (paramClass == int.class) {
+      arguments[index] = intValue(columnName);
+    } else if (paramClass == Integer.class) {
+      arguments[index] = integerValue(columnName);
+    } else if (paramClass == String.class) {
+      arguments[index] = stringValue(columnName);
     }
+  }
+
+  private Map<String, String> makeTransitionAliasToColumnNameMapping(Class<?> domainClass) {
+    Map<String, String> mapping = new HashMap<>();
+    ArraysFunctions.foreach(domainClass.getDeclaredMethods(), m -> {
+      Column column = m.getAnnotation(Column.class);
+      if (column == null) {
+        throw UnexpectedViolationException.withMessage("Method {} of the class {} should be marked with annotation {}",
+            m.getName(), domainClass.getCanonicalName(), Column.class.getSimpleName()
+        );
+      }
+      if (StringFunctions.isNullOrBlank(column.name())) {
+        throw UnexpectedViolationException.withMessage("Name attribute should be defined in annotation {} " +
+                "on the method {} in class {}",
+            Column.class.getSimpleName(), m.getName(), domainClass.getCanonicalName()
+        );
+      }
+      mapping.put(m.getName(), column.name());
+    });
+    return mapping;
   }
 }
