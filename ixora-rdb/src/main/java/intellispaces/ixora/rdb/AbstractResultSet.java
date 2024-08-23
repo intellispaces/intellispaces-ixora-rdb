@@ -1,6 +1,6 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.MovableResultSetHandle;
+import intellispaces.ixora.rdb.MovableResultSet;
 import intellispaces.core.annotation.Mapper;
 import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.annotation.Mover;
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @MovableObjectHandle("BasicResultSet")
-public abstract class AbstractResultSet implements MovableResultSetHandle {
+public abstract class AbstractResultSet implements MovableResultSet {
   private final java.sql.ResultSet rs;
 
   public AbstractResultSet(ResultSet rs) {

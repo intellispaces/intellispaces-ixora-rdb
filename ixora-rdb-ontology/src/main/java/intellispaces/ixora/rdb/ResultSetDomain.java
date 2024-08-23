@@ -5,7 +5,7 @@ import intellispaces.core.annotation.Transition;
 import intellispaces.core.traverse.TraverseTypes;
 
 @Domain("80898b0a-6a68-4693-bc86-17d7c5bb6a64")
-public interface ResultSet {
+public interface ResultSetDomain {
 
   @Transition(value = "a0b049ef-9ff2-4611-95b4-b500673afa55", allowedTraverseTypes = TraverseTypes.Moving)
   boolean next();

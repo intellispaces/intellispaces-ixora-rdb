@@ -1,17 +1,17 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.TransactionHandle;
+import intellispaces.ixora.rdb.Transaction;
 import intellispaces.core.exception.TraverseException;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public final class Transactions {
-  private static final ThreadLocal<Deque<TransactionHandle>> CURRENT_TRANSACTIONS = new ThreadLocal<>();
+  private static final ThreadLocal<Deque<Transaction>> CURRENT_TRANSACTIONS = new ThreadLocal<>();
 
-  public static TransactionHandle current() {
-    TransactionHandle tx = null;
-    Deque<TransactionHandle> transactions = CURRENT_TRANSACTIONS.get();
+  public static Transaction current() {
+    Transaction tx = null;
+    Deque<Transaction> transactions = CURRENT_TRANSACTIONS.get();
     if (transactions != null) {
       tx = transactions.peek();
     }
@@ -21,16 +21,16 @@ public final class Transactions {
     return tx;
   }
 
-  static void setCurrent(TransactionHandle tx) {
+  static void setCurrent(Transaction tx) {
     if (tx != null) {
-      Deque<TransactionHandle> transactions = CURRENT_TRANSACTIONS.get();
+      Deque<Transaction> transactions = CURRENT_TRANSACTIONS.get();
       if (transactions == null) {
         transactions = new ArrayDeque<>();
         CURRENT_TRANSACTIONS.set(transactions);
       }
       transactions.push(tx);
     } else {
-      Deque<TransactionHandle> transactions = CURRENT_TRANSACTIONS.get();
+      Deque<Transaction> transactions = CURRENT_TRANSACTIONS.get();
       if (transactions != null) {
         transactions.pop();
       }

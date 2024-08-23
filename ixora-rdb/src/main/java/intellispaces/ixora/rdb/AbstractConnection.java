@@ -1,26 +1,25 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.ConnectionHandle;
-import intellispaces.ixora.rdb.MovableConnectionHandle;
-import intellispaces.ixora.rdb.StatementHandle;
+import intellispaces.ixora.rdb.Connection;
+import intellispaces.ixora.rdb.MovableConnection;
+import intellispaces.ixora.rdb.Statement;
 import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.annotation.Mover;
 import intellispaces.core.exception.TraverseException;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 @MovableObjectHandle("BasicConnection")
-public abstract class AbstractConnection implements MovableConnectionHandle {
-  private final Connection connection;
+public abstract class AbstractConnection implements MovableConnection {
+  private final java.sql.Connection connection;
 
-  public AbstractConnection(Connection connection) {
+  public AbstractConnection(java.sql.Connection connection) {
     this.connection = connection;
   }
 
   @Mover
   @Override
-  public StatementHandle createStatement() {
+  public Statement createStatement() {
     try {
       return new BasicStatement(connection.createStatement());
     } catch (SQLException e) {
@@ -30,7 +29,7 @@ public abstract class AbstractConnection implements MovableConnectionHandle {
 
   @Mover
   @Override
-  public ConnectionHandle close() {
+  public Connection close() {
 
     return null;
   }

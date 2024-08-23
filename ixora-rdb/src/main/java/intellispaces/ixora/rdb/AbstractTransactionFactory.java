@@ -1,33 +1,33 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.DataSourceHandle;
-import intellispaces.ixora.rdb.MovableConnectionHandle;
-import intellispaces.ixora.rdb.MovableDataSourceHandle;
-import intellispaces.ixora.rdb.MovableTransactionFactoryHandle;
-import intellispaces.ixora.rdb.TransactionHandle;
+import intellispaces.ixora.rdb.DataSource;
+import intellispaces.ixora.rdb.MovableConnection;
+import intellispaces.ixora.rdb.MovableDataSource;
+import intellispaces.ixora.rdb.MovableTransactionFactory;
+import intellispaces.ixora.rdb.Transaction;
 import intellispaces.ixora.rdb.exception.TransactionException;
 import intellispaces.core.annotation.Mapper;
 import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.annotation.Mover;
 
 @MovableObjectHandle("BasicTransactionFactory")
-public abstract class AbstractTransactionFactory implements MovableTransactionFactoryHandle {
-  private final MovableDataSourceHandle dataSource;
+public abstract class AbstractTransactionFactory implements MovableTransactionFactory {
+  private final MovableDataSource dataSource;
 
-  public AbstractTransactionFactory(MovableDataSourceHandle dataSource) {
+  public AbstractTransactionFactory(MovableDataSource dataSource) {
     this.dataSource = dataSource;
   }
 
   @Mapper
   @Override
-  public DataSourceHandle dataSource() {
+  public DataSource dataSource() {
     return dataSource;
   }
 
   @Mover
   @Override
-  public TransactionHandle getTransaction() throws TransactionException {
-    MovableConnectionHandle connection = (MovableConnectionHandle) dataSource.getConnection();
+  public Transaction getTransaction() throws TransactionException {
+    MovableConnection connection = (MovableConnection) dataSource.getConnection();
     //connection.disableAutoCommit();
     //connection.beginTransaction();
     return new BasicTransaction(connection);

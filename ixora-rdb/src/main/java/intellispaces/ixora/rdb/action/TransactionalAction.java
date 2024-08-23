@@ -1,14 +1,14 @@
 package intellispaces.ixora.rdb.action;
 
-import intellispaces.ixora.rdb.TransactionFactoryHandle;
+import intellispaces.ixora.rdb.TransactionFactory;
 import intellispaces.ixora.rdb.TransactionFunctions;
 import intellispaces.actions.Action;
 import intellispaces.actions.wrapper.AbstractWrapper;
 
 public class TransactionalAction extends AbstractWrapper {
-  private final TransactionFactoryHandle transactionFactory;
+  private final TransactionFactory transactionFactory;
 
-  public TransactionalAction(TransactionFactoryHandle transactionFactory, Action wrappedAction) {
+  public TransactionalAction(TransactionFactory transactionFactory, Action wrappedAction) {
     super(wrappedAction);
     this.transactionFactory = transactionFactory;
   }

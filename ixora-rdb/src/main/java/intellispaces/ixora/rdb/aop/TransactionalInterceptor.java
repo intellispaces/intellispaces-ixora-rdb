@@ -1,6 +1,6 @@
 package intellispaces.ixora.rdb.aop;
 
-import intellispaces.ixora.rdb.TransactionFactoryHandle;
+import intellispaces.ixora.rdb.TransactionFactory;
 import intellispaces.ixora.rdb.TransactionFunctions;
 import intellispaces.ixora.rdb.exception.TransactionException;
 import intellispaces.actions.Action;
@@ -18,14 +18,14 @@ public class TransactionalInterceptor extends Interceptor {
 
   @Override
   public Object execute(Object[] data) {
-    TransactionFactoryHandle transactionFactory = getDefaultTransactionFactory();
+    TransactionFactory transactionFactory = getDefaultTransactionFactory();
     Action joinAction = joinAction();
     return TransactionFunctions.transactional(transactionFactory, joinAction::execute, data);
   }
 
-  private TransactionFactoryHandle getDefaultTransactionFactory() {
-    List<TransactionFactoryHandle> transactionFactories = Modules.current()
-        .getProjections(TransactionFactoryHandle.class);
+  private TransactionFactory getDefaultTransactionFactory() {
+    List<TransactionFactory> transactionFactories = Modules.current()
+        .getProjections(TransactionFactory.class);
     if (transactionFactories.isEmpty()) {
       throw TransactionException.withMessage("Transaction factory is not found");
     }

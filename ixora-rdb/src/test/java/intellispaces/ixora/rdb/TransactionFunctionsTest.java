@@ -1,7 +1,7 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.TransactionFactoryHandle;
-import intellispaces.ixora.rdb.TransactionHandle;
+import intellispaces.ixora.rdb.TransactionFactory;
+import intellispaces.ixora.rdb.Transaction;
 import org.junit.jupiter.api.Test;
 import intellispaces.core.exception.TraverseException;
 
@@ -23,11 +23,11 @@ public class TransactionFunctionsTest {
   @Test
   public void testTransactional_whenOk() {
     // Given
-    TransactionFactoryHandle transactionFactory = mock(TransactionFactoryHandle.class);
-    TransactionHandle tx = mock(TransactionHandle.class);
+    TransactionFactory transactionFactory = mock(TransactionFactory.class);
+    Transaction tx = mock(Transaction.class);
     when(transactionFactory.getTransaction()).thenReturn(tx);
 
-    List<TransactionHandle> appliedTransactions = new ArrayList<>();
+    List<Transaction> appliedTransactions = new ArrayList<>();
 
     // When
     TransactionFunctions.transactional(transactionFactory,

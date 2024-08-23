@@ -1,7 +1,7 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.TransactionFactoryHandle;
-import intellispaces.ixora.rdb.TransactionHandle;
+import intellispaces.ixora.rdb.TransactionFactory;
+import intellispaces.ixora.rdb.Transaction;
 import intellispaces.ixora.rdb.exception.TransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class TransactionFunctions {
 
   private TransactionFunctions() {}
 
-  public static void transactional(TransactionFactoryHandle transactionFactory, Runnable operation) {
+  public static void transactional(TransactionFactory transactionFactory, Runnable operation) {
     transactional(transactionFactory,
         data -> {
           operation.run();
@@ -31,7 +31,7 @@ public class TransactionFunctions {
   }
 
   public static void transactional(
-      TransactionFactoryHandle transactionFactory, Consumer<TransactionHandle> operation
+      TransactionFactory transactionFactory, Consumer<Transaction> operation
   ) {
     transactional(transactionFactory,
         data -> {
@@ -43,12 +43,12 @@ public class TransactionFunctions {
   }
 
   public static <R, E extends Throwable> R transactional(
-      TransactionFactoryHandle transactionFactory,
+      TransactionFactory transactionFactory,
       ThrowableFunction<Object[], R, E> operation,
       Object[] data
   ) {
     R result;
-    TransactionHandle tx = null;
+    Transaction tx = null;
     try {
       tx = transactionFactory.getTransaction();
       storeTransactionInContext(tx);
@@ -82,9 +82,9 @@ public class TransactionFunctions {
     return result;
   }
 
-  private static void storeTransactionInContext(TransactionHandle tx) {
+  private static void storeTransactionInContext(Transaction tx) {
     Transactions.setCurrent(tx);
-    ModuleProjections.addContextProjection(TRANSACTION_PROJECTION_NAME, TransactionHandle.class, tx);
+    ModuleProjections.addContextProjection(TRANSACTION_PROJECTION_NAME, Transaction.class, tx);
   }
 
   private static void removeTransactionFromContext() {
@@ -92,7 +92,7 @@ public class TransactionFunctions {
     ModuleProjections.removeContextProjection(TRANSACTION_PROJECTION_NAME);
   }
 
-  private static void commit(TransactionHandle tx, Throwable reason) {
+  private static void commit(Transaction tx, Throwable reason) {
     try {
       tx.commit();
     } catch (Throwable e) {
@@ -106,7 +106,7 @@ public class TransactionFunctions {
     }
   }
 
-  private static void rollback(TransactionHandle tx, Throwable reason) {
+  private static void rollback(Transaction tx, Throwable reason) {
     try {
       tx.rollback();
     } catch (Throwable e) {
