@@ -3,7 +3,6 @@ package intellispaces.ixora.rdb;
 import intellispaces.core.annotation.Domain;
 import intellispaces.core.annotation.Transition;
 import intellispaces.core.traverse.TraverseTypes;
-import intellispaces.ixora.structures.collection.Cursor;
 import intellispaces.ixora.structures.collection.CursorDomain;
 
 @Domain("8f174862-2fab-48cb-af12-b8e264f19257")

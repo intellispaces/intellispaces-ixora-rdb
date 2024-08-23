@@ -1,8 +1,5 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.DataSourceProperties;
-import intellispaces.ixora.rdb.MovableDataSource;
-import intellispaces.ixora.rdb.MovableTransactionFactory;
 import intellispaces.core.annotation.Configuration;
 import intellispaces.core.annotation.Projection;
 import intellispaces.core.annotation.Properties;

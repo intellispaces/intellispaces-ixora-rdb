@@ -1,11 +1,11 @@
 package intellispaces.ixora.rdb.aop;
 
-import intellispaces.ixora.rdb.TransactionFactory;
-import intellispaces.ixora.rdb.TransactionFunctions;
-import intellispaces.ixora.rdb.exception.TransactionException;
 import intellispaces.actions.Action;
 import intellispaces.core.aop.Interceptor;
 import intellispaces.core.system.Modules;
+import intellispaces.ixora.rdb.TransactionFactory;
+import intellispaces.ixora.rdb.TransactionFunctions;
+import intellispaces.ixora.rdb.exception.TransactionException;
 import intellispaces.javastatements.method.MethodStatement;
 
 import java.util.List;

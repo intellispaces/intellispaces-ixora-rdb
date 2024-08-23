@@ -1,14 +1,9 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.DataSource;
-import intellispaces.ixora.rdb.MovableConnection;
-import intellispaces.ixora.rdb.MovableDataSource;
-import intellispaces.ixora.rdb.MovableTransactionFactory;
-import intellispaces.ixora.rdb.Transaction;
-import intellispaces.ixora.rdb.exception.TransactionException;
 import intellispaces.core.annotation.Mapper;
 import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.annotation.Mover;
+import intellispaces.ixora.rdb.exception.TransactionException;
 
 @MovableObjectHandle("BasicTransactionFactory")
 public abstract class AbstractTransactionFactory implements MovableTransactionFactory {

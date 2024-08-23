@@ -1,7 +1,5 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.MovableStatement;
-import intellispaces.ixora.rdb.ResultSet;
 import intellispaces.core.annotation.Mapper;
 import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.exception.TraverseException;

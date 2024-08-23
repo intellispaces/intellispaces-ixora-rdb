@@ -1,13 +1,11 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.TransactionFactory;
-import intellispaces.ixora.rdb.Transaction;
-import intellispaces.ixora.rdb.exception.TransactionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import intellispaces.commons.exception.CoveredCheckedException;
 import intellispaces.commons.function.ThrowableFunction;
 import intellispaces.core.system.ModuleProjections;
+import intellispaces.ixora.rdb.exception.TransactionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.function.Consumer;
 

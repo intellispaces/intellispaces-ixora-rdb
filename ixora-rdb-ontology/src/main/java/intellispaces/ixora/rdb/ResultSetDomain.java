@@ -3,6 +3,7 @@ package intellispaces.ixora.rdb;
 import intellispaces.core.annotation.Domain;
 import intellispaces.core.annotation.Transition;
 import intellispaces.core.traverse.TraverseTypes;
+import intellispaces.ixora.structures.collection.ListDomain;
 
 @Domain("80898b0a-6a68-4693-bc86-17d7c5bb6a64")
 public interface ResultSetDomain {
@@ -17,5 +18,8 @@ public interface ResultSetDomain {
   String stringValue(String name);
 
   @Transition("d280d0b1-16d9-4d3a-a172-a0ad39c63de7")
-  <T> T rowValue(Class<T> valueDomain);
+  <D> D value(Class<D> dataClass);
+
+  @Transition(value = "befbf6f7-50af-491f-a17c-574723315122", allowedTraverseTypes = TraverseTypes.Moving)
+  <D> ListDomain<D> values(Class<D> dataClass);
 }

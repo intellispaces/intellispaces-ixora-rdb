@@ -1,14 +1,9 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.Connection;
-import intellispaces.ixora.rdb.MovableConnection;
-import intellispaces.ixora.rdb.MovableTransaction;
-import intellispaces.ixora.rdb.ResultSet;
-import intellispaces.ixora.rdb.Transaction;
-import intellispaces.ixora.structures.collection.Cursor;
 import intellispaces.core.annotation.Mapper;
 import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.annotation.Mover;
+import intellispaces.ixora.structures.collection.Cursor;
 
 @MovableObjectHandle("BasicTransaction")
 public abstract class AbstractTransaction implements MovableTransaction {

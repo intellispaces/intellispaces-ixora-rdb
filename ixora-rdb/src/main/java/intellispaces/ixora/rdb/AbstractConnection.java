@@ -1,8 +1,5 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.ixora.rdb.Connection;
-import intellispaces.ixora.rdb.MovableConnection;
-import intellispaces.ixora.rdb.Statement;
 import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.annotation.Mover;
 import intellispaces.core.exception.TraverseException;
