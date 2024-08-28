@@ -5,7 +5,7 @@ import intellispaces.core.annotation.Mover;
 import intellispaces.core.annotation.ObjectHandle;
 import intellispaces.ixora.structures.collection.Cursor;
 
-@ObjectHandle("BasicTransaction")
+@ObjectHandle(value = TransactionDomain.class, name = "BasicTransaction")
 public abstract class AbstractTransaction implements MovableTransaction {
   private final MovableConnection connection;
 

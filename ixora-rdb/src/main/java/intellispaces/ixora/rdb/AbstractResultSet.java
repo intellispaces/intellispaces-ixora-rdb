@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-@ObjectHandle("BasicResultSet")
+@ObjectHandle(value = ResultSetDomain.class, name = "BasicResultSet")
 public abstract class AbstractResultSet implements MovableResultSet {
   private final java.sql.ResultSet rs;
 

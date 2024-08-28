@@ -6,7 +6,7 @@ import intellispaces.core.exception.TraverseException;
 
 import java.sql.SQLException;
 
-@ObjectHandle("BasicConnection")
+@ObjectHandle(value = ConnectionDomain.class, name = "BasicConnection")
 public abstract class AbstractConnection implements MovableConnection {
   private final java.sql.Connection connection;
 

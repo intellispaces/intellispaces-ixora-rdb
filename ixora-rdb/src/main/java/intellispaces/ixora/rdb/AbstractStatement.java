@@ -7,7 +7,7 @@ import intellispaces.core.exception.TraverseException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@ObjectHandle("BasicStatement")
+@ObjectHandle(value = StatementDomain.class, name = "BasicStatement")
 public abstract class AbstractStatement implements MovableStatement {
   private final Statement statement;
 
