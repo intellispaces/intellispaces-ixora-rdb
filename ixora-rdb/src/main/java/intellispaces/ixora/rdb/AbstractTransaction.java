@@ -1,11 +1,11 @@
 package intellispaces.ixora.rdb;
 
 import intellispaces.core.annotation.Mapper;
-import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.annotation.Mover;
+import intellispaces.core.annotation.ObjectHandle;
 import intellispaces.ixora.structures.collection.Cursor;
 
-@MovableObjectHandle("BasicTransaction")
+@ObjectHandle("BasicTransaction")
 public abstract class AbstractTransaction implements MovableTransaction {
   private final MovableConnection connection;
 

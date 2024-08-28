@@ -6,9 +6,9 @@ import intellispaces.commons.string.StringFunctions;
 import intellispaces.commons.type.TypeFunctions;
 import intellispaces.core.annotation.Data;
 import intellispaces.core.annotation.Mapper;
-import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.annotation.Mover;
 import intellispaces.core.annotation.Name;
+import intellispaces.core.annotation.ObjectHandle;
 import intellispaces.core.common.NameConventionFunctions;
 import intellispaces.core.exception.TraverseException;
 import intellispaces.core.object.DataFunctions;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-@MovableObjectHandle("BasicResultSet")
+@ObjectHandle("BasicResultSet")
 public abstract class AbstractResultSet implements MovableResultSet {
   private final java.sql.ResultSet rs;
 

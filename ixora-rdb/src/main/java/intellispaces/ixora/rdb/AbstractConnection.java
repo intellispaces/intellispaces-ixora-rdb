@@ -1,12 +1,12 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.core.annotation.MovableObjectHandle;
 import intellispaces.core.annotation.Mover;
+import intellispaces.core.annotation.ObjectHandle;
 import intellispaces.core.exception.TraverseException;
 
 import java.sql.SQLException;
 
-@MovableObjectHandle("BasicConnection")
+@ObjectHandle("BasicConnection")
 public abstract class AbstractConnection implements MovableConnection {
   private final java.sql.Connection connection;
 
