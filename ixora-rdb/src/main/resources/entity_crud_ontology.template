@@ -1,0 +1,23 @@
+package {{$packageName}};
+
+{{for importedClass : $importedClasses}}
+import {{$importedClass}};
+{{end}}
+
+/**
+ * CRUD ontology for entities of the domain {@link {{$sourceCanonicalName}}}.<p/>
+ *
+ * This class was generated automatically. Don't try to change it.
+ */
+@Ontology
+{{$generatedAnnotation}}
+public interface {{$classSimpleName}} {
+
+{{when $entityHasIdentifier}}
+  @Transition(name = "{{$identifierToEntityTransitionSimpleName}}", value = "{{$identifierToEntityTid}}")
+  {{$sourceSimpleName}} getById({{$identifierType}} id);
+
+  @Transition(name = "{{$transactionToEntityByIdentifierTransitionSimpleName}}", value = "{{$transactionToEntityByIdentifierTid}}")
+  {{$sourceSimpleName}} getById(TransactionDomain tx, {{$identifierType}} id);
+{{end}}
+}

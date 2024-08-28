@@ -22,19 +22,20 @@ public abstract class AbstractTransaction implements MovableTransaction {
   @Mover
   @Override
   public Transaction commit() {
-    return null;
+//    throw new RuntimeException("Not implemented");
+    return this;
   }
 
   @Mover
   @Override
   public Transaction rollback() {
-    return null;
+    throw new RuntimeException("Not implemented");
   }
 
   @Mover
   @Override
-  public Transaction update(String sql) {
-    return null;
+  public Transaction modify(String sql) {
+    throw new RuntimeException("Not implemented");
   }
 
   @Mapper
@@ -45,13 +46,13 @@ public abstract class AbstractTransaction implements MovableTransaction {
 
   @Mapper
   @Override
-  public <T> Cursor<T> queryData(Class<T> type, String sql) {
-    return null;
+  public <D> Cursor<D> queryData(Class<D> dataType, String sql) {
+    throw new RuntimeException("Not implemented");
   }
 
   @Mapper
   @Override
-  public <T> T fetchData(Class<T> type, String sql) {
-    return null;
+  public <D> D fetchData(Class<D> dataType, String sql) {
+    throw new RuntimeException("Not implemented");
   }
 }

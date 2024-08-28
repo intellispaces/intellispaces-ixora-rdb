@@ -12,6 +12,11 @@ public interface DataSourceDomain {
   @Transition("ea808587-a507-40e1-9091-0c623dcb6d74")
   DataSourcePropertiesDomain properties();
 
-  @Transition(value = "7465cd7c-94bd-4aac-b220-1520907c4e9b", allowedTraverseTypes = TraverseTypes.Moving, factory = true)
+  @Transition(
+      value = "7465cd7c-94bd-4aac-b220-1520907c4e9b",
+      name = "DataSourceToConnectionTransition",
+      allowedTraverse = TraverseTypes.Moving,
+      factory = true
+  )
   ConnectionDomain getConnection();
 }

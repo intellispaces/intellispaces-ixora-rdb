@@ -1,0 +1,23 @@
+package {{$packageName}};
+
+{{for importedClass : $importedClasses}}
+import {{$importedClass}};
+{{end}}
+
+/**
+ * Interface of the CRUD guide for entities of the domain {@link {{$sourceCanonicalName}}}.<p/>
+ *
+ * This class was generated automatically. Don't try to change it.
+ */
+@Guide
+{{$generatedAnnotation}}
+public interface {{$classSimpleName}} {
+
+{{when $entityHasIdentifier}}
+  @Mapper({{$identifierToEntityTransitionSimpleName}}.class)
+  {{$entityHandleSimpleName}} getById({{$identifierType}} id);
+
+  @Mapper({{$transactionToEntityByIdentifierTransitionSimpleName}}.class)
+  {{$entityHandleSimpleName}} getById(Transaction tx, {{$identifierType}} id);
+{{end}}
+}
