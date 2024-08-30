@@ -21,7 +21,7 @@ public class {{$classSimpleName}} implements {{$guideType}} {
 
   @Override
   public {{$entityHandleSimpleName}} getById(Transaction tx, {{$identifierType}} id) {
-    throw new RuntimeException("Not implemented");
+    return tx.fetchData({{$entityHandleSimpleName}}.class, "SELECT * FROM {{$entityTable}} {{$entityAlias}} WHERE {{$entityAlias}}.{{$identifierColumn}} = 2");
   }
 {{end}}
 }

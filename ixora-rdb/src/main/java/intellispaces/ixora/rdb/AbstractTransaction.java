@@ -3,6 +3,7 @@ package intellispaces.ixora.rdb;
 import intellispaces.core.annotation.Mapper;
 import intellispaces.core.annotation.Mover;
 import intellispaces.core.annotation.ObjectHandle;
+import intellispaces.ixora.rdb.exception.RdbException;
 import intellispaces.ixora.structures.collection.Cursor;
 
 @ObjectHandle(value = TransactionDomain.class, name = "BasicTransaction")
@@ -53,6 +54,14 @@ public abstract class AbstractTransaction implements MovableTransaction {
   @Mapper
   @Override
   public <D> D fetchData(Class<D> dataType, String sql) {
-    throw new RuntimeException("Not implemented");
+    ResultSet rs = connection.createStatement().executeQuery(sql);
+    if (!rs.next()) {
+      throw RdbException.withMessage("No data found");
+    }
+    D data = rs.value(dataType);
+    if (rs.next()) {
+      throw RdbException.withMessage("More than one data was found");
+    }
+    return data;
   }
 }

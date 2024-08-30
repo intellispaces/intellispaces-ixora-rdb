@@ -1,39 +1,46 @@
 package intellispaces.ixora.rdb.annotation.processor.entity;
 
-import intellispaces.core.annotation.Guide;
-import intellispaces.core.annotation.Mapper;
-import intellispaces.core.annotation.processor.AbstractGenerator;
-import intellispaces.core.object.ObjectFunctions;
-import intellispaces.ixora.rdb.Transaction;
+import intellispaces.annotations.context.AnnotationProcessingContext;
+import intellispaces.core.annotation.Ontology;
+import intellispaces.core.annotation.Transition;
+import intellispaces.core.annotation.processor.AbstractGenerationTask;
+import intellispaces.core.id.RepetableUuidIdentifierGenerator;
+import intellispaces.core.space.domain.DomainFunctions;
+import intellispaces.ixora.rdb.TransactionDomain;
 import intellispaces.javastatements.customtype.CustomType;
 import intellispaces.javastatements.method.MethodStatement;
 
 import javax.annotation.processing.RoundEnvironment;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class EntityCrudGuideGenerator extends AbstractGenerator {
+public class EntityCrudOntologyGenerationTask extends AbstractGenerationTask {
+  private String identifierToEntityTid;
+  private String transactionToEntityByIdentifierTid;
+
   private boolean entityHasIdentifier;
-  private String entityHandleSimpleName;
   private String identifierType;
   private String identifierToEntityTransitionSimpleName;
   private String transactionToEntityByIdentifierTransitionSimpleName;
 
-  public EntityCrudGuideGenerator(CustomType entityType) {
-    super(entityType);
+  public EntityCrudOntologyGenerationTask(CustomType initiatorType, CustomType entityType) {
+    super(initiatorType, entityType);
   }
 
   @Override
-  public String getArtifactName() {
-    return EntityProcessorFunctions.getCrudGuideCanonicalName(annotatedType);
+  public boolean isRelevant(AnnotationProcessingContext context) {
+    return true;
+  }
+
+  @Override
+  public String artifactName() {
+    return EntityProcessorFunctions.getCrudOntologyCanonicalName(annotatedType);
   }
 
   @Override
   protected String templateName() {
-    return "/entity_crud_guide.template";
+    return "/entity_crud_ontology.template";
   }
 
   @Override
@@ -47,26 +54,33 @@ public class EntityCrudGuideGenerator extends AbstractGenerator {
     vars.put("importedClasses", context.getImports());
 
     vars.put("entityHasIdentifier", entityHasIdentifier);
-    vars.put("entityHandleSimpleName", entityHandleSimpleName);
     vars.put("identifierType", identifierType);
     vars.put("identifierToEntityTransitionSimpleName", identifierToEntityTransitionSimpleName);
     vars.put("transactionToEntityByIdentifierTransitionSimpleName", transactionToEntityByIdentifierTransitionSimpleName);
 
+    vars.put("identifierToEntityTid", identifierToEntityTid);
+    vars.put("transactionToEntityByIdentifierTid", transactionToEntityByIdentifierTid);
     return vars;
   }
 
   @Override
   protected boolean analyzeAnnotatedType(RoundEnvironment roundEnv) {
-    context.generatedClassCanonicalName(getArtifactName());
-    context.addImport(Guide.class);
-    context.addImport(Mapper.class);
-    context.addImport(Transaction.class);
+    context.generatedClassCanonicalName(artifactName());
 
-    entityHandleSimpleName = context.addToImportAndGetSimpleName(
-        EntityProcessorFunctions.getEntityHandleCanonicalName(annotatedType)
-    );
+    context.addImport(Ontology.class);
+    context.addImport(Transition.class);
+    context.addImport(TransactionDomain.class);
+
+    defineIdentifiers();
     analyzeEntityIdentifier();
     return true;
+  }
+
+  private void defineIdentifiers() {
+    String did = DomainFunctions.getDomainId(annotatedType);
+    var identifierGenerator = new RepetableUuidIdentifierGenerator(did);
+    identifierToEntityTid = identifierGenerator.next();
+    transactionToEntityByIdentifierTid = identifierGenerator.next();
   }
 
   private void analyzeEntityIdentifier() {
@@ -77,13 +91,14 @@ public class EntityCrudGuideGenerator extends AbstractGenerator {
     }
     entityHasIdentifier = true;
 
-    identifierType = context.addToImportAndGetSimpleName(
-        EntityProcessorFunctions.getIdentifierType(annotatedType, identifierMethod.orElseThrow())
-    );
     identifierToEntityTransitionSimpleName = EntityProcessorFunctions.getIdentifierToEntityTransitionSimpleName(
-        annotatedType);
+        annotatedType
+    );
     transactionToEntityByIdentifierTransitionSimpleName = EntityProcessorFunctions.getTransactionToEntityByIdentifierTransitionSimpleName(
         annotatedType
+    );
+    identifierType = context.addToImportAndGetSimpleName(
+      EntityProcessorFunctions.getIdentifierType(annotatedType, identifierMethod.orElseThrow())
     );
   }
 }

@@ -2,7 +2,7 @@ package intellispaces.ixora.rdb;
 
 import intellispaces.commons.exception.CoveredCheckedException;
 import intellispaces.commons.function.ThrowableFunction;
-import intellispaces.core.system.ModuleProjections;
+import intellispaces.core.system.ContextProjections;
 import intellispaces.ixora.rdb.exception.TransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,12 +82,12 @@ public class TransactionFunctions {
 
   private static void storeTransactionInContext(Transaction tx) {
     Transactions.setCurrent(tx);
-    ModuleProjections.addContextProjection(TRANSACTION_PROJECTION_NAME, Transaction.class, tx);
+    ContextProjections.addProjection(TRANSACTION_PROJECTION_NAME, Transaction.class, tx);
   }
 
   private static void removeTransactionFromContext() {
     Transactions.setCurrent(null);
-    ModuleProjections.removeContextProjection(TRANSACTION_PROJECTION_NAME);
+    ContextProjections.removeProjection(TRANSACTION_PROJECTION_NAME);
   }
 
   private static void commit(Transaction tx, Throwable reason) {

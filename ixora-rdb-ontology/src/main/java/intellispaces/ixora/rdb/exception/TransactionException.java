@@ -1,8 +1,6 @@
 package intellispaces.ixora.rdb.exception;
 
-import intellispaces.core.exception.TraverseException;
-
-public class TransactionException extends TraverseException {
+public class TransactionException extends RdbException {
 
   public TransactionException(String messageTemplate, Object... messageParams) {
     super(messageTemplate, messageParams);
