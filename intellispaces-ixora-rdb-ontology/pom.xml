@@ -2,20 +2,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>intellispaces-parent</groupId>
-        <artifactId>intellispaces-parent-pom</artifactId>
+        <groupId>intellispaces-ixora</groupId>
+        <artifactId>intellispaces-ixora-rdb-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>intellispaces-ixora</groupId>
-    <artifactId>intellispaces-ixora-rdb-parent</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>intellispaces-ixora-rdb-ontology</module>
-        <module>intellispaces-ixora-rdb</module>
-    </modules>
-
+    <artifactId>intellispaces-ixora-rdb-ontology</artifactId>
+    <packaging>jar</packaging>
+	
     <build>
         <plugins>
             <plugin>
@@ -26,10 +20,20 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <!-- Intellispaces -->
+        <dependency>
+            <groupId>intellispaces-framework</groupId>
+            <artifactId>intellispaces-framework-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>intellispaces-ixora</groupId>
+            <artifactId>intellispaces-ixora-structures-ontology</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
