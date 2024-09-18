@@ -21,7 +21,8 @@ public class {{$classSimpleName}} implements {{$guideType}} {
 
   @Override
   public {{$entityHandleSimpleName}} getById(Transaction tx, {{$identifierType}} id) {
-    return tx.fetchData({{$entityHandleSimpleName}}.class, "SELECT * FROM {{$entityTable}} {{$entityAlias}} WHERE {{$entityAlias}}.{{$identifierColumn}} = 2");
+    Map<String, Object> params = new JavaMap<>(java.util.Map.of("id", id), String.class, Object.class);
+    return tx.fetchData({{$entityHandleSimpleName}}.class, "SELECT * FROM {{$entityTable}} {{$entityAlias}} WHERE {{$entityAlias}}.{{$identifierColumn}} = :id", params);
   }
 {{end}}
 }

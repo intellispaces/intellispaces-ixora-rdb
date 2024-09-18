@@ -9,6 +9,7 @@ import intellispaces.ixora.rdb.Transaction;
 import intellispaces.ixora.rdb.exception.RdbException;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.ixora.structures.association.JavaMap;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
@@ -72,6 +73,8 @@ public class EntityCrudGuideImplGenerationTask extends AbstractGenerationTask {
 
     context.addImport(Guide.class);
     context.addImport(Transaction.class);
+    context.addImport(intellispaces.ixora.structures.association.Map.class);
+    context.addImport(JavaMap.class);
 
     guideType = context.addToImportAndGetSimpleName(EntityProcessorFunctions.getCrudGuideCanonicalName(annotatedType));
     entityHandleSimpleName = context.addToImportAndGetSimpleName(
@@ -90,7 +93,7 @@ public class EntityCrudGuideImplGenerationTask extends AbstractGenerationTask {
 
   private String getTableName() {
     Table table = annotatedType.selectAnnotation(Table.class).orElseThrow(() ->
-        RdbException.withMessage("RDB entity class {} must annotation with annotation {}",
+        RdbException.withMessage("RDB entity class {0} must annotation with annotation {1}",
         annotatedType.canonicalName(), Table.class.getCanonicalName()
     ));
     if (TextFunctions.isNotBlank(table.schema())) {
@@ -112,7 +115,7 @@ public class EntityCrudGuideImplGenerationTask extends AbstractGenerationTask {
     );
 
     Column column = identifierMethod.orElseThrow().selectAnnotation(Column.class).orElseThrow(() ->
-        RdbException.withMessage("RDB entity {} identifier method {} must annotation with annotation {}",
+        RdbException.withMessage("RDB entity {0} identifier method {1} must annotation with annotation {2}",
             annotatedType.canonicalName(), identifierMethod.get().name(), Column.class.getCanonicalName()
         ));
     identifierColumn = column.name();

@@ -96,7 +96,7 @@ public class TransactionFunctions {
     } catch (Throwable e) {
       if (reason != null) {
         TransactionException te = TransactionException.withCauseAndMessage(e,
-            "Could not commit transaction after exception {}", reason.getClass().getCanonicalName());
+            "Could not commit transaction after exception {0}", reason.getClass().getCanonicalName());
         te.addSuppressed(reason);
         throw te;
       }
@@ -110,7 +110,7 @@ public class TransactionFunctions {
     } catch (Throwable e) {
       if (reason != null) {
         TransactionException te = TransactionException.withCauseAndMessage(e,
-            "Could not roll back transaction after exception {}", reason.getClass().getCanonicalName());
+            "Could not roll back transaction after exception {0}", reason.getClass().getCanonicalName());
         te.addSuppressed(reason);
         throw te;
       }

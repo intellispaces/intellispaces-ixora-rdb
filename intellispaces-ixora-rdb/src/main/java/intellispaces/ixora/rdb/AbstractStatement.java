@@ -2,7 +2,7 @@ package intellispaces.ixora.rdb;
 
 import intellispaces.framework.core.annotation.Mapper;
 import intellispaces.framework.core.annotation.ObjectHandle;
-import intellispaces.framework.core.exception.TraverseException;
+import intellispaces.ixora.rdb.exception.RdbException;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,12 +17,12 @@ public abstract class AbstractStatement implements MovableStatement {
 
   @Mapper
   @Override
-  public ResultSet executeQuery(String sql) {
+  public ResultSet executeQuery(String query) {
     try {
-      java.sql.ResultSet rs = statement.executeQuery(sql);
+      java.sql.ResultSet rs = statement.executeQuery(query);
       return new BasicResultSet(rs);
     } catch (SQLException e) {
-      throw TraverseException.withCauseAndMessage(e, "Could not execute query {}", sql);
+      throw RdbException.withCauseAndMessage(e, "Could not execute query {0}", query);
     }
   }
 }

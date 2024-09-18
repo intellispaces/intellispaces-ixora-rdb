@@ -2,7 +2,7 @@ package intellispaces.ixora.rdb;
 
 import intellispaces.framework.core.annotation.Mover;
 import intellispaces.framework.core.annotation.ObjectHandle;
-import intellispaces.framework.core.exception.TraverseException;
+import intellispaces.ixora.rdb.exception.RdbException;
 
 import java.sql.SQLException;
 
@@ -20,7 +20,17 @@ public abstract class AbstractConnection implements MovableConnection {
     try {
       return new BasicStatement(connection.createStatement());
     } catch (SQLException e) {
-      throw TraverseException.withCauseAndMessage(e, "Could not create statement");
+      throw RdbException.withCauseAndMessage(e, "Could not create statement");
+    }
+  }
+
+  @Mover
+  @Override
+  public PreparedStatement createPreparedStatement(String query) {
+    try {
+      return new BasicPreparedStatement(connection.prepareStatement(query));
+    } catch (SQLException e) {
+      throw RdbException.withCauseAndMessage(e, "Could not create statement");
     }
   }
 

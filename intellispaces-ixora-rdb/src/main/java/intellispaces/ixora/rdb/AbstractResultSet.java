@@ -53,7 +53,7 @@ public abstract class AbstractResultSet implements MovableResultSet {
       }
       return value;
     } catch (SQLException e) {
-      throw TraverseException.withCauseAndMessage(e, "Could not read integer value by name {}", name);
+      throw TraverseException.withCauseAndMessage(e, "Could not read integer value by name {0}", name);
     }
   }
 
@@ -61,11 +61,11 @@ public abstract class AbstractResultSet implements MovableResultSet {
     try {
       int value = rs.getInt(name);
       if (rs.wasNull()) {
-        throw UnexpectedViolationException.withMessage("Null value of the primitive integer value by name {}", name);
+        throw UnexpectedViolationException.withMessage("Null value of the primitive integer value by name {0}", name);
       }
       return value;
     } catch (SQLException e) {
-      throw TraverseException.withCauseAndMessage(e, "Could not read integer value by name {}", name);
+      throw TraverseException.withCauseAndMessage(e, "Could not read integer value by name {0}", name);
     }
   }
 
@@ -79,7 +79,7 @@ public abstract class AbstractResultSet implements MovableResultSet {
       }
       return value;
     } catch (SQLException e) {
-      throw TraverseException.withCauseAndMessage(e, "Could not read string value by name {}", name);
+      throw TraverseException.withCauseAndMessage(e, "Could not read string value by name {0}", name);
     }
   }
 
@@ -117,7 +117,7 @@ public abstract class AbstractResultSet implements MovableResultSet {
   private <D> Constructor<D> getDataHandleConstructor(Class<D> dataClass, Class<?> domainClass) {
     String dataHandleClassName = NameConventionFunctions.getDataClassName(domainClass.getCanonicalName());
     Class<D> dataHandleClass = (Class<D>) TypeFunctions.getClass(dataHandleClassName).orElseThrow(() ->
-        UnexpectedViolationException.withMessage("Could not find data handle class by name {} ",
+        UnexpectedViolationException.withMessage("Could not find data handle class by name {0} ",
             dataHandleClassName)
     );
 
@@ -132,7 +132,7 @@ public abstract class AbstractResultSet implements MovableResultSet {
     Class<?> domainClass = ObjectFunctions.getDomainClassOfObjectHandle(dataClass);
     if (!DataFunctions.isDataDomain(domainClass)) {
       throw UnexpectedViolationException.withMessage("Expected object handle class of the data domain. " +
-          "Data domain should be annotated with @{}", Data.class.getSimpleName());
+          "Data domain should be annotated with @{0}", Data.class.getSimpleName());
     }
     return domainClass;
   }
@@ -147,8 +147,8 @@ public abstract class AbstractResultSet implements MovableResultSet {
       Parameter param = constructor.getParameters()[index];
       Name name = param.getAnnotation(Name.class);
       if (name == null) {
-        throw UnexpectedViolationException.withMessage("Parameter {} of the data class {} constructor " +
-            "should be marked with annotation {}", index, dataClass, Name.class.getSimpleName());
+        throw UnexpectedViolationException.withMessage("Parameter {0} of the data class {1} constructor " +
+            "should be marked with annotation {2}", index, dataClass, Name.class.getSimpleName());
       }
       String alias = name.value();
       Class<?> paramClass = param.getType();
@@ -172,13 +172,13 @@ public abstract class AbstractResultSet implements MovableResultSet {
     ArraysFunctions.foreach(domainClass.getDeclaredMethods(), m -> {
       Column column = m.getAnnotation(Column.class);
       if (column == null) {
-        throw UnexpectedViolationException.withMessage("Method {} of the class {} should be marked with annotation {}",
+        throw UnexpectedViolationException.withMessage("Method {0} of the class {1} should be marked with annotation {2}",
             m.getName(), domainClass.getCanonicalName(), Column.class.getSimpleName()
         );
       }
       if (TextFunctions.isNullOrBlank(column.name())) {
-        throw UnexpectedViolationException.withMessage("Name attribute should be defined in annotation {} " +
-                "on the method {} in class {}",
+        throw UnexpectedViolationException.withMessage("Name attribute should be defined in annotation {0} " +
+                "on the method {1} in class {2}",
             Column.class.getSimpleName(), m.getName(), domainClass.getCanonicalName()
         );
       }

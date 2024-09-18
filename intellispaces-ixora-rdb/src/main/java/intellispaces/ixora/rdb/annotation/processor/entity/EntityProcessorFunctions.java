@@ -46,7 +46,7 @@ public interface EntityProcessorFunctions {
   static String getIdentifierType(CustomType entityType, MethodStatement identifierMethod) {
     TypeReference returnType = identifierMethod.returnType()
         .orElseThrow(() -> UnexpectedViolationException.withMessage(
-            "Entity identifier method {} of the entity {} should return value",
+            "Entity identifier method {0} of the entity {1} should return value",
             identifierMethod.name(), entityType.canonicalName()
         ));
     return ObjectFunctions.getBaseObjectHandleTypename(returnType);

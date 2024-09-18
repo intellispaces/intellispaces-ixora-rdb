@@ -12,6 +12,9 @@ public interface ConnectionDomain {
   @Transition(value = "b7c73781-0441-4ef7-b5b3-f122b5bccd29", allowedTraverse = TraverseTypes.Moving, factory = true)
   StatementDomain createStatement();
 
+  @Transition(value = "4a08c0f9-0159-4b69-9211-3ec1d8a6200c", allowedTraverse = TraverseTypes.Moving, factory = true)
+  PreparedStatementDomain createPreparedStatement(String query);
+
   @Transition(value = "33512973-f011-4ab8-81b9-0cdf4ba7b082", allowedTraverse = TraverseTypes.Moving)
   ConnectionDomain close();
 }
