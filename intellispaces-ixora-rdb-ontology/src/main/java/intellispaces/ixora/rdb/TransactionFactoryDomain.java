@@ -13,6 +13,10 @@ public interface TransactionFactoryDomain {
   @Transition("42c35449-eb32-4683-ba40-9ded4a1d38f4")
   DataSourceDomain dataSource();
 
-  @Transition(value = "03e420fb-2cf3-49ea-a1f3-8adff39e738b", allowedTraverse = TraverseTypes.Moving, factory = true)
+  @Transition(
+    value = "03e420fb-2cf3-49ea-a1f3-8adff39e738b",
+    name = "TransactionFactoryToTransactionTransition",
+    allowedTraverse = TraverseTypes.MovingThenMapping
+  )
   TransactionDomain getTransaction() throws TransactionException;
 }
