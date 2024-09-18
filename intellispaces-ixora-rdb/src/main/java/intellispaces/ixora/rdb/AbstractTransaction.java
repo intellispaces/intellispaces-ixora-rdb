@@ -106,7 +106,7 @@ public abstract class AbstractTransaction implements MovableTransaction {
         preparedQuery[index2++] = ch;
       }
     }
-    return new PreparedQuery(new String(preparedQuery), values);
+    return new PreparedQuery(new String(preparedQuery, 0, index2), values);
   }
 
   private void setParamValues(PreparedStatement ps, List<Object> paramValues) {
