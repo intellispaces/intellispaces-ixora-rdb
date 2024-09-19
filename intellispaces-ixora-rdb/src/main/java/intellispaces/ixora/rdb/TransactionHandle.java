@@ -1,18 +1,20 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.framework.core.annotation.Inject;
 import intellispaces.framework.core.annotation.Mapper;
 import intellispaces.framework.core.annotation.Mover;
 import intellispaces.framework.core.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.RdbException;
 import intellispaces.ixora.structures.association.Map;
 import intellispaces.ixora.structures.collection.Cursor;
-
-import java.util.ArrayList;
-import java.util.List;
+import intellispaces.ixora.structures.collection.List;
 
 @ObjectHandle(value = TransactionDomain.class, name = "TransactionHandleImpl")
 public abstract class TransactionHandle implements MovableTransaction {
   private final MovableConnection connection;
+
+  @Inject
+  abstract NamedQueryToBlindQueryGuide namedQueryToBlindQueryGuide();
 
   public TransactionHandle(MovableConnection connection) {
     this.connection = connection;
@@ -67,9 +69,9 @@ public abstract class TransactionHandle implements MovableTransaction {
   @Mapper
   @Override
   public <D> D fetchData(Class<D> dataType, String query, Map<String, Object> params) {
-    BlindQueryAndParameterNames blindQueryAndParamNames = prepareQuery(query, params);
+    BlindQueryAndParameterNames blindQueryAndParamNames = namedQueryToBlindQueryGuide().namedQueryToBlindQuery(query);
     PreparedStatement ps = connection.createPreparedStatement(blindQueryAndParamNames.query());
-    setParamValues(ps, blindQueryAndParamNames.paramNames(), params);
+    setParamValues(ps, blindQueryAndParamNames.parameterNames(), params);
     ResultSet rs = ps.executeQuery();
     return fetchData(dataType, rs);
   }
@@ -85,31 +87,9 @@ public abstract class TransactionHandle implements MovableTransaction {
     return data;
   }
 
-  private BlindQueryAndParameterNames prepareQuery(String query, Map<String, Object> params) {
-    char[] originQuery = query.toCharArray();
-    char[] blindQuery = new char[query.length()];
-    List<String> paramNames = new ArrayList<>();
-    int index1 = 0, index2 = 0;
-    while (index1 < originQuery.length) {
-      char ch = originQuery[index1++];
-      if (ch == ':') {
-        blindQuery[index2++] = '?';
-        int ind = index1;
-        while (index1 < originQuery.length && Character.isLetterOrDigit(originQuery[index1])) {
-          index1++;
-        }
-        String paramName = query.substring(ind, index1);
-        paramNames.add(paramName);
-      } else {
-        blindQuery[index2++] = ch;
-      }
-    }
-    return new BlindQueryAndParameterNames(new String(blindQuery, 0, index2), paramNames);
-  }
-
   private void setParamValues(PreparedStatement ps, List<String> paramNames, Map<String, Object> params) {
     int index = 1;
-    for (Object paramName : paramNames) {
+    for (Object paramName : paramNames.nativeList()) {
       if (!params.nativeMap().containsKey(paramName)) {
         throw RdbException.withMessage("Value of parameter {0} is not found", paramName);
       }
@@ -119,24 +99,6 @@ public abstract class TransactionHandle implements MovableTransaction {
       } else {
         throw new RuntimeException("Not implemented");
       }
-    }
-  }
-
-  private final static class BlindQueryAndParameterNames {
-    private final String query;
-    private final List<String> paramNames;
-
-    public BlindQueryAndParameterNames(String query, List<String> paramNames) {
-      this.query = query;
-      this.paramNames = paramNames;
-    }
-
-    public String query() {
-      return query;
-    }
-
-    public List<String> paramNames() {
-      return paramNames;
     }
   }
 }
