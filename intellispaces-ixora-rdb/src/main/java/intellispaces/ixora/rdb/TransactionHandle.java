@@ -70,7 +70,7 @@ public abstract class TransactionHandle implements MovableTransaction {
   @Override
   public <D> D fetchData(Class<D> dataType, String query, Map<String, Object> params) {
     BlindQueryAndParameterNames blindQueryAndParamNames = namedQueryToBlindQueryGuide().namedQueryToBlindQuery(query);
-    PreparedStatement ps = connection.createPreparedStatement(blindQueryAndParamNames.query());
+    PreparedStatement ps = connection.createPreparedStatement(blindQueryAndParamNames.blindQuery());
     setParamValues(ps, blindQueryAndParamNames.parameterNames(), params);
     ResultSet rs = ps.executeQuery();
     return fetchData(dataType, rs);
