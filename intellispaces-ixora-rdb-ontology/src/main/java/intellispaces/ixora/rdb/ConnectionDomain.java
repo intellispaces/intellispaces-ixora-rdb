@@ -23,6 +23,15 @@ public interface ConnectionDomain {
   )
   PreparedStatementDomain createPreparedStatement(String query);
 
+  @Transition(value = "0f840bdd-29eb-4847-9209-199f13de78a8", allowedTraverse = TraverseTypes.Moving)
+  ConnectionDomain disableAutoCommit();
+
+  @Transition(value = "7e5ce719-8cb6-452f-a1e2-a0f08fc786a3", allowedTraverse = TraverseTypes.Moving)
+  ConnectionDomain commit();
+
+  @Transition(value = "f2b08c59-c52e-4915-9d14-ac6352e2fe23", allowedTraverse = TraverseTypes.Moving)
+  ConnectionDomain rollback();
+
   @Transition(value = "33512973-f011-4ab8-81b9-0cdf4ba7b082", allowedTraverse = TraverseTypes.Moving)
   ConnectionDomain close();
 }

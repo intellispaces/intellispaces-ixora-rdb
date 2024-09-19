@@ -5,8 +5,8 @@ import intellispaces.framework.core.annotation.Mover;
 import intellispaces.framework.core.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.RdbException;
 
-import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @ObjectHandle(value = PreparedStatementDomain.class, name = "PreparedStatementHandleImpl")
 public abstract class PreparedStatementHandle implements MovablePreparedStatement {

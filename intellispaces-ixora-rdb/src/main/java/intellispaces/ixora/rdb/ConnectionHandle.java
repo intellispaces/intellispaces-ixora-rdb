@@ -36,8 +36,45 @@ public abstract class ConnectionHandle implements MovableConnection {
 
   @Mover
   @Override
-  public Connection close() {
+  public Connection disableAutoCommit() {
+    try {
+      connection.setAutoCommit(false);
+    } catch (SQLException e) {
+      throw RdbException.withCauseAndMessage(e, "Could not disable SQL connection auto commit");
+    }
+    return this;
+  }
 
-    return null;
+  @Mover
+  @Override
+  public Connection commit() {
+    try {
+      connection.commit();
+    } catch (SQLException e) {
+      throw RdbException.withCauseAndMessage(e, "Could not commit SQL connection");
+    }
+    return this;
+  }
+
+  @Mover
+  @Override
+  public Connection rollback() {
+    try {
+      connection.rollback();
+    } catch (SQLException e) {
+      throw RdbException.withCauseAndMessage(e, "Could not roll back SQL connection");
+    }
+    return this;
+  }
+
+  @Mover
+  @Override
+  public Connection close() {
+    try {
+      connection.close();
+    } catch (SQLException e) {
+      throw RdbException.withCauseAndMessage(e, "Could not close SQL connection");
+    }
+    return this;
   }
 }

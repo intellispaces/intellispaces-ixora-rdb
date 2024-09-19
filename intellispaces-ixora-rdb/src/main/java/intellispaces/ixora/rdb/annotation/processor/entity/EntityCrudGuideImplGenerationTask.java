@@ -2,13 +2,13 @@ package intellispaces.ixora.rdb.annotation.processor.entity;
 
 import intellispaces.common.annotationprocessor.context.AnnotationProcessingContext;
 import intellispaces.common.base.text.TextFunctions;
+import intellispaces.common.javastatement.customtype.CustomType;
+import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.framework.core.annotation.Guide;
 import intellispaces.framework.core.annotation.Ontology;
 import intellispaces.framework.core.annotation.processor.AbstractGenerationTask;
 import intellispaces.ixora.rdb.Transaction;
 import intellispaces.ixora.rdb.exception.RdbException;
-import intellispaces.common.javastatement.customtype.CustomType;
-import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.ixora.structures.association.JavaMap;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;

@@ -1,14 +1,14 @@
 package intellispaces.ixora.rdb.annotation.processor.entity;
 
 import intellispaces.common.annotationprocessor.context.AnnotationProcessingContext;
+import intellispaces.common.javastatement.customtype.CustomType;
+import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.framework.core.annotation.Ontology;
 import intellispaces.framework.core.annotation.Transition;
 import intellispaces.framework.core.annotation.processor.AbstractGenerationTask;
 import intellispaces.framework.core.id.RepetableUuidIdentifierGenerator;
 import intellispaces.framework.core.space.domain.DomainFunctions;
 import intellispaces.ixora.rdb.TransactionDomain;
-import intellispaces.common.javastatement.customtype.CustomType;
-import intellispaces.common.javastatement.method.MethodStatement;
 
 import javax.annotation.processing.RoundEnvironment;
 import java.util.HashMap;

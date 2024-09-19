@@ -4,10 +4,10 @@ import intellispaces.common.base.collection.AdditionalCollectors;
 import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.base.text.TextFunctions;
 import intellispaces.common.base.type.TypeFunctions;
-import intellispaces.framework.core.object.ObjectFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.reference.TypeReference;
+import intellispaces.framework.core.object.ObjectFunctions;
 import jakarta.persistence.Id;
 
 import java.util.Optional;
@@ -32,7 +32,7 @@ public interface EntityProcessorFunctions {
 
   static String getCrudGuideGeneratedImplCanonicalName(CustomType entityType) {
     return TypeFunctions.addPrefixToSimpleName(
-        "Generated", TextFunctions.replaceEndingOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide")
+        "Default", TextFunctions.replaceEndingOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide")
     );
   }
 

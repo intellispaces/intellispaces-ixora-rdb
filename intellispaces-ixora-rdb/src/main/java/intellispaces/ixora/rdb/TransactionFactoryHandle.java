@@ -23,8 +23,6 @@ public abstract class TransactionFactoryHandle implements MovableTransactionFact
   @Override
   public Transaction getTransaction() throws TransactionException {
     MovableConnection connection = (MovableConnection) dataSource.getConnection();
-    //connection.disableAutoCommit();
-    //connection.beginTransaction();
     return new TransactionHandleImpl(connection);
   }
 }

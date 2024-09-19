@@ -16,6 +16,7 @@ public abstract class TransactionHandle implements MovableTransaction {
 
   public TransactionHandle(MovableConnection connection) {
     this.connection = connection;
+    connection.disableAutoCommit();
   }
 
   @Mapper
@@ -27,14 +28,15 @@ public abstract class TransactionHandle implements MovableTransaction {
   @Mover
   @Override
   public Transaction commit() {
-//    throw new RuntimeException("Not implemented");
+    connection.commit();
     return this;
   }
 
   @Mover
   @Override
   public Transaction rollback() {
-    throw new RuntimeException("Not implemented");
+    connection.rollback();
+    return this;
   }
 
   @Mover
