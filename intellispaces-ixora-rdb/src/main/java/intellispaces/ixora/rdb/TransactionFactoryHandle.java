@@ -5,11 +5,11 @@ import intellispaces.framework.core.annotation.Mover;
 import intellispaces.framework.core.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.TransactionException;
 
-@ObjectHandle(value = TransactionFactoryDomain.class, name = "BasicTransactionFactory")
-public abstract class AbstractTransactionFactory implements MovableTransactionFactory {
+@ObjectHandle(value = TransactionFactoryDomain.class, name = "TransactionFactoryHandleImpl")
+public abstract class TransactionFactoryHandle implements MovableTransactionFactory {
   private final MovableDataSource dataSource;
 
-  public AbstractTransactionFactory(MovableDataSource dataSource) {
+  public TransactionFactoryHandle(MovableDataSource dataSource) {
     this.dataSource = dataSource;
   }
 
@@ -25,6 +25,6 @@ public abstract class AbstractTransactionFactory implements MovableTransactionFa
     MovableConnection connection = (MovableConnection) dataSource.getConnection();
     //connection.disableAutoCommit();
     //connection.beginTransaction();
-    return new BasicTransaction(connection);
+    return new TransactionHandleImpl(connection);
   }
 }

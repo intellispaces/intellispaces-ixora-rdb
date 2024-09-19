@@ -25,11 +25,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-@ObjectHandle(value = ResultSetDomain.class, name = "BasicResultSet")
-public abstract class AbstractResultSet implements MovableResultSet {
+@ObjectHandle(value = ResultSetDomain.class, name = "ResultSetHandleImpl")
+public abstract class ResultSetHandle implements MovableResultSet {
   private final java.sql.ResultSet rs;
 
-  public AbstractResultSet(ResultSet rs) {
+  public ResultSetHandle(ResultSet rs) {
     this.rs = rs;
   }
 

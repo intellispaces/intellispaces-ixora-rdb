@@ -19,6 +19,6 @@ public abstract class RdbConfiguration {
    */
   @Projection
   public MovableTransactionFactory transactionFactory(MovableDataSource dataSource) {
-    return new BasicTransactionFactory(dataSource);
+    return new TransactionFactoryHandleImpl(dataSource);
   }
 }

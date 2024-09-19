@@ -10,11 +10,11 @@ import intellispaces.ixora.structures.collection.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
-@ObjectHandle(value = TransactionDomain.class, name = "BasicTransaction")
-public abstract class AbstractTransaction implements MovableTransaction {
+@ObjectHandle(value = TransactionDomain.class, name = "TransactionHandleImpl")
+public abstract class TransactionHandle implements MovableTransaction {
   private final MovableConnection connection;
 
-  public AbstractTransaction(MovableConnection connection) {
+  public TransactionHandle(MovableConnection connection) {
     this.connection = connection;
   }
 

@@ -6,11 +6,11 @@ import intellispaces.ixora.rdb.exception.RdbException;
 
 import java.sql.SQLException;
 
-@ObjectHandle(value = ConnectionDomain.class, name = "BasicConnection")
-public abstract class AbstractConnection implements MovableConnection {
+@ObjectHandle(value = ConnectionDomain.class, name = "ConnectionHandleImpl")
+public abstract class ConnectionHandle implements MovableConnection {
   private final java.sql.Connection connection;
 
-  public AbstractConnection(java.sql.Connection connection) {
+  public ConnectionHandle(java.sql.Connection connection) {
     this.connection = connection;
   }
 
@@ -18,7 +18,7 @@ public abstract class AbstractConnection implements MovableConnection {
   @Override
   public Statement createStatement() {
     try {
-      return new BasicStatement(connection.createStatement());
+      return new StatementHandleImpl(connection.createStatement());
     } catch (SQLException e) {
       throw RdbException.withCauseAndMessage(e, "Could not create statement");
     }
@@ -28,7 +28,7 @@ public abstract class AbstractConnection implements MovableConnection {
   @Override
   public PreparedStatement createPreparedStatement(String query) {
     try {
-      return new BasicPreparedStatement(connection.prepareStatement(query));
+      return new PreparedStatementHandleImpl(connection.prepareStatement(query));
     } catch (SQLException e) {
       throw RdbException.withCauseAndMessage(e, "Could not create statement");
     }

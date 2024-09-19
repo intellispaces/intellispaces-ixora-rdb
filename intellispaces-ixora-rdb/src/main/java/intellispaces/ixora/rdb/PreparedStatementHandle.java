@@ -8,11 +8,11 @@ import intellispaces.ixora.rdb.exception.RdbException;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
-@ObjectHandle(value = PreparedStatementDomain.class, name = "BasicPreparedStatement")
-public abstract class AbstractPreparedStatement implements MovablePreparedStatement {
+@ObjectHandle(value = PreparedStatementDomain.class, name = "PreparedStatementHandleImpl")
+public abstract class PreparedStatementHandle implements MovablePreparedStatement {
   private final PreparedStatement preparedStatement;
 
-  public AbstractPreparedStatement(PreparedStatement preparedStatement) {
+  public PreparedStatementHandle(PreparedStatement preparedStatement) {
     this.preparedStatement = preparedStatement;
   }
 
@@ -21,7 +21,7 @@ public abstract class AbstractPreparedStatement implements MovablePreparedStatem
   public ResultSet executeQuery() {
     try {
       java.sql.ResultSet rs = preparedStatement.executeQuery();
-      return new BasicResultSet(rs);
+      return new ResultSetHandleImpl(rs);
     } catch (SQLException e) {
       throw RdbException.withCauseAndMessage(e, "Could not execute prepared statement");
     }

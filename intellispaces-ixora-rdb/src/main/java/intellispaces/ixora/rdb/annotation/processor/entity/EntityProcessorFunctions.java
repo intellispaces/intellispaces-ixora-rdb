@@ -32,8 +32,7 @@ public interface EntityProcessorFunctions {
 
   static String getCrudGuideGeneratedImplCanonicalName(CustomType entityType) {
     return TypeFunctions.addPrefixToSimpleName(
-        "Generated",
-            TextFunctions.replaceEndingOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide")
+        "Generated", TextFunctions.replaceEndingOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide")
     );
   }
 

@@ -7,11 +7,11 @@ import intellispaces.ixora.rdb.exception.RdbException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@ObjectHandle(value = StatementDomain.class, name = "BasicStatement")
-public abstract class AbstractStatement implements MovableStatement {
+@ObjectHandle(value = StatementDomain.class, name = "StatementHandleImpl")
+public abstract class StatementHandle implements MovableStatement {
   private final Statement statement;
 
-  public AbstractStatement(Statement statement) {
+  public StatementHandle(Statement statement) {
     this.statement = statement;
   }
 
@@ -20,7 +20,7 @@ public abstract class AbstractStatement implements MovableStatement {
   public ResultSet executeQuery(String query) {
     try {
       java.sql.ResultSet rs = statement.executeQuery(query);
-      return new BasicResultSet(rs);
+      return new ResultSetHandleImpl(rs);
     } catch (SQLException e) {
       throw RdbException.withCauseAndMessage(e, "Could not execute query {0}", query);
     }
