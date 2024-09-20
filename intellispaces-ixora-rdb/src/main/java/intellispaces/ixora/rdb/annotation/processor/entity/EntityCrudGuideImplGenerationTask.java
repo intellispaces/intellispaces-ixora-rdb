@@ -9,7 +9,7 @@ import intellispaces.framework.core.annotation.Ontology;
 import intellispaces.framework.core.annotation.processor.AbstractGenerationTask;
 import intellispaces.ixora.rdb.Transaction;
 import intellispaces.ixora.rdb.exception.RdbException;
-import intellispaces.ixora.structures.association.JavaMap;
+import intellispaces.ixora.structures.association.Maps;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
@@ -74,7 +74,7 @@ public class EntityCrudGuideImplGenerationTask extends AbstractGenerationTask {
     context.addImport(Guide.class);
     context.addImport(Transaction.class);
     context.addImport(intellispaces.ixora.structures.association.Map.class);
-    context.addImport(JavaMap.class);
+    context.addImport(Maps.class);
 
     guideType = context.addToImportAndGetSimpleName(EntityProcessorFunctions.getCrudGuideCanonicalName(annotatedType));
     entityHandleSimpleName = context.addToImportAndGetSimpleName(

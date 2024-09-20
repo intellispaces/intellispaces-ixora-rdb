@@ -1,7 +1,7 @@
 package intellispaces.ixora.rdb;
 
 import intellispaces.framework.core.annotation.Guide;
-import intellispaces.ixora.structures.collection.JavaList;
+import intellispaces.ixora.structures.collection.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class DefaultNamedQueryToBlindQueryGuide implements NamedQueryToBlindQuer
     }
     return new BlindQueryAndParameterNamesData(
       new String(blindQuery, 0, index2),
-      new JavaList<>(paramNames, String.class)
+      Lists.of(paramNames, String.class)
     );
   }
 }

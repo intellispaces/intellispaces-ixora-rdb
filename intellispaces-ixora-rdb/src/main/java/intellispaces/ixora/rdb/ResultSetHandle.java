@@ -13,8 +13,8 @@ import intellispaces.framework.core.common.NameConventionFunctions;
 import intellispaces.framework.core.exception.TraverseException;
 import intellispaces.framework.core.object.DataFunctions;
 import intellispaces.framework.core.object.ObjectFunctions;
-import intellispaces.ixora.structures.collection.JavaList;
 import intellispaces.ixora.structures.collection.List;
+import intellispaces.ixora.structures.collection.Lists;
 import jakarta.persistence.Column;
 
 import java.lang.reflect.Constructor;
@@ -110,7 +110,7 @@ public abstract class ResultSetHandle implements MovableResultSet {
         throw UnexpectedViolationException.withCauseAndMessage(e, "Failed to create data handle");
       }
     }
-    return new JavaList<>(values, dataClass);
+    return Lists.of(values, dataClass);
   }
 
   @SuppressWarnings("unchecked")

@@ -21,4 +21,9 @@ public abstract class RdbConfiguration {
   public MovableTransactionFactory transactionFactory(MovableDataSource dataSource) {
     return new TransactionFactoryHandleImpl(dataSource);
   }
+
+  @Projection
+  public NamedQueryToBlindQueryGuide namedQueryToBlindQueryGuide() {
+    return new DefaultNamedQueryToBlindQueryGuide();
+  }
 }
