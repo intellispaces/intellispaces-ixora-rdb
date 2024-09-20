@@ -4,7 +4,9 @@ import intellispaces.framework.core.annotation.Configuration;
 import intellispaces.framework.core.annotation.Projection;
 import intellispaces.framework.core.annotation.Properties;
 
-@Configuration
+@Configuration(include = {
+  DefaultParameterizedQueryToBlindQueryGuide.class
+})
 public abstract class RdbConfiguration {
 
   /**
@@ -20,10 +22,5 @@ public abstract class RdbConfiguration {
   @Projection
   public MovableTransactionFactory transactionFactory(MovableDataSource dataSource) {
     return new TransactionFactoryHandleImpl(dataSource);
-  }
-
-  @Projection
-  public NamedQueryToBlindQueryGuide namedQueryToBlindQueryGuide() {
-    return new DefaultNamedQueryToBlindQueryGuide();
   }
 }

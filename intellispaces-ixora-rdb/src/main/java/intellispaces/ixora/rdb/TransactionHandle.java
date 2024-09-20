@@ -14,7 +14,7 @@ public abstract class TransactionHandle implements MovableTransaction {
   private final MovableConnection connection;
 
   @Inject
-  abstract NamedQueryToBlindQueryGuide namedQueryToBlindQueryGuide();
+  abstract ParameterizedQueryToBlindQueryGuide parameterizedQueryToBlindQueryGuide();
 
   public TransactionHandle(MovableConnection connection) {
     this.connection = connection;
@@ -31,6 +31,7 @@ public abstract class TransactionHandle implements MovableTransaction {
   @Override
   public Transaction commit() {
     connection.commit();
+    connection.close();
     return this;
   }
 
@@ -38,6 +39,7 @@ public abstract class TransactionHandle implements MovableTransaction {
   @Override
   public Transaction rollback() {
     connection.rollback();
+    connection.close();
     return this;
   }
 
@@ -69,7 +71,9 @@ public abstract class TransactionHandle implements MovableTransaction {
   @Mapper
   @Override
   public <D> D fetchData(Class<D> dataType, String query, Map<String, Object> params) {
-    BlindQueryAndParameterNames blindQueryAndParamNames = namedQueryToBlindQueryGuide().namedQueryToBlindQuery(query);
+    BlindQueryAndParameterNames blindQueryAndParamNames = (
+      parameterizedQueryToBlindQueryGuide().parameterizedQueryToBlindQuery(query)
+    );
     PreparedStatement ps = connection.createPreparedStatement(blindQueryAndParamNames.blindQuery());
     setParamValues(ps, blindQueryAndParamNames.parameterNames(), params);
     ResultSet rs = ps.executeQuery();

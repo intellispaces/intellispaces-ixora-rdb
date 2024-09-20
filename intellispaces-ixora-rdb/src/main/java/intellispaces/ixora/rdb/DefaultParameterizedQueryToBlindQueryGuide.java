@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Guide
-public class DefaultNamedQueryToBlindQueryGuide implements NamedQueryToBlindQueryGuide {
+public class DefaultParameterizedQueryToBlindQueryGuide implements ParameterizedQueryToBlindQueryGuide {
 
   @Override
-  public BlindQueryAndParameterNames namedQueryToBlindQuery(String query) {
+  public BlindQueryAndParameterNames parameterizedQueryToBlindQuery(String query) {
     char[] originQuery = query.toCharArray();
     char[] blindQuery = new char[query.length()];
     List<String> paramNames = new ArrayList<>();

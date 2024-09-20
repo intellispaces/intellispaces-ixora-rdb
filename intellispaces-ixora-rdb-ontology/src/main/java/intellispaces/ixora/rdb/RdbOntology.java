@@ -7,5 +7,5 @@ import intellispaces.framework.core.annotation.Transition;
 public interface RdbOntology {
 
   @Transition("d3673390-b743-434a-b7c9-f7dc64976387")
-  BlindQueryAndParameterNamesDomain namedQueryToBlindQuery(String namedQuery);
+  BlindQueryAndParameterNamesDomain parameterizedQueryToBlindQuery(String query);
 }
