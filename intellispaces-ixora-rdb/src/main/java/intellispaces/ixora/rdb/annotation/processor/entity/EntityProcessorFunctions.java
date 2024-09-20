@@ -1,6 +1,6 @@
 package intellispaces.ixora.rdb.annotation.processor.entity;
 
-import intellispaces.common.base.collection.AdditionalCollectors;
+import intellispaces.common.base.collection.Collectors;
 import intellispaces.common.base.exception.UnexpectedViolationException;
 import intellispaces.common.base.text.TextFunctions;
 import intellispaces.common.base.type.TypeFunctions;
@@ -39,7 +39,7 @@ public interface EntityProcessorFunctions {
   static Optional<MethodStatement> findIdentifierMethod(CustomType entityType) {
     return entityType.declaredMethods().stream()
         .filter(m -> m.hasAnnotation(Id.class))
-        .collect(AdditionalCollectors.optional());
+        .collect(Collectors.optional());
   }
 
   static String getIdentifierType(CustomType entityType, MethodStatement identifierMethod) {
