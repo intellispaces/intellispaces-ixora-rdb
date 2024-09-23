@@ -5,21 +5,22 @@ import intellispaces.framework.core.annotation.Factory;
 import intellispaces.framework.core.annotation.Transition;
 import intellispaces.framework.core.traverse.TraverseTypes;
 
-@Factory
 @Domain("f72b8a37-6f1e-4c98-93b5-9d5bb959cb80")
 public interface ConnectionDomain {
 
+  @Factory
   @Transition(
     value = "b7c73781-0441-4ef7-b5b3-f122b5bccd29",
     name = "ConnectionToStatementTransition",
-    allowedTraverse = TraverseTypes.MovingThenMapping
+    allowedTraverse = TraverseTypes.MappingRelatedToMoving
   )
   StatementDomain createStatement();
 
+  @Factory
   @Transition(
     value = "4a08c0f9-0159-4b69-9211-3ec1d8a6200c",
     name = "ConnectionToPreparedStatementTransition",
-    allowedTraverse = TraverseTypes.MovingThenMapping
+    allowedTraverse = TraverseTypes.Mapping
   )
   PreparedStatementDomain createPreparedStatement(String query);
 
