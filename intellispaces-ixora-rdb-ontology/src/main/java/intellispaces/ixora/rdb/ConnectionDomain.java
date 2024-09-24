@@ -12,7 +12,7 @@ public interface ConnectionDomain {
   @Transition(
     value = "b7c73781-0441-4ef7-b5b3-f122b5bccd29",
     name = "ConnectionToStatementTransition",
-    allowedTraverse = TraverseTypes.MappingRelatedToMoving
+    allowedTraverse = TraverseTypes.MappingOfMoving
   )
   StatementDomain createStatement();
 

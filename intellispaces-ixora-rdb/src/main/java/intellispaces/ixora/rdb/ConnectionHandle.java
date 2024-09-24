@@ -1,5 +1,6 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.framework.core.annotation.MapperOfMoving;
 import intellispaces.framework.core.annotation.Mover;
 import intellispaces.framework.core.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.RdbException;
@@ -14,8 +15,8 @@ public abstract class ConnectionHandle implements MovableConnection {
     this.connection = connection;
   }
 
-  @Mover
   @Override
+  @MapperOfMoving
   public Statement createStatement() {
     try {
       return new StatementHandleImpl(connection.createStatement());
@@ -24,8 +25,8 @@ public abstract class ConnectionHandle implements MovableConnection {
     }
   }
 
-  @Mover
   @Override
+  @MapperOfMoving
   public PreparedStatement createPreparedStatement(String query) {
     try {
       return new PreparedStatementHandleImpl(connection.prepareStatement(query));

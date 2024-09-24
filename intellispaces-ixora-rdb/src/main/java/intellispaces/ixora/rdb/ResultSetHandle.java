@@ -6,6 +6,7 @@ import intellispaces.common.base.text.TextFunctions;
 import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.framework.core.annotation.Data;
 import intellispaces.framework.core.annotation.Mapper;
+import intellispaces.framework.core.annotation.MapperOfMoving;
 import intellispaces.framework.core.annotation.Mover;
 import intellispaces.framework.core.annotation.Name;
 import intellispaces.framework.core.annotation.ObjectHandle;
@@ -33,8 +34,8 @@ public abstract class ResultSetHandle implements MovableResultSet {
     this.rs = rs;
   }
 
-  @Mover
   @Override
+  @MapperOfMoving
   public boolean next() {
     try {
       return rs.next();
@@ -96,8 +97,8 @@ public abstract class ResultSetHandle implements MovableResultSet {
     }
   }
 
-  @Mover
   @Override
+  @MapperOfMoving
   public <D> List<D> values(Class<D> dataClass) {
     Class<?> domainClass = getDomainClass(dataClass);
     Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);

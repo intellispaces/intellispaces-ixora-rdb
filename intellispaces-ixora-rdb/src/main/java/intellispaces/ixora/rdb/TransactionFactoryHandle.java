@@ -1,7 +1,7 @@
 package intellispaces.ixora.rdb;
 
 import intellispaces.framework.core.annotation.Mapper;
-import intellispaces.framework.core.annotation.Mover;
+import intellispaces.framework.core.annotation.MapperOfMoving;
 import intellispaces.framework.core.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.TransactionException;
 
@@ -19,8 +19,8 @@ public abstract class TransactionFactoryHandle implements MovableTransactionFact
     return dataSource;
   }
 
-  @Mover
   @Override
+  @MapperOfMoving
   public Transaction getTransaction() throws TransactionException {
     MovableConnection connection = (MovableConnection) dataSource.getConnection();
     return new TransactionHandleImpl(connection);

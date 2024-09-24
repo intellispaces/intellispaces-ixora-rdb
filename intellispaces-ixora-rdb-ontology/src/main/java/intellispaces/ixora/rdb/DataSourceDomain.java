@@ -15,7 +15,7 @@ public interface DataSourceDomain {
   @Transition(
       value = "7465cd7c-94bd-4aac-b220-1520907c4e9b",
       name = "DataSourceToConnectionTransition",
-      allowedTraverse = TraverseTypes.MappingRelatedToMoving
+      allowedTraverse = TraverseTypes.MappingOfMoving
   )
   ConnectionDomain getConnection();
 }

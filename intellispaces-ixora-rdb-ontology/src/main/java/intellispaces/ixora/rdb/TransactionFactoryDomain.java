@@ -16,7 +16,7 @@ public interface TransactionFactoryDomain {
   @Transition(
     value = "03e420fb-2cf3-49ea-a1f3-8adff39e738b",
     name = "TransactionFactoryToTransactionTransition",
-    allowedTraverse = TraverseTypes.MappingRelatedToMoving
+    allowedTraverse = TraverseTypes.MappingOfMoving
   )
   TransactionDomain getTransaction() throws TransactionException;
 }
