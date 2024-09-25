@@ -3,9 +3,12 @@ package intellispaces.ixora.rdb;
 import intellispaces.framework.core.annotation.Configuration;
 import intellispaces.framework.core.annotation.Projection;
 import intellispaces.framework.core.annotation.Properties;
+import intellispaces.ixora.rdb.guide.IxoraParameterizedQueryToBlindQueryGuide;
+import intellispaces.ixora.rdb.guide.IxoraResultSetToDataGuide;
 
 @Configuration(include = {
-  DefaultParameterizedQueryToBlindQueryGuide.class
+    IxoraParameterizedQueryToBlindQueryGuide.class,
+    IxoraResultSetToDataGuide.class
 })
 public abstract class RdbConfiguration {
 

@@ -17,9 +17,12 @@ public interface ResultSetDomain {
   @Transition(value = "0fb39956-45e1-4b78-afdf-aa0b4922ed86", name = "ResultSetToStringValueByNameTransition")
   String stringValue(String name);
 
-  @Transition("d280d0b1-16d9-4d3a-a172-a0ad39c63de7")
-  <D> D value(Class<D> dataClass);
+  @Transition(value = "d280d0b1-16d9-4d3a-a172-a0ad39c63de7", name = "ResultSetToDataTransition")
+  <D> D dataValue(Class<D> dataClass);
 
-  @Transition(value = "befbf6f7-50af-491f-a17c-574723315122", allowedTraverse = TraverseTypes.MappingOfMoving)
-  <D> ListDomain<D> values(Class<D> dataClass);
+  @Transition(
+      value = "befbf6f7-50af-491f-a17c-574723315122",
+      name = "ResultSetToDataListTransition",
+      allowedTraverse = TraverseTypes.MappingOfMoving)
+  <D> ListDomain<D> dataValues(Class<D> dataClass);
 }

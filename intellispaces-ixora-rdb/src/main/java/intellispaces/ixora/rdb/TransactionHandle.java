@@ -86,7 +86,7 @@ public abstract class TransactionHandle implements MovableTransaction {
     if (!rs.next()) {
       throw RdbException.withMessage("No data found");
     }
-    D data = rs.value(dataType);
+    D data = rs.dataValue(dataType);
     if (rs.next()) {
       throw RdbException.withMessage("More than one data was found");
     }

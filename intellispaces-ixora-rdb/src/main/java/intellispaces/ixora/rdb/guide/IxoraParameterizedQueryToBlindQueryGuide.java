@@ -1,13 +1,16 @@
-package intellispaces.ixora.rdb;
+package intellispaces.ixora.rdb.guide;
 
 import intellispaces.framework.core.annotation.Guide;
+import intellispaces.ixora.rdb.BlindQueryAndParameterNames;
+import intellispaces.ixora.rdb.BlindQueryAndParameterNamesData;
+import intellispaces.ixora.rdb.ParameterizedQueryToBlindQueryGuide;
 import intellispaces.ixora.structures.collection.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Guide
-public class DefaultParameterizedQueryToBlindQueryGuide implements ParameterizedQueryToBlindQueryGuide {
+public class IxoraParameterizedQueryToBlindQueryGuide implements ParameterizedQueryToBlindQueryGuide {
 
   @Override
   public BlindQueryAndParameterNames parameterizedQueryToBlindQuery(String query) {
