@@ -15,8 +15,9 @@ public class {{$classSimpleName}} implements {{$guideType}} {
 
 {{when $entityHasIdentifier}}
   @Override
+  @Transactional
   public {{$entityHandleSimpleName}} getById({{$identifierType}} id) {
-    throw new RuntimeException("Not implemented");
+    return getById(Transactions.current(), id);
   }
 
   @Override
