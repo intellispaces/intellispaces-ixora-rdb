@@ -1,5 +1,6 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.framework.core.annotation.AutoGuide;
 import intellispaces.framework.core.annotation.Inject;
 import intellispaces.framework.core.annotation.Mapper;
 import intellispaces.framework.core.annotation.Mover;
@@ -14,6 +15,7 @@ public abstract class TransactionHandle implements MovableTransaction {
   private final MovableConnection connection;
 
   @Inject
+  @AutoGuide
   abstract ParameterizedQueryToBlindQueryGuide parameterizedQueryToBlindQueryGuide();
 
   public TransactionHandle(MovableConnection connection) {
