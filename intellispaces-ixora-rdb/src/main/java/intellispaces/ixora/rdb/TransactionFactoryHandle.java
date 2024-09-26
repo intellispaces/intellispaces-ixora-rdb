@@ -6,10 +6,10 @@ import intellispaces.framework.core.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.TransactionException;
 
 @ObjectHandle(value = TransactionFactoryDomain.class, name = "TransactionFactoryHandleImpl")
-public abstract class TransactionFactoryHandle implements MovableTransactionFactory {
+abstract class TransactionFactoryHandle implements MovableTransactionFactory {
   private final MovableDataSource dataSource;
 
-  public TransactionFactoryHandle(MovableDataSource dataSource) {
+  TransactionFactoryHandle(MovableDataSource dataSource) {
     this.dataSource = dataSource;
   }
 

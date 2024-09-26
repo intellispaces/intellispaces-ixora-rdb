@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @ObjectHandle(value = StatementDomain.class, name = "StatementHandleImpl")
-public abstract class StatementHandle implements MovableStatement {
+abstract class StatementHandle implements MovableStatement {
   private final Statement statement;
 
-  public StatementHandle(Statement statement) {
+  StatementHandle(Statement statement) {
     this.statement = statement;
   }
 

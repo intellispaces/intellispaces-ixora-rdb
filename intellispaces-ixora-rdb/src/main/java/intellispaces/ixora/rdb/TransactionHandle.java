@@ -11,14 +11,14 @@ import intellispaces.ixora.structures.collection.Cursor;
 import intellispaces.ixora.structures.collection.List;
 
 @ObjectHandle(value = TransactionDomain.class, name = "TransactionHandleImpl")
-public abstract class TransactionHandle implements MovableTransaction {
+abstract class TransactionHandle implements MovableTransaction {
   private final MovableConnection connection;
 
   @Inject
   @AutoGuide
   abstract ParameterizedQueryToBlindQueryGuide parameterizedQueryToBlindQueryGuide();
 
-  public TransactionHandle(MovableConnection connection) {
+  TransactionHandle(MovableConnection connection) {
     this.connection = connection;
     connection.disableAutoCommit();
   }

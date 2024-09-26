@@ -9,10 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @ObjectHandle(value = PreparedStatementDomain.class, name = "PreparedStatementHandleImpl")
-public abstract class PreparedStatementHandle implements MovablePreparedStatement {
+abstract class PreparedStatementHandle implements MovablePreparedStatement {
   private final PreparedStatement preparedStatement;
 
-  public PreparedStatementHandle(PreparedStatement preparedStatement) {
+  PreparedStatementHandle(PreparedStatement preparedStatement) {
     this.preparedStatement = preparedStatement;
   }
 

@@ -8,10 +8,10 @@ import intellispaces.ixora.rdb.exception.RdbException;
 import java.sql.SQLException;
 
 @ObjectHandle(value = ConnectionDomain.class, name = "ConnectionHandleImpl")
-public abstract class ConnectionHandle implements MovableConnection {
+abstract class ConnectionHandle implements MovableConnection {
   private final java.sql.Connection connection;
 
-  public ConnectionHandle(java.sql.Connection connection) {
+  ConnectionHandle(java.sql.Connection connection) {
     this.connection = connection;
   }
 
