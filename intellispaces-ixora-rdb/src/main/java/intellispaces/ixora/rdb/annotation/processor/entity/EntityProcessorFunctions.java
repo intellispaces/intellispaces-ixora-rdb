@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface EntityProcessorFunctions {
 
   static String getEntityHandleCanonicalName(CustomType entityType) {
-    return ObjectFunctions.getBaseObjectHandleTypename(entityType);
+    return ObjectFunctions.getCommonObjectHandleTypename(entityType);
   }
 
   static String getCrudOntologyCanonicalName(CustomType entityType) {
@@ -48,7 +48,7 @@ public interface EntityProcessorFunctions {
             "Entity identifier method {0} of the entity {1} should return value",
             identifierMethod.name(), entityType.canonicalName()
         ));
-    return ObjectFunctions.getBaseObjectHandleTypename(returnType);
+    return ObjectFunctions.getCommonObjectHandleTypename(returnType);
   }
 
   static String getIdentifierToEntityTransitionSimpleName(CustomType entityType) {
