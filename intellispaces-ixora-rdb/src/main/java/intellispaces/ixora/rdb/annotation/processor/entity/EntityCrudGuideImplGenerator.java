@@ -6,7 +6,7 @@ import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.framework.core.annotation.Guide;
 import intellispaces.framework.core.annotation.Ontology;
-import intellispaces.framework.core.annotation.processor.AbstractGenerationTask;
+import intellispaces.framework.core.annotation.processor.AbstractGenerator;
 import intellispaces.ixora.rdb.Transaction;
 import intellispaces.ixora.rdb.Transactions;
 import intellispaces.ixora.rdb.annotation.Transactional;
@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class EntityCrudGuideImplGenerationTask extends AbstractGenerationTask {
+public class EntityCrudGuideImplGenerator extends AbstractGenerator {
   private String entityHandleSimpleName;
   private String entityTable;
   private String entityAlias;
@@ -29,7 +29,7 @@ public class EntityCrudGuideImplGenerationTask extends AbstractGenerationTask {
   private String identifierColumn;
   private String guideType;
 
-  public EntityCrudGuideImplGenerationTask(CustomType initiatorType, CustomType entityType) {
+  public EntityCrudGuideImplGenerator(CustomType initiatorType, CustomType entityType) {
     super(initiatorType, entityType);
   }
 

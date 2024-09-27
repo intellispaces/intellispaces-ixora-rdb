@@ -1,7 +1,7 @@
 package intellispaces.ixora.rdb.annotation.processor.entity;
 
 import intellispaces.common.annotationprocessor.AnnotatedTypeProcessor;
-import intellispaces.common.annotationprocessor.generator.GenerationTask;
+import intellispaces.common.annotationprocessor.generator.Generator;
 import intellispaces.common.annotationprocessor.validator.AnnotatedTypeValidator;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.framework.core.annotation.processor.AnnotationProcessorFunctions;
@@ -30,11 +30,11 @@ public class EntityAnnotationProcessor extends AnnotatedTypeProcessor {
   }
 
   @Override
-  public List<GenerationTask> makeTasks(CustomType initiatorType, CustomType entityType, RoundEnvironment roundEnv) {
-    List<GenerationTask> tasks = new ArrayList<>();
-    tasks.add(new EntityCrudOntologyGenerationTask(initiatorType, entityType));
-    tasks.add(new EntityCrudGuideGenerationTask(initiatorType, entityType));
-    tasks.add(new EntityCrudGuideImplGenerationTask(initiatorType, entityType));
-    return tasks;
+  public List<Generator> makeGenerators(CustomType initiatorType, CustomType entityType, RoundEnvironment roundEnv) {
+    List<Generator> generators = new ArrayList<>();
+    generators.add(new EntityCrudOntologyGenerator(initiatorType, entityType));
+    generators.add(new EntityCrudGuideGenerator(initiatorType, entityType));
+    generators.add(new EntityCrudGuideImplGenerator(initiatorType, entityType));
+    return generators;
   }
 }

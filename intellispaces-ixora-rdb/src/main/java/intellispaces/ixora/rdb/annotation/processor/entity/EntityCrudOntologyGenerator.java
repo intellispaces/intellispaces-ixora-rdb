@@ -5,7 +5,7 @@ import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.framework.core.annotation.Ontology;
 import intellispaces.framework.core.annotation.Transition;
-import intellispaces.framework.core.annotation.processor.AbstractGenerationTask;
+import intellispaces.framework.core.annotation.processor.AbstractGenerator;
 import intellispaces.framework.core.id.RepetableUuidIdentifierGenerator;
 import intellispaces.framework.core.space.domain.DomainFunctions;
 import intellispaces.ixora.rdb.TransactionDomain;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class EntityCrudOntologyGenerationTask extends AbstractGenerationTask {
+public class EntityCrudOntologyGenerator extends AbstractGenerator {
   private String identifierToEntityTid;
   private String transactionToEntityByIdentifierTid;
 
@@ -24,7 +24,7 @@ public class EntityCrudOntologyGenerationTask extends AbstractGenerationTask {
   private String identifierToEntityTransitionSimpleName;
   private String transactionToEntityByIdentifierTransitionSimpleName;
 
-  public EntityCrudOntologyGenerationTask(CustomType initiatorType, CustomType entityType) {
+  public EntityCrudOntologyGenerator(CustomType initiatorType, CustomType entityType) {
     super(initiatorType, entityType);
   }
 

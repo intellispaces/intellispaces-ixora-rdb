@@ -6,7 +6,7 @@ import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.framework.core.annotation.Guide;
 import intellispaces.framework.core.annotation.Mapper;
 import intellispaces.framework.core.annotation.Ontology;
-import intellispaces.framework.core.annotation.processor.AbstractGenerationTask;
+import intellispaces.framework.core.annotation.processor.AbstractGenerator;
 import intellispaces.ixora.rdb.Transaction;
 
 import javax.annotation.processing.RoundEnvironment;
@@ -14,14 +14,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class EntityCrudGuideGenerationTask extends AbstractGenerationTask {
+public class EntityCrudGuideGenerator extends AbstractGenerator {
   private boolean entityHasIdentifier;
   private String entityHandleSimpleName;
   private String identifierType;
   private String identifierToEntityTransitionSimpleName;
   private String transactionToEntityByIdentifierTransitionSimpleName;
 
-  public EntityCrudGuideGenerationTask(CustomType initiatorType, CustomType entityType) {
+  public EntityCrudGuideGenerator(CustomType initiatorType, CustomType entityType) {
     super(initiatorType, entityType);
   }
 
