@@ -18,7 +18,7 @@ abstract class ResultSetHandle implements MovableResultSet {
 
   @Override
   @MapperOfMoving
-  public boolean next() {
+  public Boolean next() {
     try {
       return rs.next();
     } catch (SQLException e) {

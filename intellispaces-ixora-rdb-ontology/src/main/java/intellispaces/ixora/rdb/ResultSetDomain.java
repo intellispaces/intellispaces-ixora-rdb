@@ -9,7 +9,7 @@ import intellispaces.ixora.structures.collection.ListDomain;
 public interface ResultSetDomain {
 
   @Transition(value = "a0b049ef-9ff2-4611-95b4-b500673afa55", allowedTraverse = TraverseTypes.MappingOfMoving)
-  boolean next();
+  Boolean next();
 
   @Transition(value = "77aeebe4-6c9f-4067-a1be-fe7633558a13", name = "ResultSetToIntegerValueByNameTransition")
   Integer integerValue(String name);
