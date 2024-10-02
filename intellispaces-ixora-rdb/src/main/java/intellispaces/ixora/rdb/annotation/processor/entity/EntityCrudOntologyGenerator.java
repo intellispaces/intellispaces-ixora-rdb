@@ -3,8 +3,8 @@ package intellispaces.ixora.rdb.annotation.processor.entity;
 import intellispaces.common.annotationprocessor.context.AnnotationProcessingContext;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.framework.core.annotation.Channel;
 import intellispaces.framework.core.annotation.Ontology;
-import intellispaces.framework.core.annotation.Transition;
 import intellispaces.framework.core.annotation.processor.AbstractGenerator;
 import intellispaces.framework.core.id.RepetableUuidIdentifierGenerator;
 import intellispaces.framework.core.space.domain.DomainFunctions;
@@ -16,13 +16,13 @@ import java.util.Map;
 import java.util.Optional;
 
 public class EntityCrudOntologyGenerator extends AbstractGenerator {
-  private String identifierToEntityTid;
-  private String transactionToEntityByIdentifierTid;
+  private String identifierToEntityCid;
+  private String transactionToEntityByIdentifierCid;
 
   private boolean entityHasIdentifier;
   private String identifierType;
-  private String identifierToEntityTransitionSimpleName;
-  private String transactionToEntityByIdentifierTransitionSimpleName;
+  private String identifierToEntityChannelSimpleName;
+  private String transactionToEntityByIdentifierChannelSimpleName;
 
   public EntityCrudOntologyGenerator(CustomType initiatorType, CustomType entityType) {
     super(initiatorType, entityType);
@@ -55,11 +55,11 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
 
     vars.put("entityHasIdentifier", entityHasIdentifier);
     vars.put("identifierType", identifierType);
-    vars.put("identifierToEntityTransitionSimpleName", identifierToEntityTransitionSimpleName);
-    vars.put("transactionToEntityByIdentifierTransitionSimpleName", transactionToEntityByIdentifierTransitionSimpleName);
+    vars.put("identifierToEntityChannelSimpleName", identifierToEntityChannelSimpleName);
+    vars.put("transactionToEntityByIdentifierChannelSimpleName", transactionToEntityByIdentifierChannelSimpleName);
 
-    vars.put("identifierToEntityTid", identifierToEntityTid);
-    vars.put("transactionToEntityByIdentifierTid", transactionToEntityByIdentifierTid);
+    vars.put("identifierToEntityCid", identifierToEntityCid);
+    vars.put("transactionToEntityByIdentifierCid", transactionToEntityByIdentifierCid);
     return vars;
   }
 
@@ -68,7 +68,7 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
     context.generatedClassCanonicalName(artifactName());
 
     context.addImport(Ontology.class);
-    context.addImport(Transition.class);
+    context.addImport(Channel.class);
     context.addImport(TransactionDomain.class);
 
     defineIdentifiers();
@@ -79,8 +79,8 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
   private void defineIdentifiers() {
     String did = DomainFunctions.getDomainId(annotatedType);
     var identifierGenerator = new RepetableUuidIdentifierGenerator(did);
-    identifierToEntityTid = identifierGenerator.next();
-    transactionToEntityByIdentifierTid = identifierGenerator.next();
+    identifierToEntityCid = identifierGenerator.next();
+    transactionToEntityByIdentifierCid = identifierGenerator.next();
   }
 
   private void analyzeEntityIdentifier() {
@@ -91,10 +91,10 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
     }
     entityHasIdentifier = true;
 
-    identifierToEntityTransitionSimpleName = EntityProcessorFunctions.getIdentifierToEntityTransitionSimpleName(
+    identifierToEntityChannelSimpleName = EntityProcessorFunctions.getIdentifierToEntityChannelSimpleName(
         annotatedType
     );
-    transactionToEntityByIdentifierTransitionSimpleName = EntityProcessorFunctions.getTransactionToEntityByIdentifierTransitionSimpleName(
+    transactionToEntityByIdentifierChannelSimpleName = EntityProcessorFunctions.getTransactionToEntityByIdentifierChannelSimpleName(
         annotatedType
     );
     identifierType = context.addToImportAndGetSimpleName(

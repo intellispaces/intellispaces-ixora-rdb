@@ -18,8 +18,8 @@ public class EntityCrudGuideGenerator extends AbstractGenerator {
   private boolean entityHasIdentifier;
   private String entityHandleSimpleName;
   private String identifierType;
-  private String identifierToEntityTransitionSimpleName;
-  private String transactionToEntityByIdentifierTransitionSimpleName;
+  private String identifierToEntityChannelSimpleName;
+  private String transactionToEntityByIdentifierChannelSimpleName;
 
   public EntityCrudGuideGenerator(CustomType initiatorType, CustomType entityType) {
     super(initiatorType, entityType);
@@ -55,8 +55,8 @@ public class EntityCrudGuideGenerator extends AbstractGenerator {
     vars.put("entityHasIdentifier", entityHasIdentifier);
     vars.put("entityHandleSimpleName", entityHandleSimpleName);
     vars.put("identifierType", identifierType);
-    vars.put("identifierToEntityTransitionSimpleName", identifierToEntityTransitionSimpleName);
-    vars.put("transactionToEntityByIdentifierTransitionSimpleName", transactionToEntityByIdentifierTransitionSimpleName);
+    vars.put("identifierToEntityChannelSimpleName", identifierToEntityChannelSimpleName);
+    vars.put("transactionToEntityByIdentifierChannelSimpleName", transactionToEntityByIdentifierChannelSimpleName);
 
     return vars;
   }
@@ -86,9 +86,9 @@ public class EntityCrudGuideGenerator extends AbstractGenerator {
     identifierType = context.addToImportAndGetSimpleName(
         EntityProcessorFunctions.getIdentifierType(annotatedType, identifierMethod.orElseThrow())
     );
-    identifierToEntityTransitionSimpleName = EntityProcessorFunctions.getIdentifierToEntityTransitionSimpleName(
+    identifierToEntityChannelSimpleName = EntityProcessorFunctions.getIdentifierToEntityChannelSimpleName(
         annotatedType);
-    transactionToEntityByIdentifierTransitionSimpleName = EntityProcessorFunctions.getTransactionToEntityByIdentifierTransitionSimpleName(
+    transactionToEntityByIdentifierChannelSimpleName = EntityProcessorFunctions.getTransactionToEntityByIdentifierChannelSimpleName(
         annotatedType
     );
   }

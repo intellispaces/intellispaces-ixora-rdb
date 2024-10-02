@@ -14,10 +14,10 @@ import {{$importedClass}};
 public interface {{$classSimpleName}} {
 
 {{when $entityHasIdentifier}}
-  @Transition(name = "{{$identifierToEntityTransitionSimpleName}}", value = "{{$identifierToEntityTid}}")
+  @Channel(name = "{{$identifierToEntityChannelSimpleName}}", value = "{{$identifierToEntityCid}}")
   {{$sourceSimpleName}} getById({{$identifierType}} id);
 
-  @Transition(name = "{{$transactionToEntityByIdentifierTransitionSimpleName}}", value = "{{$transactionToEntityByIdentifierTid}}")
+  @Channel(name = "{{$transactionToEntityByIdentifierChannelSimpleName}}", value = "{{$transactionToEntityByIdentifierCid}}")
   {{$sourceSimpleName}} getById(TransactionDomain tx, {{$identifierType}} id);
 {{end}}
 }

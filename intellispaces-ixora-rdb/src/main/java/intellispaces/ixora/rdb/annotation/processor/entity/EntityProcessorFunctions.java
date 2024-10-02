@@ -51,16 +51,16 @@ public interface EntityProcessorFunctions {
     return ObjectFunctions.getCommonObjectHandleTypename(returnType);
   }
 
-  static String getIdentifierToEntityTransitionSimpleName(CustomType entityType) {
+  static String getIdentifierToEntityChannelSimpleName(CustomType entityType) {
     return "IdentifierTo" +
             TextFunctions.capitalizeFirstLetter(TextFunctions.replaceEndingOrElseThrow(entityType.simpleName(), "Domain", "")) +
-        "Transition";
+        "Channel";
   }
 
-  static String getTransactionToEntityByIdentifierTransitionSimpleName(CustomType entityType) {
+  static String getTransactionToEntityByIdentifierChannelSimpleName(CustomType entityType) {
     return "TransactionTo" +
             TextFunctions.capitalizeFirstLetter(TextFunctions.replaceEndingOrElseThrow(entityType.simpleName(), "Domain", "")) +
-        "ByIdentifierTransition";
+        "ByIdentifierChannel";
   }
 
   static String getIdentifierToEntityGuideSimpleName(CustomType entityType) {

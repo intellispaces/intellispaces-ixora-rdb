@@ -1,21 +1,21 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.framework.core.annotation.Channel;
 import intellispaces.framework.core.annotation.Domain;
 import intellispaces.framework.core.annotation.Factory;
-import intellispaces.framework.core.annotation.Transition;
 import intellispaces.framework.core.traverse.TraverseTypes;
 import intellispaces.ixora.rdb.exception.TransactionException;
 
 @Domain("1931adca-ed62-4b0f-af4f-6d7dee9b7822")
 public interface TransactionFactoryDomain {
 
-  @Transition("42c35449-eb32-4683-ba40-9ded4a1d38f4")
+  @Channel("42c35449-eb32-4683-ba40-9ded4a1d38f4")
   DataSourceDomain dataSource();
 
   @Factory
-  @Transition(
+  @Channel(
     value = "03e420fb-2cf3-49ea-a1f3-8adff39e738b",
-    name = "TransactionFactoryToTransactionTransition",
+    name = "TransactionFactoryToTransactionChannel",
     allowedTraverse = TraverseTypes.MappingOfMoving
   )
   TransactionDomain getTransaction() throws TransactionException;

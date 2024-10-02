@@ -14,10 +14,10 @@ import {{$importedClass}};
 public interface {{$classSimpleName}} {
 
 {{when $entityHasIdentifier}}
-  @Mapper({{$identifierToEntityTransitionSimpleName}}.class)
+  @Mapper({{$identifierToEntityChannelSimpleName}}.class)
   {{$entityHandleSimpleName}} getById({{$identifierType}} id);
 
-  @Mapper({{$transactionToEntityByIdentifierTransitionSimpleName}}.class)
+  @Mapper({{$transactionToEntityByIdentifierChannelSimpleName}}.class)
   {{$entityHandleSimpleName}} getById(Transaction tx, {{$identifierType}} id);
 {{end}}
 }

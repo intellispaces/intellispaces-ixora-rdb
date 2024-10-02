@@ -13,8 +13,8 @@ import intellispaces.framework.core.common.NameConventionFunctions;
 import intellispaces.framework.core.object.DataFunctions;
 import intellispaces.framework.core.object.ObjectFunctions;
 import intellispaces.ixora.rdb.ResultSet;
-import intellispaces.ixora.rdb.ResultSetToDataListTransition;
-import intellispaces.ixora.rdb.ResultSetToDataTransition;
+import intellispaces.ixora.rdb.ResultSetToDataListChannel;
+import intellispaces.ixora.rdb.ResultSetToDataChannel;
 import intellispaces.ixora.structures.collection.List;
 import intellispaces.ixora.structures.collection.Lists;
 import jakarta.persistence.Column;
@@ -28,7 +28,7 @@ import java.util.Map;
 @Guide
 public class IxoraResultSetToDataGuide {
 
-  @Mapper(ResultSetToDataTransition.class)
+  @Mapper(ResultSetToDataChannel.class)
   public <D> D resultSetToData(ResultSet resultSet, Class<D> dataClass) {
     Class<?> domainClass = getDomainClass(dataClass);
     Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);
@@ -40,7 +40,7 @@ public class IxoraResultSetToDataGuide {
     }
   }
 
-  @MapperOfMoving(ResultSetToDataListTransition.class)
+  @MapperOfMoving(ResultSetToDataListChannel.class)
   public <D> List<D> resultSetToDataList(ResultSet resultSet, Class<D> dataClass) {
     Class<?> domainClass = getDomainClass(dataClass);
     Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);
@@ -83,7 +83,7 @@ public class IxoraResultSetToDataGuide {
   private <D> Object[] makeDataHandleArguments(
       ResultSet resultSet, Class<D> dataClass, Class<?> domainClass, Constructor<D> constructor
   ) {
-    Map<String, String> mapping = makeTransitionAliasToColumnNameMapping(domainClass);
+    Map<String, String> mapping = makeChannelAliasToColumnNameMapping(domainClass);
 
     Object[] arguments = new Object[constructor.getParameterCount()];
     for (int index = 0; index < constructor.getParameterCount(); index++) {
@@ -117,7 +117,7 @@ public class IxoraResultSetToDataGuide {
     }
   }
 
-  private Map<String, String> makeTransitionAliasToColumnNameMapping(Class<?> domainClass) {
+  private Map<String, String> makeChannelAliasToColumnNameMapping(Class<?> domainClass) {
     Map<String, String> mapping = new HashMap<>();
     ArraysFunctions.foreach(domainClass.getDeclaredMethods(), method -> {
       Column column = method.getAnnotation(Column.class);
