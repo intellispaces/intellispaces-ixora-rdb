@@ -19,7 +19,7 @@ public interface EntityProcessorFunctions {
   }
 
   static String getCrudOntologyCanonicalName(CustomType entityType) {
-    return TextFunctions.replaceEndingOrElseThrow(entityType.canonicalName(), "Domain", "CrudOntology");
+    return TextFunctions.replaceTailOrElseThrow(entityType.canonicalName(), "Domain", "CrudOntology");
   }
 
   static String getCrudOntologySimpleName(CustomType entityType) {
@@ -27,12 +27,12 @@ public interface EntityProcessorFunctions {
   }
 
   static String getCrudGuideCanonicalName(CustomType entityType) {
-    return TextFunctions.replaceEndingOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide");
+    return TextFunctions.replaceTailOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide");
   }
 
   static String getCrudGuideGeneratedImplCanonicalName(CustomType entityType) {
     return TypeFunctions.addPrefixToSimpleName(
-        "Default", TextFunctions.replaceEndingOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide")
+        "Default", TextFunctions.replaceTailOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide")
     );
   }
 
@@ -53,25 +53,25 @@ public interface EntityProcessorFunctions {
 
   static String getIdentifierToEntityChannelSimpleName(CustomType entityType) {
     return "IdentifierTo" +
-            TextFunctions.capitalizeFirstLetter(TextFunctions.replaceEndingOrElseThrow(entityType.simpleName(), "Domain", "")) +
+            TextFunctions.capitalizeFirstLetter(TextFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
         "Channel";
   }
 
   static String getTransactionToEntityByIdentifierChannelSimpleName(CustomType entityType) {
     return "TransactionTo" +
-            TextFunctions.capitalizeFirstLetter(TextFunctions.replaceEndingOrElseThrow(entityType.simpleName(), "Domain", "")) +
+            TextFunctions.capitalizeFirstLetter(TextFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
         "ByIdentifierChannel";
   }
 
   static String getIdentifierToEntityGuideSimpleName(CustomType entityType) {
     return "IdentifierTo" +
-            TextFunctions.capitalizeFirstLetter(TextFunctions.replaceEndingOrElseThrow(entityType.simpleName(), "Domain", "")) +
+            TextFunctions.capitalizeFirstLetter(TextFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
         "Guide";
   }
 
   static String getTransactionToEntityByIdentifierGuideSimpleName(CustomType entityType) {
     return "TransactionTo" +
-            TextFunctions.capitalizeFirstLetter(TextFunctions.replaceEndingOrElseThrow(entityType.simpleName(), "Domain", "")) +
+            TextFunctions.capitalizeFirstLetter(TextFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
         "ByIdentifierGuide";
   }
 }
