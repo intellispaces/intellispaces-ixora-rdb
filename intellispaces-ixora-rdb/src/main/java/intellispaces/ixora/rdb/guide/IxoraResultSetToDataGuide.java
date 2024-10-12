@@ -15,8 +15,8 @@ import intellispaces.framework.core.object.ObjectFunctions;
 import intellispaces.ixora.rdb.ResultSet;
 import intellispaces.ixora.rdb.ResultSetToDataListChannel;
 import intellispaces.ixora.rdb.ResultSetToDataChannel;
-import intellispaces.ixora.structures.collection.List;
-import intellispaces.ixora.structures.collection.Lists;
+import intellispaces.ixora.data.collection.List;
+import intellispaces.ixora.data.collection.Lists;
 import jakarta.persistence.Column;
 
 import java.lang.reflect.Constructor;

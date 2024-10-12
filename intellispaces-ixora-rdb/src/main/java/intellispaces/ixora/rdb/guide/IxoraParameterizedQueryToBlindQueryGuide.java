@@ -4,7 +4,7 @@ import intellispaces.framework.core.annotation.Guide;
 import intellispaces.ixora.rdb.BlindQueryAndParameterNames;
 import intellispaces.ixora.rdb.BlindQueryAndParameterNamesData;
 import intellispaces.ixora.rdb.ParameterizedQueryToBlindQueryGuide;
-import intellispaces.ixora.structures.collection.Lists;
+import intellispaces.ixora.data.collection.Lists;
 
 import java.util.ArrayList;
 import java.util.List;

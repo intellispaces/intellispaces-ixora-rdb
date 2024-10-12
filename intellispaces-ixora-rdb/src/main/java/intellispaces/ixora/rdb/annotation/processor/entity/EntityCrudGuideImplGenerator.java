@@ -11,7 +11,7 @@ import intellispaces.ixora.rdb.Transaction;
 import intellispaces.ixora.rdb.Transactions;
 import intellispaces.ixora.rdb.annotation.Transactional;
 import intellispaces.ixora.rdb.exception.RdbException;
-import intellispaces.ixora.structures.association.Maps;
+import intellispaces.ixora.data.association.Maps;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
@@ -75,7 +75,7 @@ public class EntityCrudGuideImplGenerator extends AbstractGenerator {
 
     context.addImport(Guide.class);
     context.addImport(Transaction.class);
-    context.addImport(intellispaces.ixora.structures.association.Map.class);
+    context.addImport(intellispaces.ixora.data.association.Map.class);
     context.addImport(Maps.class);
     context.addImport(Transactional.class);
     context.addImport(Transactions.class);

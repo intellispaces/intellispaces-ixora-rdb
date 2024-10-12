@@ -3,8 +3,8 @@ package intellispaces.ixora.rdb;
 import intellispaces.framework.core.annotation.Channel;
 import intellispaces.framework.core.annotation.Domain;
 import intellispaces.framework.core.traverse.TraverseTypes;
-import intellispaces.ixora.structures.association.MapDomain;
-import intellispaces.ixora.structures.collection.CursorDomain;
+import intellispaces.ixora.data.association.MapDomain;
+import intellispaces.ixora.data.cursor.CursorDomain;
 
 @Domain("8f174862-2fab-48cb-af12-b8e264f19257")
 public interface TransactionDomain {

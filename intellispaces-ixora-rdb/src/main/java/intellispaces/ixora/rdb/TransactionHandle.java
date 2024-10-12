@@ -6,9 +6,9 @@ import intellispaces.framework.core.annotation.Mapper;
 import intellispaces.framework.core.annotation.Mover;
 import intellispaces.framework.core.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.RdbException;
-import intellispaces.ixora.structures.association.Map;
-import intellispaces.ixora.structures.collection.Cursor;
-import intellispaces.ixora.structures.collection.List;
+import intellispaces.ixora.data.association.Map;
+import intellispaces.ixora.data.cursor.Cursor;
+import intellispaces.ixora.data.collection.List;
 
 @ObjectHandle(value = TransactionDomain.class, name = "TransactionHandleImpl")
 abstract class TransactionHandle implements MovableTransaction {

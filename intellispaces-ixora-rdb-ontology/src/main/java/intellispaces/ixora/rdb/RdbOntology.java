@@ -3,7 +3,7 @@ package intellispaces.ixora.rdb;
 import intellispaces.framework.core.annotation.Channel;
 import intellispaces.framework.core.annotation.Ontology;
 import intellispaces.framework.core.traverse.TraverseTypes;
-import intellispaces.ixora.structures.collection.ListDomain;
+import intellispaces.ixora.data.collection.ListDomain;
 
 @Ontology
 public interface RdbOntology {

@@ -3,7 +3,7 @@ package intellispaces.ixora.rdb;
 import intellispaces.framework.core.annotation.Channel;
 import intellispaces.framework.core.annotation.Data;
 import intellispaces.framework.core.annotation.Domain;
-import intellispaces.ixora.structures.collection.ListDomain;
+import intellispaces.ixora.data.collection.ListDomain;
 
 @Data
 @Domain("db6fbe62-df10-41d8-8192-f3324af11ef4")
