@@ -31,7 +31,7 @@ abstract class TransactionHandle implements MovableTransaction {
 
   @Mover
   @Override
-  public Transaction commit() {
+  public MovableTransaction commit() {
     connection.commit();
     connection.close();
     return this;
@@ -39,7 +39,7 @@ abstract class TransactionHandle implements MovableTransaction {
 
   @Mover
   @Override
-  public Transaction rollback() {
+  public MovableTransaction rollback() {
     connection.rollback();
     connection.close();
     return this;
@@ -47,13 +47,13 @@ abstract class TransactionHandle implements MovableTransaction {
 
   @Mover
   @Override
-  public Transaction modify(String query) {
+  public MovableTransaction modify(String query) {
     throw new RuntimeException("Not implemented");
   }
 
   @Mapper
   @Override
-  public ResultSet query(String query) {
+  public MovableResultSet query(String query) {
     return connection.createStatement().executeQuery(query);
   }
 
@@ -66,7 +66,7 @@ abstract class TransactionHandle implements MovableTransaction {
   @Mapper
   @Override
   public <D> D fetchData(Class<D> dataType, String query) {
-    ResultSet rs = connection.createStatement().executeQuery(query);
+    MovableResultSet rs = connection.createStatement().executeQuery(query);
     return fetchData(dataType, rs);
   }
 
@@ -76,13 +76,13 @@ abstract class TransactionHandle implements MovableTransaction {
     BlindQueryAndParameterNames blindQueryAndParamNames = (
       parameterizedQueryToBlindQueryGuide().parameterizedQueryToBlindQuery(query)
     );
-    PreparedStatement ps = connection.createPreparedStatement(blindQueryAndParamNames.blindQuery());
+    MovablePreparedStatement ps = connection.createPreparedStatement(blindQueryAndParamNames.blindQuery());
     setParamValues(ps, blindQueryAndParamNames.parameterNames(), params);
-    ResultSet rs = ps.executeQuery();
+    MovableResultSet rs = ps.executeQuery();
     return fetchData(dataType, rs);
   }
 
-  private <D> D fetchData(Class<D> dataType, ResultSet rs) {
+  private <D> D fetchData(Class<D> dataType, MovableResultSet rs) {
     if (!rs.next()) {
       throw RdbException.withMessage("No data found");
     }
@@ -93,7 +93,7 @@ abstract class TransactionHandle implements MovableTransaction {
     return data;
   }
 
-  private void setParamValues(PreparedStatement ps, List<String> paramNames, Map<String, Object> params) {
+  private void setParamValues(MovablePreparedStatement ps, List<String> paramNames, Map<String, Object> params) {
     int index = 1;
     for (Object paramName : paramNames.nativeList()) {
       if (!params.nativeMap().containsKey(paramName)) {
