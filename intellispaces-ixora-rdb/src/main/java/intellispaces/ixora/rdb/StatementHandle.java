@@ -17,7 +17,7 @@ abstract class StatementHandle implements MovableStatement {
 
   @Mapper
   @Override
-  public ResultSet executeQuery(String query) {
+  public MovableResultSet executeQuery(String query) {
     try {
       java.sql.ResultSet rs = statement.executeQuery(query);
       return new ResultSetHandleImpl(rs);

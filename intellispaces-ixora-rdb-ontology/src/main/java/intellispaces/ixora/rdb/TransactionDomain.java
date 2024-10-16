@@ -2,6 +2,7 @@ package intellispaces.ixora.rdb;
 
 import intellispaces.framework.core.annotation.Channel;
 import intellispaces.framework.core.annotation.Domain;
+import intellispaces.framework.core.annotation.TargetSpecification;
 import intellispaces.framework.core.traverse.TraverseTypes;
 import intellispaces.ixora.data.association.MapDomain;
 import intellispaces.ixora.data.cursor.CursorDomain;
@@ -21,7 +22,11 @@ public interface TransactionDomain {
   @Channel(value = "5dce771b-2908-444b-ba15-6c0b2167fe33", allowedTraverse = TraverseTypes.Moving)
   TransactionDomain modify(String query);
 
-  @Channel(value = "580e6c95-881e-47f3-a43e-bce3dd2c628d", name = "TransactionQueryChannel")
+  @Channel(
+      value = "580e6c95-881e-47f3-a43e-bce3dd2c628d",
+      name = "TransactionQueryChannel",
+      targetSpecifications = TargetSpecification.Movable
+  )
   ResultSetDomain query(String query);
 
   @Channel(value = "562a0437-6e55-492b-ac35-70ca1ddf57f0", name = "TransactionQueryDataChannel")

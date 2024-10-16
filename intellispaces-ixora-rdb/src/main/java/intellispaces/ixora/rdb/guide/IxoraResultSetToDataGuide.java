@@ -45,7 +45,7 @@ public class IxoraResultSetToDataGuide {
     Class<?> domainClass = getDomainClass(dataClass);
     Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);
     java.util.List<D> values = new ArrayList<>();
-    while (resultSet.next()) {
+    while (resultSet.asMovableOrElseThrow().next()) {
       Object[] arguments = makeDataHandleArguments(resultSet, dataClass, domainClass, constructor);
       try {
         values.add(constructor.newInstance(arguments));

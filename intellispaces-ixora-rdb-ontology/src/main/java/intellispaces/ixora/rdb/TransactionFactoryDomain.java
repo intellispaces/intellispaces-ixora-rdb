@@ -3,6 +3,7 @@ package intellispaces.ixora.rdb;
 import intellispaces.framework.core.annotation.Channel;
 import intellispaces.framework.core.annotation.Domain;
 import intellispaces.framework.core.annotation.Factory;
+import intellispaces.framework.core.annotation.TargetSpecification;
 import intellispaces.framework.core.traverse.TraverseTypes;
 import intellispaces.ixora.rdb.exception.TransactionException;
 
@@ -16,7 +17,8 @@ public interface TransactionFactoryDomain {
   @Channel(
     value = "03e420fb-2cf3-49ea-a1f3-8adff39e738b",
     name = "TransactionFactoryToTransactionChannel",
-    allowedTraverse = TraverseTypes.MappingOfMoving
+    allowedTraverse = TraverseTypes.MappingOfMoving,
+    targetSpecifications = TargetSpecification.Movable
   )
   TransactionDomain getTransaction() throws TransactionException;
 }

@@ -18,7 +18,7 @@ abstract class PreparedStatementHandle implements MovablePreparedStatement {
 
   @Mapper
   @Override
-  public ResultSet executeQuery() {
+  public MovableResultSet executeQuery() {
     try {
       java.sql.ResultSet rs = preparedStatement.executeQuery();
       return new ResultSetHandleImpl(rs);
@@ -29,7 +29,7 @@ abstract class PreparedStatementHandle implements MovablePreparedStatement {
 
   @Mover
   @Override
-  public intellispaces.ixora.rdb.PreparedStatement setInt(int parameterIndex, int value) {
+  public MovablePreparedStatement setInt(int parameterIndex, int value) {
     try {
       preparedStatement.setInt(parameterIndex, value);
       return this;

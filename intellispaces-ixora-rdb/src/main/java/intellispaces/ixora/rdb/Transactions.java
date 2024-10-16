@@ -6,11 +6,11 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public final class Transactions {
-  private static final ThreadLocal<Deque<Transaction>> CURRENT_TRANSACTIONS = new ThreadLocal<>();
+  private static final ThreadLocal<Deque<MovableTransaction>> CURRENT_TRANSACTIONS = new ThreadLocal<>();
 
-  public static Transaction current() {
-    Transaction tx = null;
-    Deque<Transaction> transactions = CURRENT_TRANSACTIONS.get();
+  public static MovableTransaction current() {
+    MovableTransaction tx = null;
+    Deque<MovableTransaction> transactions = CURRENT_TRANSACTIONS.get();
     if (transactions != null) {
       tx = transactions.peek();
     }
@@ -20,16 +20,16 @@ public final class Transactions {
     return tx;
   }
 
-  static void setCurrent(Transaction tx) {
+  static void setCurrent(MovableTransaction tx) {
     if (tx != null) {
-      Deque<Transaction> transactions = CURRENT_TRANSACTIONS.get();
+      Deque<MovableTransaction> transactions = CURRENT_TRANSACTIONS.get();
       if (transactions == null) {
         transactions = new ArrayDeque<>();
         CURRENT_TRANSACTIONS.set(transactions);
       }
       transactions.push(tx);
     } else {
-      Deque<Transaction> transactions = CURRENT_TRANSACTIONS.get();
+      Deque<MovableTransaction> transactions = CURRENT_TRANSACTIONS.get();
       if (transactions != null) {
         transactions.pop();
       }

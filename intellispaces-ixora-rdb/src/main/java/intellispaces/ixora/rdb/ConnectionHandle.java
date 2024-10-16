@@ -17,7 +17,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Override
   @MapperOfMoving
-  public Statement createStatement() {
+  public MovableStatement createStatement() {
     try {
       return new StatementHandleImpl(connection.createStatement());
     } catch (SQLException e) {
@@ -27,7 +27,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Override
   @MapperOfMoving
-  public PreparedStatement createPreparedStatement(String query) {
+  public MovablePreparedStatement createPreparedStatement(String query) {
     try {
       return new PreparedStatementHandleImpl(connection.prepareStatement(query));
     } catch (SQLException e) {
@@ -37,7 +37,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Mover
   @Override
-  public Connection disableAutoCommit() {
+  public MovableConnection disableAutoCommit() {
     try {
       connection.setAutoCommit(false);
     } catch (SQLException e) {
@@ -48,7 +48,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Mover
   @Override
-  public Connection commit() {
+  public MovableConnection commit() {
     try {
       connection.commit();
     } catch (SQLException e) {
@@ -59,7 +59,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Mover
   @Override
-  public Connection rollback() {
+  public MovableConnection rollback() {
     try {
       connection.rollback();
     } catch (SQLException e) {
@@ -70,7 +70,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Mover
   @Override
-  public Connection close() {
+  public MovableConnection close() {
     try {
       connection.close();
     } catch (SQLException e) {

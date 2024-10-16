@@ -4,7 +4,7 @@ import intellispaces.common.action.Action;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.framework.core.aop.Interceptor;
 import intellispaces.framework.core.system.ProjectionProvider;
-import intellispaces.ixora.rdb.TransactionFactory;
+import intellispaces.ixora.rdb.MovableTransactionFactory;
 import intellispaces.ixora.rdb.TransactionFunctions;
 import intellispaces.ixora.rdb.exception.TransactionException;
 
@@ -20,13 +20,13 @@ public class TransactionalInterceptor extends Interceptor {
 
   @Override
   public Object execute(Object[] data) {
-    TransactionFactory transactionFactory = getDefaultTransactionFactory();
+    MovableTransactionFactory transactionFactory = getDefaultTransactionFactory();
     Action joinAction = joinAction();
     return TransactionFunctions.transactional(transactionFactory, joinAction::execute, data);
   }
 
-  private TransactionFactory getDefaultTransactionFactory() {
-    List<TransactionFactory> transactionFactories = projectionProvider.getProjections(TransactionFactory.class);
+  private MovableTransactionFactory getDefaultTransactionFactory() {
+    List<MovableTransactionFactory> transactionFactories = projectionProvider.getProjections(MovableTransactionFactory.class);
     if (transactionFactories.isEmpty()) {
       throw TransactionException.withMessage("Transaction factory is not found");
     }

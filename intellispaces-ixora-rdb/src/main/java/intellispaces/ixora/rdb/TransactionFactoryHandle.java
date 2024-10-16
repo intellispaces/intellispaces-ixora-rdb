@@ -21,8 +21,8 @@ abstract class TransactionFactoryHandle implements MovableTransactionFactory {
 
   @Override
   @MapperOfMoving
-  public Transaction getTransaction() throws TransactionException {
-    MovableConnection connection = (MovableConnection) dataSource.getConnection();
+  public MovableTransaction getTransaction() throws TransactionException {
+    MovableConnection connection = dataSource.getConnection();
     return new TransactionHandleImpl(connection);
   }
 }
