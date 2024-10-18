@@ -2,29 +2,26 @@ package intellispaces.ixora.rdb;
 
 import intellispaces.framework.core.annotation.Channel;
 import intellispaces.framework.core.annotation.Domain;
-import intellispaces.framework.core.annotation.Factory;
-import intellispaces.framework.core.annotation.TargetSpecification;
+import intellispaces.framework.core.annotation.Movable;
 import intellispaces.framework.core.traverse.TraverseTypes;
 
 @Domain("f72b8a37-6f1e-4c98-93b5-9d5bb959cb80")
 public interface ConnectionDomain {
 
-  @Factory
   @Channel(
     value = "b7c73781-0441-4ef7-b5b3-f122b5bccd29",
     name = "ConnectionToStatementChannel",
-    allowedTraverse = TraverseTypes.MappingOfMoving,
-    targetSpecifications = TargetSpecification.Movable
+    allowedTraverse = TraverseTypes.MappingOfMoving
   )
+  @Movable
   StatementDomain createStatement();
 
-  @Factory
   @Channel(
     value = "4a08c0f9-0159-4b69-9211-3ec1d8a6200c",
     name = "ConnectionToPreparedStatementChannel",
-    allowedTraverse = TraverseTypes.Mapping,
-    targetSpecifications = TargetSpecification.Movable
+    allowedTraverse = TraverseTypes.Mapping
   )
+  @Movable
   PreparedStatementDomain createPreparedStatement(String query);
 
   @Channel(value = "0f840bdd-29eb-4847-9209-199f13de78a8", allowedTraverse = TraverseTypes.Moving)
