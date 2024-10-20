@@ -5,7 +5,7 @@ import intellispaces.framework.core.annotation.MapperOfMoving;
 import intellispaces.framework.core.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.TransactionException;
 
-@ObjectHandle(value = TransactionFactoryDomain.class, name = "TransactionFactoryHandleImpl")
+@ObjectHandle(TransactionFactoryDomain.class)
 abstract class TransactionFactoryHandle implements MovableTransactionFactory {
   private final MovableDataSource dataSource;
 

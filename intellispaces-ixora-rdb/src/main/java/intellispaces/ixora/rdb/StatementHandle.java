@@ -7,7 +7,7 @@ import intellispaces.ixora.rdb.exception.RdbException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@ObjectHandle(value = StatementDomain.class, name = "StatementHandleImpl")
+@ObjectHandle(StatementDomain.class)
 abstract class StatementHandle implements MovableStatement {
   private final Statement statement;
 

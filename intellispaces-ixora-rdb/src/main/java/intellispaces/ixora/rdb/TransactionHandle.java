@@ -10,7 +10,7 @@ import intellispaces.ixora.data.association.Map;
 import intellispaces.ixora.data.cursor.Cursor;
 import intellispaces.ixora.data.collection.List;
 
-@ObjectHandle(value = TransactionDomain.class, name = "TransactionHandleImpl")
+@ObjectHandle(TransactionDomain.class)
 abstract class TransactionHandle implements MovableTransaction {
   private final MovableConnection connection;
 

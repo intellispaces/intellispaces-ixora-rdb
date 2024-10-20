@@ -8,7 +8,7 @@ import intellispaces.framework.core.exception.TraverseException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@ObjectHandle(value = ResultSetDomain.class, name = "ResultSetHandleImpl")
+@ObjectHandle(ResultSetDomain.class)
 abstract class ResultSetHandle implements MovableResultSet {
   private final java.sql.ResultSet rs;
 

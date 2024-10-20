@@ -7,7 +7,7 @@ import intellispaces.ixora.rdb.exception.RdbException;
 
 import java.sql.SQLException;
 
-@ObjectHandle(value = ConnectionDomain.class, name = "ConnectionHandleImpl")
+@ObjectHandle( ConnectionDomain.class)
 abstract class ConnectionHandle implements MovableConnection {
   private final java.sql.Connection connection;
 
