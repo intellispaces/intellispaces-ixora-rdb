@@ -6,7 +6,7 @@ import intellispaces.framework.core.annotation.Properties;
 import intellispaces.ixora.rdb.guide.IxoraParameterizedQueryToBlindQueryGuide;
 import intellispaces.ixora.rdb.guide.IxoraResultSetToDataGuide;
 
-@Configuration(include = {
+@Configuration({
     IxoraParameterizedQueryToBlindQueryGuide.class,
     IxoraResultSetToDataGuide.class
 })
