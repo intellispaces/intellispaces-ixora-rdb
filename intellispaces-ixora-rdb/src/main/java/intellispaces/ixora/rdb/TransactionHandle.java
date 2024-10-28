@@ -1,10 +1,10 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.framework.core.annotation.AutoGuide;
-import intellispaces.framework.core.annotation.Inject;
-import intellispaces.framework.core.annotation.Mapper;
-import intellispaces.framework.core.annotation.Mover;
-import intellispaces.framework.core.annotation.ObjectHandle;
+import intellispaces.jaquarius.annotation.AutoGuide;
+import intellispaces.jaquarius.annotation.Inject;
+import intellispaces.jaquarius.annotation.Mapper;
+import intellispaces.jaquarius.annotation.Mover;
+import intellispaces.jaquarius.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.RdbException;
 import intellispaces.ixora.data.association.Map;
 import intellispaces.ixora.data.cursor.Cursor;

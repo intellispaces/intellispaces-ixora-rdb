@@ -1,6 +1,6 @@
 package intellispaces.ixora.rdb.annotation;
 
-import intellispaces.framework.core.annotation.Data;
+import intellispaces.jaquarius.annotation.Data;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

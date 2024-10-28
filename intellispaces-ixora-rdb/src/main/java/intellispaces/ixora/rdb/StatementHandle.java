@@ -1,7 +1,7 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.framework.core.annotation.Mapper;
-import intellispaces.framework.core.annotation.ObjectHandle;
+import intellispaces.jaquarius.annotation.Mapper;
+import intellispaces.jaquarius.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.RdbException;
 
 import java.sql.SQLException;

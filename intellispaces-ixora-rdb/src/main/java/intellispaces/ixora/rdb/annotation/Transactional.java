@@ -1,6 +1,6 @@
 package intellispaces.ixora.rdb.annotation;
 
-import intellispaces.framework.core.annotation.ApplyAdvice;
+import intellispaces.jaquarius.annotation.ApplyAdvice;
 import intellispaces.ixora.rdb.aop.TransactionalInterceptor;
 
 import java.lang.annotation.ElementType;

@@ -1,9 +1,9 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.framework.core.annotation.Channel;
-import intellispaces.framework.core.annotation.Domain;
-import intellispaces.framework.core.annotation.Movable;
-import intellispaces.framework.core.traverse.TraverseTypes;
+import intellispaces.jaquarius.annotation.Channel;
+import intellispaces.jaquarius.annotation.Domain;
+import intellispaces.jaquarius.annotation.Movable;
+import intellispaces.jaquarius.traverse.TraverseTypes;
 
 @Domain("d3660036-a556-4ae1-a322-4a60d4c3b2e2")
 public interface PreparedStatementDomain {

@@ -4,7 +4,7 @@ import intellispaces.common.annotationprocessor.AnnotatedTypeProcessor;
 import intellispaces.common.annotationprocessor.generator.Generator;
 import intellispaces.common.annotationprocessor.validator.AnnotatedTypeValidator;
 import intellispaces.common.javastatement.customtype.CustomType;
-import intellispaces.framework.core.annotation.processor.AnnotationProcessorFunctions;
+import intellispaces.jaquarius.processor.AnnotationProcessorFunctions;
 import intellispaces.ixora.rdb.annotation.Entity;
 
 import javax.annotation.processing.RoundEnvironment;

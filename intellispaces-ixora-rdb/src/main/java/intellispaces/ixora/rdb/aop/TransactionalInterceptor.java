@@ -2,8 +2,8 @@ package intellispaces.ixora.rdb.aop;
 
 import intellispaces.common.action.Action;
 import intellispaces.common.javastatement.method.MethodStatement;
-import intellispaces.framework.core.aop.Interceptor;
-import intellispaces.framework.core.system.ProjectionProvider;
+import intellispaces.jaquarius.aop.Interceptor;
+import intellispaces.jaquarius.system.ProjectionProvider;
 import intellispaces.ixora.rdb.MovableTransactionFactory;
 import intellispaces.ixora.rdb.TransactionFunctions;
 import intellispaces.ixora.rdb.exception.TransactionException;

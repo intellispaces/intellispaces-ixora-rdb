@@ -1,6 +1,6 @@
 package intellispaces.ixora.rdb.guide;
 
-import intellispaces.framework.core.annotation.Guide;
+import intellispaces.jaquarius.annotation.Guide;
 import intellispaces.ixora.rdb.BlindQueryAndParameterNames;
 import intellispaces.ixora.rdb.BlindQueryAndParameterNamesData;
 import intellispaces.ixora.rdb.ParameterizedQueryToBlindQueryGuide;

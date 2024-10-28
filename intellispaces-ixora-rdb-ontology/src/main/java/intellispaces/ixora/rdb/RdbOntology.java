@@ -1,8 +1,8 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.framework.core.annotation.Channel;
-import intellispaces.framework.core.annotation.Ontology;
-import intellispaces.framework.core.traverse.TraverseTypes;
+import intellispaces.jaquarius.annotation.Channel;
+import intellispaces.jaquarius.annotation.Ontology;
+import intellispaces.jaquarius.traverse.TraverseTypes;
 import intellispaces.ixora.data.collection.ListDomain;
 
 @Ontology

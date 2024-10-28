@@ -1,8 +1,8 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.framework.core.annotation.Channel;
-import intellispaces.framework.core.annotation.Data;
-import intellispaces.framework.core.annotation.Domain;
+import intellispaces.jaquarius.annotation.Channel;
+import intellispaces.jaquarius.annotation.Data;
+import intellispaces.jaquarius.annotation.Domain;
 
 @Data
 @Domain("a0d2d709-9af1-4bcc-8a90-c3c828585198")

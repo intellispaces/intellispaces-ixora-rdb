@@ -7,7 +7,7 @@ import intellispaces.common.base.type.TypeFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.reference.TypeReference;
-import intellispaces.framework.core.object.ObjectFunctions;
+import intellispaces.jaquarius.object.ObjectFunctions;
 import jakarta.persistence.Id;
 
 import java.util.Optional;

@@ -1,9 +1,9 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.framework.core.annotation.Channel;
-import intellispaces.framework.core.annotation.Domain;
-import intellispaces.framework.core.annotation.Movable;
-import intellispaces.framework.core.traverse.TraverseTypes;
+import intellispaces.jaquarius.annotation.Channel;
+import intellispaces.jaquarius.annotation.Domain;
+import intellispaces.jaquarius.annotation.Movable;
+import intellispaces.jaquarius.traverse.TraverseTypes;
 import intellispaces.ixora.rdb.exception.TransactionException;
 
 @Domain("1931adca-ed62-4b0f-af4f-6d7dee9b7822")

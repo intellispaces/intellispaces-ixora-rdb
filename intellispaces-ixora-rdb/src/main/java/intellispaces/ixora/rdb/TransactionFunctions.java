@@ -2,7 +2,7 @@ package intellispaces.ixora.rdb;
 
 import intellispaces.common.base.exception.CoveredCheckedException;
 import intellispaces.common.base.function.ThrowableFunction;
-import intellispaces.framework.core.system.ContextProjections;
+import intellispaces.jaquarius.system.ContextProjections;
 import intellispaces.ixora.rdb.exception.TransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
