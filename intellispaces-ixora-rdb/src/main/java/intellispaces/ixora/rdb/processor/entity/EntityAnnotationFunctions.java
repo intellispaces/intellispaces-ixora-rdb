@@ -1,4 +1,4 @@
-package intellispaces.ixora.rdb.annotation.processor.entity;
+package intellispaces.ixora.rdb.processor.entity;
 
 import intellispaces.common.base.collection.Collectors;
 import intellispaces.common.base.exception.UnexpectedViolationException;
@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 
 import java.util.Optional;
 
-public interface EntityProcessorFunctions {
+public interface EntityAnnotationFunctions {
 
   static String getEntityHandleCanonicalName(CustomType entityType) {
     return ObjectFunctions.getCommonObjectHandleTypename(entityType);

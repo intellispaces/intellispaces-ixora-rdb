@@ -1,4 +1,4 @@
-package intellispaces.ixora.rdb.annotation.processor.entity;
+package intellispaces.ixora.rdb.processor.entity;
 
 import intellispaces.common.annotationprocessor.context.AnnotationProcessingContext;
 import intellispaces.common.javastatement.customtype.CustomType;
@@ -6,7 +6,7 @@ import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.jaquarius.annotation.Guide;
 import intellispaces.jaquarius.annotation.Mapper;
 import intellispaces.jaquarius.annotation.Ontology;
-import intellispaces.jaquarius.processor.AbstractGenerator;
+import intellispaces.jaquarius.annotation.processor.AbstractGenerator;
 import intellispaces.ixora.rdb.Transaction;
 
 import javax.annotation.processing.RoundEnvironment;
@@ -28,13 +28,13 @@ public class EntityCrudGuideGenerator extends AbstractGenerator {
   @Override
   public boolean isRelevant(AnnotationProcessingContext context) {
     return context.isProcessingFinished(
-        Ontology.class, EntityProcessorFunctions.getCrudOntologyCanonicalName(annotatedType)
+        Ontology.class, EntityAnnotationFunctions.getCrudOntologyCanonicalName(annotatedType)
     );
   }
 
   @Override
   public String artifactName() {
-    return EntityProcessorFunctions.getCrudGuideCanonicalName(annotatedType);
+    return EntityAnnotationFunctions.getCrudGuideCanonicalName(annotatedType);
   }
 
   @Override
@@ -69,14 +69,14 @@ public class EntityCrudGuideGenerator extends AbstractGenerator {
     context.addImport(Transaction.class);
 
     entityHandleSimpleName = context.addToImportAndGetSimpleName(
-        EntityProcessorFunctions.getEntityHandleCanonicalName(annotatedType)
+        EntityAnnotationFunctions.getEntityHandleCanonicalName(annotatedType)
     );
     analyzeEntityIdentifier();
     return true;
   }
 
   private void analyzeEntityIdentifier() {
-    Optional<MethodStatement> identifierMethod = EntityProcessorFunctions.findIdentifierMethod(annotatedType);
+    Optional<MethodStatement> identifierMethod = EntityAnnotationFunctions.findIdentifierMethod(annotatedType);
     if (identifierMethod.isEmpty()) {
       entityHasIdentifier = false;
       return;
@@ -84,11 +84,11 @@ public class EntityCrudGuideGenerator extends AbstractGenerator {
     entityHasIdentifier = true;
 
     identifierType = context.addToImportAndGetSimpleName(
-        EntityProcessorFunctions.getIdentifierType(annotatedType, identifierMethod.orElseThrow())
+        EntityAnnotationFunctions.getIdentifierType(annotatedType, identifierMethod.orElseThrow())
     );
-    identifierToEntityChannelSimpleName = EntityProcessorFunctions.getIdentifierToEntityChannelSimpleName(
+    identifierToEntityChannelSimpleName = EntityAnnotationFunctions.getIdentifierToEntityChannelSimpleName(
         annotatedType);
-    transactionToEntityByIdentifierChannelSimpleName = EntityProcessorFunctions.getTransactionToEntityByIdentifierChannelSimpleName(
+    transactionToEntityByIdentifierChannelSimpleName = EntityAnnotationFunctions.getTransactionToEntityByIdentifierChannelSimpleName(
         annotatedType
     );
   }

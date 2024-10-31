@@ -1,11 +1,11 @@
-package intellispaces.ixora.rdb.annotation.processor.entity;
+package intellispaces.ixora.rdb.processor.entity;
 
 import intellispaces.common.annotationprocessor.context.AnnotationProcessingContext;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.jaquarius.annotation.Channel;
 import intellispaces.jaquarius.annotation.Ontology;
-import intellispaces.jaquarius.processor.AbstractGenerator;
+import intellispaces.jaquarius.annotation.processor.AbstractGenerator;
 import intellispaces.jaquarius.id.RepetableUuidIdentifierGenerator;
 import intellispaces.jaquarius.space.domain.DomainFunctions;
 import intellispaces.ixora.rdb.TransactionDomain;
@@ -35,7 +35,7 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
 
   @Override
   public String artifactName() {
-    return EntityProcessorFunctions.getCrudOntologyCanonicalName(annotatedType);
+    return EntityAnnotationFunctions.getCrudOntologyCanonicalName(annotatedType);
   }
 
   @Override
@@ -84,21 +84,21 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
   }
 
   private void analyzeEntityIdentifier() {
-    Optional<MethodStatement> identifierMethod = EntityProcessorFunctions.findIdentifierMethod(annotatedType);
+    Optional<MethodStatement> identifierMethod = EntityAnnotationFunctions.findIdentifierMethod(annotatedType);
     if (identifierMethod.isEmpty()) {
       entityHasIdentifier = false;
       return;
     }
     entityHasIdentifier = true;
 
-    identifierToEntityChannelSimpleName = EntityProcessorFunctions.getIdentifierToEntityChannelSimpleName(
+    identifierToEntityChannelSimpleName = EntityAnnotationFunctions.getIdentifierToEntityChannelSimpleName(
         annotatedType
     );
-    transactionToEntityByIdentifierChannelSimpleName = EntityProcessorFunctions.getTransactionToEntityByIdentifierChannelSimpleName(
+    transactionToEntityByIdentifierChannelSimpleName = EntityAnnotationFunctions.getTransactionToEntityByIdentifierChannelSimpleName(
         annotatedType
     );
     identifierType = context.addToImportAndGetSimpleName(
-      EntityProcessorFunctions.getIdentifierType(annotatedType, identifierMethod.orElseThrow())
+      EntityAnnotationFunctions.getIdentifierType(annotatedType, identifierMethod.orElseThrow())
     );
   }
 }
