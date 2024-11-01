@@ -14,6 +14,7 @@ import javax.annotation.processing.RoundEnvironment;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 public class EntityCrudOntologyGenerator extends AbstractGenerator {
   private String identifierToEntityCid;
@@ -78,7 +79,7 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
 
   private void defineIdentifiers() {
     String did = DomainFunctions.getDomainId(annotatedType);
-    var identifierGenerator = new RepetableUuidIdentifierGenerator(did);
+    var identifierGenerator = new RepetableUuidIdentifierGenerator(UUID.fromString(did));
     identifierToEntityCid = identifierGenerator.next();
     transactionToEntityByIdentifierCid = identifierGenerator.next();
   }
