@@ -1,5 +1,6 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.exception.RdbExceptions;
 import intellispaces.jaquarius.annotation.MapperOfMoving;
 import intellispaces.jaquarius.annotation.Mover;
 import intellispaces.jaquarius.annotation.ObjectHandle;
@@ -21,7 +22,7 @@ abstract class ConnectionHandle implements MovableConnection {
     try {
       return new StatementHandleImpl(connection.createStatement());
     } catch (SQLException e) {
-      throw RdbException.withCauseAndMessage(e, "Could not create statement");
+      throw RdbExceptions.withCauseAndMessage(e, "Could not create statement");
     }
   }
 
@@ -31,7 +32,7 @@ abstract class ConnectionHandle implements MovableConnection {
     try {
       return new PreparedStatementHandleImpl(connection.prepareStatement(query));
     } catch (SQLException e) {
-      throw RdbException.withCauseAndMessage(e, "Could not create statement");
+      throw RdbExceptions.withCauseAndMessage(e, "Could not create statement");
     }
   }
 
@@ -41,7 +42,7 @@ abstract class ConnectionHandle implements MovableConnection {
     try {
       connection.setAutoCommit(false);
     } catch (SQLException e) {
-      throw RdbException.withCauseAndMessage(e, "Could not disable SQL connection auto commit");
+      throw RdbExceptions.withCauseAndMessage(e, "Could not disable SQL connection auto commit");
     }
     return this;
   }
@@ -52,7 +53,7 @@ abstract class ConnectionHandle implements MovableConnection {
     try {
       connection.commit();
     } catch (SQLException e) {
-      throw RdbException.withCauseAndMessage(e, "Could not commit SQL connection");
+      throw RdbExceptions.withCauseAndMessage(e, "Could not commit SQL connection");
     }
     return this;
   }
@@ -63,7 +64,7 @@ abstract class ConnectionHandle implements MovableConnection {
     try {
       connection.rollback();
     } catch (SQLException e) {
-      throw RdbException.withCauseAndMessage(e, "Could not roll back SQL connection");
+      throw RdbExceptions.withCauseAndMessage(e, "Could not roll back SQL connection");
     }
     return this;
   }
@@ -74,7 +75,7 @@ abstract class ConnectionHandle implements MovableConnection {
     try {
       connection.close();
     } catch (SQLException e) {
-      throw RdbException.withCauseAndMessage(e, "Could not close SQL connection");
+      throw RdbExceptions.withCauseAndMessage(e, "Could not close SQL connection");
     }
     return this;
   }

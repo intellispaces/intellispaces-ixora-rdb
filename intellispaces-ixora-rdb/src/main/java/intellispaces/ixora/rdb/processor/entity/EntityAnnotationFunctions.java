@@ -1,9 +1,9 @@
 package intellispaces.ixora.rdb.processor.entity;
 
-import intellispaces.common.base.collection.Collectors;
-import intellispaces.common.base.exception.UnexpectedViolationException;
-import intellispaces.common.base.text.TextFunctions;
-import intellispaces.common.base.type.TypeFunctions;
+import intellispaces.common.base.exception.UnexpectedExceptions;
+import intellispaces.common.base.stream.Collectors;
+import intellispaces.common.base.text.StringFunctions;
+import intellispaces.common.base.type.ClassNameFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
 import intellispaces.common.javastatement.reference.TypeReference;
@@ -19,20 +19,20 @@ public interface EntityAnnotationFunctions {
   }
 
   static String getCrudOntologyCanonicalName(CustomType entityType) {
-    return TextFunctions.replaceTailOrElseThrow(entityType.canonicalName(), "Domain", "CrudOntology");
+    return StringFunctions.replaceTailOrElseThrow(entityType.canonicalName(), "Domain", "CrudOntology");
   }
 
   static String getCrudOntologySimpleName(CustomType entityType) {
-    return TypeFunctions.getSimpleName(getCrudOntologyCanonicalName(entityType));
+    return ClassNameFunctions.getSimpleName(getCrudOntologyCanonicalName(entityType));
   }
 
   static String getCrudGuideCanonicalName(CustomType entityType) {
-    return TextFunctions.replaceTailOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide");
+    return StringFunctions.replaceTailOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide");
   }
 
   static String getCrudGuideGeneratedImplCanonicalName(CustomType entityType) {
-    return TypeFunctions.addPrefixToSimpleName(
-        "Default", TextFunctions.replaceTailOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide")
+    return ClassNameFunctions.addPrefixToSimpleName(
+        "Default", StringFunctions.replaceTailOrElseThrow(entityType.canonicalName(), "Domain", "CrudGuide")
     );
   }
 
@@ -44,7 +44,7 @@ public interface EntityAnnotationFunctions {
 
   static String getIdentifierType(CustomType entityType, MethodStatement identifierMethod) {
     TypeReference returnType = identifierMethod.returnType()
-        .orElseThrow(() -> UnexpectedViolationException.withMessage(
+        .orElseThrow(() -> UnexpectedExceptions.withMessage(
             "Entity identifier method {0} of the entity {1} should return value",
             identifierMethod.name(), entityType.canonicalName()
         ));
@@ -53,25 +53,25 @@ public interface EntityAnnotationFunctions {
 
   static String getIdentifierToEntityChannelSimpleName(CustomType entityType) {
     return "IdentifierTo" +
-            TextFunctions.capitalizeFirstLetter(TextFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
+        StringFunctions.capitalizeFirstLetter(StringFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
         "Channel";
   }
 
   static String getTransactionToEntityByIdentifierChannelSimpleName(CustomType entityType) {
     return "TransactionTo" +
-            TextFunctions.capitalizeFirstLetter(TextFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
+        StringFunctions.capitalizeFirstLetter(StringFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
         "ByIdentifierChannel";
   }
 
   static String getIdentifierToEntityGuideSimpleName(CustomType entityType) {
     return "IdentifierTo" +
-            TextFunctions.capitalizeFirstLetter(TextFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
+        StringFunctions.capitalizeFirstLetter(StringFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
         "Guide";
   }
 
   static String getTransactionToEntityByIdentifierGuideSimpleName(CustomType entityType) {
     return "TransactionTo" +
-            TextFunctions.capitalizeFirstLetter(TextFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
+        StringFunctions.capitalizeFirstLetter(StringFunctions.removeTailOrElseThrow(entityType.simpleName(), "Domain")) +
         "ByIdentifierGuide";
   }
 }

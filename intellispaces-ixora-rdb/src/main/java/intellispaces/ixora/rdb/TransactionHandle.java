@@ -1,5 +1,6 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.exception.RdbExceptions;
 import intellispaces.jaquarius.annotation.AutoGuide;
 import intellispaces.jaquarius.annotation.Inject;
 import intellispaces.jaquarius.annotation.Mapper;
@@ -84,11 +85,11 @@ abstract class TransactionHandle implements MovableTransaction {
 
   private <D> D fetchData(Class<D> dataType, MovableResultSet rs) {
     if (!rs.next()) {
-      throw RdbException.withMessage("No data found");
+      throw RdbExceptions.withMessage("No data found");
     }
     D data = rs.dataValue(dataType);
     if (rs.next()) {
-      throw RdbException.withMessage("More than one data was found");
+      throw RdbExceptions.withMessage("More than one data was found");
     }
     return data;
   }
@@ -97,7 +98,7 @@ abstract class TransactionHandle implements MovableTransaction {
     int index = 1;
     for (Object paramName : paramNames.nativeList()) {
       if (!params.nativeMap().containsKey(paramName)) {
-        throw RdbException.withMessage("Value of parameter {0} is not found", paramName);
+        throw RdbExceptions.withMessage("Value of parameter {0} is not found", paramName);
       }
       Object paramValue = params.nativeMap().get(paramName);
       if (paramValue instanceof Integer) {

@@ -1,5 +1,6 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.exception.RdbExceptions;
 import intellispaces.jaquarius.annotation.Mapper;
 import intellispaces.jaquarius.annotation.Mover;
 import intellispaces.jaquarius.annotation.ObjectHandle;
@@ -23,7 +24,7 @@ abstract class PreparedStatementHandle implements MovablePreparedStatement {
       java.sql.ResultSet rs = preparedStatement.executeQuery();
       return new ResultSetHandleImpl(rs);
     } catch (SQLException e) {
-      throw RdbException.withCauseAndMessage(e, "Could not execute prepared statement");
+      throw RdbExceptions.withCauseAndMessage(e, "Could not execute prepared statement");
     }
   }
 
@@ -34,7 +35,7 @@ abstract class PreparedStatementHandle implements MovablePreparedStatement {
       preparedStatement.setInt(parameterIndex, value);
       return this;
     } catch (SQLException e) {
-      throw RdbException.withCauseAndMessage(e, "Could not set parameter of the prepared statement");
+      throw RdbExceptions.withCauseAndMessage(e, "Could not set parameter of the prepared statement");
     }
   }
 }

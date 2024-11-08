@@ -4,6 +4,7 @@ import intellispaces.jaquarius.annotation.Mapper;
 import intellispaces.jaquarius.annotation.MapperOfMoving;
 import intellispaces.jaquarius.annotation.ObjectHandle;
 import intellispaces.jaquarius.exception.TraverseException;
+import intellispaces.jaquarius.exception.TraverseExceptions;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ abstract class ResultSetHandle implements MovableResultSet {
     try {
       return rs.next();
     } catch (SQLException e) {
-      throw TraverseException.withCauseAndMessage(e, "Could not move cursor");
+      throw TraverseExceptions.withCauseAndMessage(e, "Could not move cursor");
     }
   }
 
@@ -36,7 +37,7 @@ abstract class ResultSetHandle implements MovableResultSet {
       }
       return value;
     } catch (SQLException e) {
-      throw TraverseException.withCauseAndMessage(e, "Could not read integer value by name {0}", name);
+      throw TraverseExceptions.withCauseAndMessage(e, "Could not read integer value by name {0}", name);
     }
   }
 
@@ -50,7 +51,7 @@ abstract class ResultSetHandle implements MovableResultSet {
       }
       return value;
     } catch (SQLException e) {
-      throw TraverseException.withCauseAndMessage(e, "Could not read string value by name {0}", name);
+      throw TraverseExceptions.withCauseAndMessage(e, "Could not read string value by name {0}", name);
     }
   }
 }

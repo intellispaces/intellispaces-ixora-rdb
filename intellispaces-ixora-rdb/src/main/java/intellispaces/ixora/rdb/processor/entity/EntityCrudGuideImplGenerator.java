@@ -1,9 +1,10 @@
 package intellispaces.ixora.rdb.processor.entity;
 
 import intellispaces.common.annotationprocessor.context.AnnotationProcessingContext;
-import intellispaces.common.base.text.TextFunctions;
+import intellispaces.common.base.text.StringFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.ixora.rdb.exception.RdbExceptions;
 import intellispaces.jaquarius.annotation.Guide;
 import intellispaces.jaquarius.annotation.Ontology;
 import intellispaces.jaquarius.annotation.processor.AbstractGenerator;
@@ -97,10 +98,10 @@ public class EntityCrudGuideImplGenerator extends AbstractGenerator {
 
   private String getTableName() {
     Table table = annotatedType.selectAnnotation(Table.class).orElseThrow(() ->
-        RdbException.withMessage("RDB entity class {0} must annotation with annotation {1}",
+        RdbExceptions.withMessage("RDB entity class {0} must annotation with annotation {1}",
         annotatedType.canonicalName(), Table.class.getCanonicalName()
     ));
-    if (TextFunctions.isNotBlank(table.schema())) {
+    if (StringFunctions.isNotBlank(table.schema())) {
       return table.schema() + "." + table.name();
     }
     return table.name();
@@ -119,7 +120,7 @@ public class EntityCrudGuideImplGenerator extends AbstractGenerator {
     );
 
     Column column = identifierMethod.orElseThrow().selectAnnotation(Column.class).orElseThrow(() ->
-        RdbException.withMessage("RDB entity {0} identifier method {1} must annotation with annotation {2}",
+        RdbExceptions.withMessage("RDB entity {0} identifier method {1} must annotation with annotation {2}",
             annotatedType.canonicalName(), identifierMethod.get().name(), Column.class.getCanonicalName()
         ));
     identifierColumn = column.name();

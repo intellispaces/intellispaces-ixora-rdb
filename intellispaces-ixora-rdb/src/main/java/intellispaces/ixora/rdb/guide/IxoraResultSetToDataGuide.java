@@ -1,9 +1,9 @@
 package intellispaces.ixora.rdb.guide;
 
 import intellispaces.common.base.collection.ArraysFunctions;
-import intellispaces.common.base.exception.UnexpectedViolationException;
-import intellispaces.common.base.text.TextFunctions;
-import intellispaces.common.base.type.TypeFunctions;
+import intellispaces.common.base.exception.UnexpectedExceptions;
+import intellispaces.common.base.text.StringFunctions;
+import intellispaces.common.base.type.ClassFunctions;
 import intellispaces.jaquarius.annotation.Data;
 import intellispaces.jaquarius.annotation.Guide;
 import intellispaces.jaquarius.annotation.Mapper;
@@ -36,7 +36,7 @@ public class IxoraResultSetToDataGuide {
     try {
       return constructor.newInstance(arguments);
     } catch (Exception e) {
-      throw UnexpectedViolationException.withCauseAndMessage(e, "Failed to create data handle");
+      throw UnexpectedExceptions.withCauseAndMessage(e, "Failed to create data handle");
     }
   }
 
@@ -50,7 +50,7 @@ public class IxoraResultSetToDataGuide {
       try {
         values.add(constructor.newInstance(arguments));
       } catch (Exception e) {
-        throw UnexpectedViolationException.withCauseAndMessage(e, "Failed to create data handle");
+        throw UnexpectedExceptions.withCauseAndMessage(e, "Failed to create data handle");
       }
     }
     return Lists.of(values, dataClass);
@@ -59,14 +59,14 @@ public class IxoraResultSetToDataGuide {
   @SuppressWarnings("unchecked")
   private <D> Constructor<D> getDataHandleConstructor(Class<D> dataClass, Class<?> domainClass) {
     String dataHandleClassName = NameConventionFunctions.getDataClassName(domainClass.getCanonicalName());
-    Class<D> dataHandleClass = (Class<D>) TypeFunctions.getClass(dataHandleClassName).orElseThrow(() ->
-        UnexpectedViolationException.withMessage("Could not find data handle class by name {0} ",
+    Class<D> dataHandleClass = (Class<D>) ClassFunctions.getClass(dataHandleClassName).orElseThrow(() ->
+        UnexpectedExceptions.withMessage("Could not find data handle class by name {0} ",
             dataHandleClassName)
     );
 
     Constructor<?>[] constructors = dataHandleClass.getConstructors();
     if (constructors.length > 1) {
-      throw UnexpectedViolationException.withMessage("Data handle class should have one constructor");
+      throw UnexpectedExceptions.withMessage("Data handle class should have one constructor");
     }
     return (Constructor<D>) constructors[0];
   }
@@ -74,7 +74,7 @@ public class IxoraResultSetToDataGuide {
   private <D> Class<?> getDomainClass(Class<D> dataClass) {
     Class<?> domainClass = ObjectFunctions.getDomainClassOfObjectHandle(dataClass);
     if (!DataFunctions.isDataDomain(domainClass)) {
-      throw UnexpectedViolationException.withMessage("Expected object handle class of the data domain. " +
+      throw UnexpectedExceptions.withMessage("Expected object handle class of the data domain. " +
           "Data domain should be annotated with @{0}", Data.class.getSimpleName());
     }
     return domainClass;
@@ -90,7 +90,7 @@ public class IxoraResultSetToDataGuide {
       Parameter param = constructor.getParameters()[index];
       Name name = param.getAnnotation(Name.class);
       if (name == null) {
-        throw UnexpectedViolationException.withMessage("Parameter {0} of the data class {1} constructor " +
+        throw UnexpectedExceptions.withMessage("Parameter {0} of the data class {1} constructor " +
             "should be marked with annotation {2}", index, dataClass, Name.class.getSimpleName());
       }
       String alias = name.value();
@@ -106,7 +106,7 @@ public class IxoraResultSetToDataGuide {
     if (paramClass == int.class) {
       Integer value = resultSet.integerValue(columnName);
       if (value == null) {
-        throw UnexpectedViolationException.withMessage("Null value of the primitive integer value by name {0}",
+        throw UnexpectedExceptions.withMessage("Null value of the primitive integer value by name {0}",
             columnName);
       }
       arguments[index] = value;
@@ -122,12 +122,12 @@ public class IxoraResultSetToDataGuide {
     ArraysFunctions.foreach(domainClass.getDeclaredMethods(), method -> {
       Column column = method.getAnnotation(Column.class);
       if (column == null) {
-        throw UnexpectedViolationException.withMessage("Method {0} of the class {1} should be marked with annotation {2}",
+        throw UnexpectedExceptions.withMessage("Method {0} of the class {1} should be marked with annotation {2}",
             method.getName(), domainClass.getCanonicalName(), Column.class.getSimpleName()
         );
       }
-      if (TextFunctions.isNullOrBlank(column.name())) {
-        throw UnexpectedViolationException.withMessage("Name attribute should be defined in annotation {0} " +
+      if (StringFunctions.isNullOrBlank(column.name())) {
+        throw UnexpectedExceptions.withMessage("Name attribute should be defined in annotation {0} " +
                 "on the method {1} in class {2}",
             Column.class.getSimpleName(), method.getName(), domainClass.getCanonicalName()
         );

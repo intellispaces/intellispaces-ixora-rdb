@@ -1,6 +1,7 @@
 package intellispaces.ixora.rdb;
 
 import intellispaces.jaquarius.exception.TraverseException;
+import intellispaces.jaquarius.exception.TraverseExceptions;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -15,7 +16,7 @@ public final class Transactions {
       tx = transactions.peek();
     }
     if (tx == null) {
-      throw TraverseException.withMessage("Current transaction is not defined");
+      throw TraverseExceptions.withMessage("Current transaction is not defined");
     }
     return tx;
   }

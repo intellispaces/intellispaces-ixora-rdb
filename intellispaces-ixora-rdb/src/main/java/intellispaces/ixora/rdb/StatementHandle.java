@@ -1,5 +1,6 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.exception.RdbExceptions;
 import intellispaces.jaquarius.annotation.Mapper;
 import intellispaces.jaquarius.annotation.ObjectHandle;
 import intellispaces.ixora.rdb.exception.RdbException;
@@ -22,7 +23,7 @@ abstract class StatementHandle implements MovableStatement {
       java.sql.ResultSet rs = statement.executeQuery(query);
       return new ResultSetHandleImpl(rs);
     } catch (SQLException e) {
-      throw RdbException.withCauseAndMessage(e, "Could not execute query {0}", query);
+      throw RdbExceptions.withCauseAndMessage(e, "Could not execute query {0}", query);
     }
   }
 }

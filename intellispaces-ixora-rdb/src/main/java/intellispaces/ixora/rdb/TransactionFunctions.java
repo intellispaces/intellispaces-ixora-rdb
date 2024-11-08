@@ -1,7 +1,8 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.common.base.exception.CoveredCheckedException;
-import intellispaces.common.base.function.ThrowableFunction;
+import intellispaces.common.base.exception.WrappedExceptions;
+import intellispaces.common.base.function.ThrowingFunction;
+import intellispaces.ixora.rdb.exception.TransactionExceptions;
 import intellispaces.jaquarius.system.ContextProjections;
 import intellispaces.ixora.rdb.exception.TransactionException;
 import org.slf4j.Logger;
@@ -38,9 +39,9 @@ public class TransactionFunctions {
     );
   }
 
-  public static <R, E extends Throwable> R transactional(
+  public static <R, E extends Exception> R transactional(
       MovableTransactionFactory factory,
-      ThrowableFunction<Object[], R, E> operation,
+      ThrowingFunction<Object[], R, E> operation,
       Object[] data
   ) {
     R result;
@@ -48,7 +49,7 @@ public class TransactionFunctions {
     try {
       tx = factory.getTransaction();
       storeTransactionInContext(tx);
-      result = operation.apply(data);
+      result = operation.applyThrows(data);
       tx.commit();
     } catch (TransactionException e) {
       LOG.error("Unexpected exception occurred while transaction was executed. Transaction will be rolled back");
@@ -56,20 +57,20 @@ public class TransactionFunctions {
       throw e;
     } catch (RuntimeException | Error e) {
       if (tx == null) {
-        throw TransactionException.withCauseAndMessage(e, "Could not get transaction");
+        throw TransactionExceptions.withCauseAndMessage(e, "Could not get transaction");
       }
-      LOG.error("Runtime exception " + e.getClass().getCanonicalName() + " occurred while transaction was executed. " +
-          "Transaction will be rolled back");
+      LOG.error("Runtime exception {} occurred while transaction was executed. Transaction will be rolled back",
+          e.getClass().getCanonicalName());
       rollback(tx, e);
-      throw TransactionException.withCauseAndMessage(e, "Could not execute transaction");
-    } catch (Throwable e) {
+      throw TransactionExceptions.withCauseAndMessage(e, "Could not execute transaction");
+    } catch (Exception e) {
       if (tx == null) {
-        throw TransactionException.withCauseAndMessage(e, "Could not get transaction");
+        throw TransactionExceptions.withCauseAndMessage(e, "Could not get transaction");
       }
-      LOG.info("Checked exception " + e.getClass().getCanonicalName() + " occurred while transaction was executed. " +
-          "Transaction will be committed");
+      LOG.info("Checked exception {} occurred while transaction was executed. Transaction will be committed",
+          e.getClass().getCanonicalName());
       commit(tx, e);
-      throw CoveredCheckedException.withCause(e);
+      throw WrappedExceptions.ofChecked(e);
     } finally {
       if (tx != null) {
         removeTransactionFromContext();
@@ -93,12 +94,12 @@ public class TransactionFunctions {
       tx.commit();
     } catch (Throwable e) {
       if (reason != null) {
-        TransactionException te = TransactionException.withCauseAndMessage(e,
+        TransactionException te = TransactionExceptions.withCauseAndMessage(e,
             "Could not commit transaction after exception {0}", reason.getClass().getCanonicalName());
         te.addSuppressed(reason);
         throw te;
       }
-      throw TransactionException.withCauseAndMessage(e, "Could not commit transaction");
+      throw TransactionExceptions.withCauseAndMessage(e, "Could not commit transaction");
     }
   }
 
@@ -107,12 +108,12 @@ public class TransactionFunctions {
       tx.rollback();
     } catch (Throwable e) {
       if (reason != null) {
-        TransactionException te = TransactionException.withCauseAndMessage(e,
+        TransactionException te = TransactionExceptions.withCauseAndMessage(e,
             "Could not roll back transaction after exception {0}", reason.getClass().getCanonicalName());
         te.addSuppressed(reason);
         throw te;
       }
-      throw TransactionException.withCauseAndMessage(e, "Could not roll back transaction");
+      throw TransactionExceptions.withCauseAndMessage(e, "Could not roll back transaction");
     }
   }
 }
