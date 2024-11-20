@@ -1,10 +1,10 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.exception.TransactionException;
 import intellispaces.jaquarius.annotation.Channel;
 import intellispaces.jaquarius.annotation.Domain;
 import intellispaces.jaquarius.annotation.Movable;
 import intellispaces.jaquarius.traverse.TraverseTypes;
-import intellispaces.ixora.rdb.exception.TransactionException;
 
 @Domain("1931adca-ed62-4b0f-af4f-6d7dee9b7822")
 public interface TransactionFactoryDomain {

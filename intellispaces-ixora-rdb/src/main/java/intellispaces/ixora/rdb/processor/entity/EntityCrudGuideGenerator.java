@@ -3,11 +3,11 @@ package intellispaces.ixora.rdb.processor.entity;
 import intellispaces.common.annotationprocessor.context.AnnotationProcessingContext;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.ixora.rdb.Transaction;
 import intellispaces.jaquarius.annotation.Guide;
 import intellispaces.jaquarius.annotation.Mapper;
 import intellispaces.jaquarius.annotation.Ontology;
 import intellispaces.jaquarius.annotation.processor.AbstractGenerator;
-import intellispaces.ixora.rdb.Transaction;
 
 import javax.annotation.processing.RoundEnvironment;
 import java.util.HashMap;

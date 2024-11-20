@@ -1,10 +1,10 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.guide.IxoraParameterizedQueryToBlindQueryGuide;
+import intellispaces.ixora.rdb.guide.IxoraResultSetToDataGuide;
 import intellispaces.jaquarius.annotation.Configuration;
 import intellispaces.jaquarius.annotation.Projection;
 import intellispaces.jaquarius.annotation.Properties;
-import intellispaces.ixora.rdb.guide.IxoraParameterizedQueryToBlindQueryGuide;
-import intellispaces.ixora.rdb.guide.IxoraResultSetToDataGuide;
 
 @Configuration({
     IxoraParameterizedQueryToBlindQueryGuide.class,

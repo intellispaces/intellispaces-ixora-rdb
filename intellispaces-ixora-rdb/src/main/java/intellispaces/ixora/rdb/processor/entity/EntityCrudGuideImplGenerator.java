@@ -1,20 +1,19 @@
 package intellispaces.ixora.rdb.processor.entity;
 
 import intellispaces.common.annotationprocessor.context.AnnotationProcessingContext;
-import intellispaces.common.base.text.StringFunctions;
 import intellispaces.common.javastatement.customtype.CustomType;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.ixora.data.association.Maps;
+import intellispaces.ixora.rdb.Transaction;
+import intellispaces.ixora.rdb.Transactions;
+import intellispaces.ixora.rdb.annotation.Transactional;
 import intellispaces.ixora.rdb.exception.RdbExceptions;
 import intellispaces.jaquarius.annotation.Guide;
 import intellispaces.jaquarius.annotation.Ontology;
 import intellispaces.jaquarius.annotation.processor.AbstractGenerator;
-import intellispaces.ixora.rdb.Transaction;
-import intellispaces.ixora.rdb.Transactions;
-import intellispaces.ixora.rdb.annotation.Transactional;
-import intellispaces.ixora.rdb.exception.RdbException;
-import intellispaces.ixora.data.association.Maps;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
+import tech.intellispaces.entity.text.StringFunctions;
 
 import javax.annotation.processing.RoundEnvironment;
 import java.util.HashMap;

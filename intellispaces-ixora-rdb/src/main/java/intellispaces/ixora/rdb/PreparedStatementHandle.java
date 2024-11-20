@@ -4,7 +4,6 @@ import intellispaces.ixora.rdb.exception.RdbExceptions;
 import intellispaces.jaquarius.annotation.Mapper;
 import intellispaces.jaquarius.annotation.Mover;
 import intellispaces.jaquarius.annotation.ObjectHandle;
-import intellispaces.ixora.rdb.exception.RdbException;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

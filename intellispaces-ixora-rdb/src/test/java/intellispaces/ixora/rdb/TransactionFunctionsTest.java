@@ -1,6 +1,5 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.jaquarius.exception.TraverseException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -3,7 +3,6 @@ package intellispaces.ixora.rdb;
 import intellispaces.jaquarius.annotation.Mapper;
 import intellispaces.jaquarius.annotation.MapperOfMoving;
 import intellispaces.jaquarius.annotation.ObjectHandle;
-import intellispaces.jaquarius.exception.TraverseException;
 import intellispaces.jaquarius.exception.TraverseExceptions;
 
 import java.sql.ResultSet;

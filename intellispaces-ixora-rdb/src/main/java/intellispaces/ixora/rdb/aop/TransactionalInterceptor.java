@@ -1,13 +1,12 @@
 package intellispaces.ixora.rdb.aop;
 
-import intellispaces.common.action.Action;
 import intellispaces.common.javastatement.method.MethodStatement;
+import intellispaces.ixora.rdb.MovableTransactionFactory;
+import intellispaces.ixora.rdb.TransactionFunctions;
 import intellispaces.ixora.rdb.exception.TransactionExceptions;
 import intellispaces.jaquarius.aop.Interceptor;
 import intellispaces.jaquarius.system.ProjectionProvider;
-import intellispaces.ixora.rdb.MovableTransactionFactory;
-import intellispaces.ixora.rdb.TransactionFunctions;
-import intellispaces.ixora.rdb.exception.TransactionException;
+import tech.intellispaces.action.Action;
 
 import java.util.List;
 
@@ -17,6 +16,11 @@ public class TransactionalInterceptor extends Interceptor {
       MethodStatement joinPoint, Action nextAction, ProjectionProvider projectionProvider
   ) {
     super(joinPoint, nextAction, projectionProvider);
+  }
+
+  @Override
+  public int order() {
+    return wrappedAction().order();
   }
 
   @Override

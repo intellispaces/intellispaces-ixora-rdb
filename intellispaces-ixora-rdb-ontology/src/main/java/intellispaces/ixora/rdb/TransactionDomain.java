@@ -1,11 +1,11 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.data.association.MapDomain;
+import intellispaces.ixora.data.cursor.CursorDomain;
 import intellispaces.jaquarius.annotation.Channel;
 import intellispaces.jaquarius.annotation.Domain;
 import intellispaces.jaquarius.annotation.Movable;
 import intellispaces.jaquarius.traverse.TraverseTypes;
-import intellispaces.ixora.data.association.MapDomain;
-import intellispaces.ixora.data.cursor.CursorDomain;
 
 @Domain("8f174862-2fab-48cb-af12-b8e264f19257")
 public interface TransactionDomain {

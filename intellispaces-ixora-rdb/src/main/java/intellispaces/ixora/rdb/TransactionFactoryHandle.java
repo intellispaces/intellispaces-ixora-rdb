@@ -1,9 +1,9 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.rdb.exception.TransactionException;
 import intellispaces.jaquarius.annotation.Mapper;
 import intellispaces.jaquarius.annotation.MapperOfMoving;
 import intellispaces.jaquarius.annotation.ObjectHandle;
-import intellispaces.ixora.rdb.exception.TransactionException;
 
 @ObjectHandle(TransactionFactoryDomain.class)
 abstract class TransactionFactoryHandle implements MovableTransactionFactory {

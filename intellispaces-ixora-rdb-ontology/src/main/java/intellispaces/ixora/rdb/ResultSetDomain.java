@@ -1,9 +1,9 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.data.collection.ListDomain;
 import intellispaces.jaquarius.annotation.Channel;
 import intellispaces.jaquarius.annotation.Domain;
 import intellispaces.jaquarius.traverse.TraverseTypes;
-import intellispaces.ixora.data.collection.ListDomain;
 
 @Domain("80898b0a-6a68-4693-bc86-17d7c5bb6a64")
 public interface ResultSetDomain {

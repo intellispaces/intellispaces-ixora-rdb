@@ -1,15 +1,14 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.data.association.Map;
+import intellispaces.ixora.data.collection.List;
+import intellispaces.ixora.data.cursor.Cursor;
 import intellispaces.ixora.rdb.exception.RdbExceptions;
 import intellispaces.jaquarius.annotation.AutoGuide;
 import intellispaces.jaquarius.annotation.Inject;
 import intellispaces.jaquarius.annotation.Mapper;
 import intellispaces.jaquarius.annotation.Mover;
 import intellispaces.jaquarius.annotation.ObjectHandle;
-import intellispaces.ixora.rdb.exception.RdbException;
-import intellispaces.ixora.data.association.Map;
-import intellispaces.ixora.data.cursor.Cursor;
-import intellispaces.ixora.data.collection.List;
 
 @ObjectHandle(TransactionDomain.class)
 abstract class TransactionHandle implements MovableTransaction {

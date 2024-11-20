@@ -1,8 +1,8 @@
 package intellispaces.ixora.rdb.annotation;
 
+import intellispaces.ixora.rdb.processor.entity.EntityAnnotationProcessor;
 import intellispaces.jaquarius.annotation.AnnotationProcessor;
 import intellispaces.jaquarius.annotation.Data;
-import intellispaces.ixora.rdb.processor.entity.EntityAnnotationProcessor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

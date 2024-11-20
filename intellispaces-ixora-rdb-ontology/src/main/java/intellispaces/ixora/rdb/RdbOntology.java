@@ -1,9 +1,9 @@
 package intellispaces.ixora.rdb;
 
+import intellispaces.ixora.data.collection.ListDomain;
 import intellispaces.jaquarius.annotation.Channel;
 import intellispaces.jaquarius.annotation.Ontology;
 import intellispaces.jaquarius.traverse.TraverseTypes;
-import intellispaces.ixora.data.collection.ListDomain;
 
 @Ontology
 public interface RdbOntology {

@@ -1,6 +1,5 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.jaquarius.exception.TraverseException;
 import intellispaces.jaquarius.exception.TraverseExceptions;
 
 import java.util.ArrayDeque;

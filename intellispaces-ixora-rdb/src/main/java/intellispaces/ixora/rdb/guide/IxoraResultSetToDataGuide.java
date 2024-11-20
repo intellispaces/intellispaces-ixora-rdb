@@ -1,9 +1,10 @@
 package intellispaces.ixora.rdb.guide;
 
-import intellispaces.common.base.collection.ArraysFunctions;
-import intellispaces.common.base.exception.UnexpectedExceptions;
-import intellispaces.common.base.text.StringFunctions;
-import intellispaces.common.base.type.ClassFunctions;
+import intellispaces.ixora.data.collection.List;
+import intellispaces.ixora.data.collection.Lists;
+import intellispaces.ixora.rdb.ResultSet;
+import intellispaces.ixora.rdb.ResultSetToDataChannel;
+import intellispaces.ixora.rdb.ResultSetToDataListChannel;
 import intellispaces.jaquarius.annotation.Data;
 import intellispaces.jaquarius.annotation.Guide;
 import intellispaces.jaquarius.annotation.Mapper;
@@ -12,12 +13,11 @@ import intellispaces.jaquarius.annotation.Name;
 import intellispaces.jaquarius.common.NameConventionFunctions;
 import intellispaces.jaquarius.object.DataFunctions;
 import intellispaces.jaquarius.object.ObjectFunctions;
-import intellispaces.ixora.rdb.ResultSet;
-import intellispaces.ixora.rdb.ResultSetToDataListChannel;
-import intellispaces.ixora.rdb.ResultSetToDataChannel;
-import intellispaces.ixora.data.collection.List;
-import intellispaces.ixora.data.collection.Lists;
 import jakarta.persistence.Column;
+import tech.intellispaces.entity.collection.ArraysFunctions;
+import tech.intellispaces.entity.exception.UnexpectedExceptions;
+import tech.intellispaces.entity.text.StringFunctions;
+import tech.intellispaces.entity.type.ClassFunctions;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;

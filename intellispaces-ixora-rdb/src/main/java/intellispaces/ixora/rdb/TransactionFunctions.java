@@ -1,12 +1,12 @@
 package intellispaces.ixora.rdb;
 
-import intellispaces.common.base.exception.WrappedExceptions;
-import intellispaces.common.base.function.ThrowingFunction;
+import intellispaces.ixora.rdb.exception.TransactionException;
 import intellispaces.ixora.rdb.exception.TransactionExceptions;
 import intellispaces.jaquarius.system.ContextProjections;
-import intellispaces.ixora.rdb.exception.TransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tech.intellispaces.entity.exception.WrappedExceptions;
+import tech.intellispaces.entity.function.ThrowingFunction;
 
 import java.util.function.Consumer;
 
@@ -70,7 +70,7 @@ public class TransactionFunctions {
       LOG.info("Checked exception {} occurred while transaction was executed. Transaction will be committed",
           e.getClass().getCanonicalName());
       commit(tx, e);
-      throw WrappedExceptions.ofChecked(e);
+      throw WrappedExceptions.of(e);
     } finally {
       if (tx != null) {
         removeTransactionFromContext();
