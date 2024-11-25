@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>intellispaces-ixora</groupId>
+        <groupId>tech.intellispaces.ixora</groupId>
         <artifactId>intellispaces-ixora-rdb-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -26,12 +26,12 @@
     <dependencies>
         <!-- Intellispaces -->
         <dependency>
-            <groupId>intellispaces-ixora</groupId>
+            <groupId>tech.intellispaces.ixora</groupId>
             <artifactId>intellispaces-ixora-rdb-ontology</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>intellispaces-ixora</groupId>
+            <groupId>tech.intellispaces.ixora</groupId>
             <artifactId>intellispaces-ixora-data</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
