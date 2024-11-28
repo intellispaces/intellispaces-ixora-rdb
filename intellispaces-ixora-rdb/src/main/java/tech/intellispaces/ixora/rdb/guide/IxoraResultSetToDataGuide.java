@@ -17,7 +17,7 @@ import tech.intellispaces.jaquarius.annotation.MapperOfMoving;
 import tech.intellispaces.jaquarius.annotation.Name;
 import tech.intellispaces.jaquarius.common.NameConventionFunctions;
 import tech.intellispaces.jaquarius.object.DataFunctions;
-import tech.intellispaces.jaquarius.object.ObjectFunctions;
+import tech.intellispaces.jaquarius.object.ObjectHandleFunctions;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
@@ -72,7 +72,7 @@ public class IxoraResultSetToDataGuide {
   }
 
   private <D> Class<?> getDomainClass(Class<D> dataClass) {
-    Class<?> domainClass = ObjectFunctions.getDomainClassOfObjectHandle(dataClass);
+    Class<?> domainClass = ObjectHandleFunctions.getDomainClassOfObjectHandle(dataClass);
     if (!DataFunctions.isDataDomain(domainClass)) {
       throw UnexpectedExceptions.withMessage("Expected object handle class of the data domain. " +
           "Data domain should be annotated with @{0}", Data.class.getSimpleName());

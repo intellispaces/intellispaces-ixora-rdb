@@ -5,7 +5,7 @@ import tech.intellispaces.entity.exception.UnexpectedExceptions;
 import tech.intellispaces.entity.stream.Collectors;
 import tech.intellispaces.entity.text.StringFunctions;
 import tech.intellispaces.entity.type.ClassNameFunctions;
-import tech.intellispaces.jaquarius.object.ObjectFunctions;
+import tech.intellispaces.jaquarius.object.ObjectHandleFunctions;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.method.MethodStatement;
 import tech.intellispaces.java.reflection.reference.TypeReference;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface EntityAnnotationFunctions {
 
   static String getEntityHandleCanonicalName(CustomType entityType) {
-    return ObjectFunctions.getCommonObjectHandleTypename(entityType);
+    return ObjectHandleFunctions.getCommonObjectHandleTypename(entityType);
   }
 
   static String getCrudOntologyCanonicalName(CustomType entityType) {
@@ -48,7 +48,7 @@ public interface EntityAnnotationFunctions {
             "Entity identifier method {0} of the entity {1} should return value",
             identifierMethod.name(), entityType.canonicalName()
         ));
-    return ObjectFunctions.getCommonObjectHandleTypename(returnType);
+    return ObjectHandleFunctions.getCommonObjectHandleTypename(returnType);
   }
 
   static String getIdentifierToEntityChannelSimpleName(CustomType entityType) {
