@@ -1,10 +1,10 @@
 package tech.intellispaces.ixora.rdb.processor.entity;
 
 import jakarta.persistence.Id;
-import tech.intellispaces.entity.exception.UnexpectedExceptions;
-import tech.intellispaces.entity.stream.Collectors;
-import tech.intellispaces.entity.text.StringFunctions;
-import tech.intellispaces.entity.type.ClassNameFunctions;
+import tech.intellispaces.general.exception.UnexpectedExceptions;
+import tech.intellispaces.general.stream.Collectors;
+import tech.intellispaces.general.text.StringFunctions;
+import tech.intellispaces.general.type.ClassNameFunctions;
 import tech.intellispaces.jaquarius.object.ObjectHandleFunctions;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.method.MethodStatement;

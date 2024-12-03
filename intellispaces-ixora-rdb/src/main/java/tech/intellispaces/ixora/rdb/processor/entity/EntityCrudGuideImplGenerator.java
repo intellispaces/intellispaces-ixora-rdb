@@ -3,7 +3,7 @@ package tech.intellispaces.ixora.rdb.processor.entity;
 import tech.intellispaces.ixora.rdb.Transaction;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
-import tech.intellispaces.entity.text.StringFunctions;
+import tech.intellispaces.general.text.StringFunctions;
 import tech.intellispaces.ixora.data.association.Maps;
 import tech.intellispaces.ixora.rdb.Transactions;
 import tech.intellispaces.ixora.rdb.annotation.Transactional;
