@@ -6,7 +6,7 @@ import tech.intellispaces.general.exception.WrappedExceptions;
 import tech.intellispaces.general.function.ThrowingFunction;
 import tech.intellispaces.ixora.rdb.exception.TransactionException;
 import tech.intellispaces.ixora.rdb.exception.TransactionExceptions;
-import tech.intellispaces.jaquarius.system.ContextProjections;
+import tech.intellispaces.jaquarius.system.projection.ContextProjections;
 
 import java.util.function.Consumer;
 
@@ -81,12 +81,12 @@ public class TransactionFunctions {
 
   private static void storeTransactionInContext(MovableTransaction tx) {
     Transactions.setCurrent(tx);
-    ContextProjections.addProjection(TRANSACTION_PROJECTION_NAME, MovableTransaction.class, tx);
+    ContextProjections.add(TRANSACTION_PROJECTION_NAME, MovableTransaction.class, tx);
   }
 
   private static void removeTransactionFromContext() {
     Transactions.setCurrent(null);
-    ContextProjections.removeProjection(TRANSACTION_PROJECTION_NAME);
+    ContextProjections.remove(TRANSACTION_PROJECTION_NAME);
   }
 
   private static void commit(MovableTransaction tx, Throwable reason) {

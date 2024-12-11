@@ -1,6 +1,9 @@
 package tech.intellispaces.ixora.rdb;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tech.intellispaces.jaquarius.system.Modules;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,16 @@ import static org.mockito.Mockito.when;
  * Tests for {@link TransactionFunctions} class.
  */
 public class TransactionFunctionsTest {
+
+  @BeforeEach
+  public void init() {
+    Modules.load().start();
+  }
+
+  @AfterEach
+  public void deinit() {
+    Modules.unload();
+  }
 
   @Test
   public void testTransactional_whenOk() {

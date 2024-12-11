@@ -27,7 +27,7 @@
         <!-- Intellispaces -->
         <dependency>
             <groupId>tech.intellispaces.jaquarius</groupId>
-            <artifactId>intellispaces-jaquarius-core</artifactId>
+            <artifactId>intellispaces-jaquarius-annotationprocessor</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

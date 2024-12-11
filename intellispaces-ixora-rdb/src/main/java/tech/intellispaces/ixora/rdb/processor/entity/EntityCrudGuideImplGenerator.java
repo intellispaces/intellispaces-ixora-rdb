@@ -1,5 +1,6 @@
 package tech.intellispaces.ixora.rdb.processor.entity;
 
+import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
 import tech.intellispaces.ixora.rdb.Transaction;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
@@ -10,17 +11,13 @@ import tech.intellispaces.ixora.rdb.annotation.Transactional;
 import tech.intellispaces.ixora.rdb.exception.RdbExceptions;
 import tech.intellispaces.jaquarius.annotation.Guide;
 import tech.intellispaces.jaquarius.annotation.Ontology;
-import tech.intellispaces.jaquarius.annotation.processor.AbstractGenerator;
-import tech.intellispaces.java.annotation.context.AnnotationProcessingContext;
+import tech.intellispaces.jaquarius.annotationprocessor.JaquariusArtifactGenerator;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.method.MethodStatement;
 
-import javax.annotation.processing.RoundEnvironment;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
-public class EntityCrudGuideImplGenerator extends AbstractGenerator {
+public class EntityCrudGuideImplGenerator extends JaquariusArtifactGenerator {
   private String entityHandleSimpleName;
   private String entityTable;
   private String entityAlias;
@@ -29,20 +26,20 @@ public class EntityCrudGuideImplGenerator extends AbstractGenerator {
   private String identifierColumn;
   private String guideType;
 
-  public EntityCrudGuideImplGenerator(CustomType initiatorType, CustomType entityType) {
-    super(initiatorType, entityType);
+  public EntityCrudGuideImplGenerator(CustomType entityType) {
+    super(entityType);
   }
 
   @Override
-  public boolean isRelevant(AnnotationProcessingContext context) {
+  public boolean isRelevant(ArtifactGeneratorContext context) {
     return context.isProcessingFinished(
-        Ontology.class, EntityAnnotationFunctions.getCrudOntologyCanonicalName(annotatedType)
+        EntityAnnotationFunctions.getCrudOntologyCanonicalName(sourceArtifact()), Ontology.class
     );
   }
 
   @Override
-  public String artifactName() {
-    return EntityAnnotationFunctions.getCrudGuideGeneratedImplCanonicalName(annotatedType);
+  public String generatedArtifactName() {
+    return EntityAnnotationFunctions.getCrudGuideGeneratedImplCanonicalName(sourceArtifact());
   }
 
   @Override
@@ -51,41 +48,29 @@ public class EntityCrudGuideImplGenerator extends AbstractGenerator {
   }
 
   @Override
-  protected Map<String, Object> templateVariables() {
-    Map<String, Object> vars = new HashMap<>();
-    vars.put("generatedAnnotation", makeGeneratedAnnotation());
-    vars.put("packageName", context.packageName());
-    vars.put("sourceCanonicalName", sourceClassCanonicalName());
-    vars.put("sourceSimpleName", sourceClassSimpleName());
-    vars.put("classSimpleName", context.generatedClassSimpleName());
-    vars.put("importedClasses", context.getImports());
-    vars.put("guideType", guideType);
-    vars.put("entityHandleSimpleName", entityHandleSimpleName);
-    vars.put("entityTable", entityTable);
-    vars.put("entityAlias", entityAlias);
-    vars.put("entityHasIdentifier", entityHasIdentifier);
-    vars.put("identifierType", identifierType);
-    vars.put("identifierColumn", identifierColumn);
-    return vars;
-  }
+  protected boolean analyzeSourceArtifact(ArtifactGeneratorContext context) {
+    addImport(Guide.class);
+    addImport(Transaction.class);
+    addImport(tech.intellispaces.ixora.data.association.Map.class);
+    addImport(Maps.class);
+    addImport(Transactional.class);
+    addImport(Transactions.class);
 
-  @Override
-  protected boolean analyzeAnnotatedType(RoundEnvironment roundEnv) {
-    context.generatedClassCanonicalName(artifactName());
-
-    context.addImport(Guide.class);
-    context.addImport(Transaction.class);
-    context.addImport(tech.intellispaces.ixora.data.association.Map.class);
-    context.addImport(Maps.class);
-    context.addImport(Transactional.class);
-    context.addImport(Transactions.class);
-
-    guideType = context.addToImportAndGetSimpleName(EntityAnnotationFunctions.getCrudGuideCanonicalName(annotatedType));
-    entityHandleSimpleName = context.addToImportAndGetSimpleName(
-        EntityAnnotationFunctions.getEntityHandleCanonicalName(annotatedType)
+    guideType = addToImportAndGetSimpleName(EntityAnnotationFunctions.getCrudGuideCanonicalName(sourceArtifact()));
+    entityHandleSimpleName = addToImportAndGetSimpleName(
+        EntityAnnotationFunctions.getEntityHandleCanonicalName(sourceArtifact())
     );
 
     analyzeEntity();
+
+    addVariable("generatedAnnotation", makeGeneratedAnnotation());
+    addVariable("guideType", guideType);
+    addVariable("entityHandleSimpleName", entityHandleSimpleName);
+    addVariable("entityTable", entityTable);
+    addVariable("entityAlias", entityAlias);
+    addVariable("entityHasIdentifier", entityHasIdentifier);
+    addVariable("identifierType", identifierType);
+    addVariable("identifierColumn", identifierColumn);
     return true;
   }
 
@@ -96,9 +81,9 @@ public class EntityCrudGuideImplGenerator extends AbstractGenerator {
   }
 
   private String getTableName() {
-    Table table = annotatedType.selectAnnotation(Table.class).orElseThrow(() ->
+    Table table = sourceArtifact().selectAnnotation(Table.class).orElseThrow(() ->
         RdbExceptions.withMessage("RDB entity class {0} must annotation with annotation {1}",
-        annotatedType.canonicalName(), Table.class.getCanonicalName()
+        sourceArtifact().canonicalName(), Table.class.getCanonicalName()
     ));
     if (StringFunctions.isNotBlank(table.schema())) {
       return table.schema() + "." + table.name();
@@ -107,20 +92,20 @@ public class EntityCrudGuideImplGenerator extends AbstractGenerator {
   }
 
   private void analyzeEntityIdentifier() {
-    Optional<MethodStatement> identifierMethod = EntityAnnotationFunctions.findIdentifierMethod(annotatedType);
+    Optional<MethodStatement> identifierMethod = EntityAnnotationFunctions.findIdentifierMethod(sourceArtifact());
     if (identifierMethod.isEmpty()) {
       entityHasIdentifier = false;
       return;
     }
     entityHasIdentifier = true;
 
-    identifierType = context.addToImportAndGetSimpleName(
-        EntityAnnotationFunctions.getIdentifierType(annotatedType, identifierMethod.get())
+    identifierType = addToImportAndGetSimpleName(
+        EntityAnnotationFunctions.getIdentifierType(sourceArtifact(), identifierMethod.get())
     );
 
     Column column = identifierMethod.orElseThrow().selectAnnotation(Column.class).orElseThrow(() ->
         RdbExceptions.withMessage("RDB entity {0} identifier method {1} must annotation with annotation {2}",
-            annotatedType.canonicalName(), identifierMethod.get().name(), Column.class.getCanonicalName()
+            sourceArtifact().canonicalName(), identifierMethod.get().name(), Column.class.getCanonicalName()
         ));
     identifierColumn = column.name();
   }

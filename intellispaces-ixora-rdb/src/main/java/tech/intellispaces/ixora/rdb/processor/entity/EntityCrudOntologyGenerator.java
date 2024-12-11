@@ -1,22 +1,21 @@
 package tech.intellispaces.ixora.rdb.processor.entity;
 
+import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
 import tech.intellispaces.ixora.rdb.TransactionDomain;
 import tech.intellispaces.jaquarius.annotation.Channel;
 import tech.intellispaces.jaquarius.annotation.Ontology;
-import tech.intellispaces.jaquarius.annotation.processor.AbstractGenerator;
+import tech.intellispaces.jaquarius.annotationprocessor.JaquariusArtifactGenerator;
 import tech.intellispaces.jaquarius.id.RepetableUuidIdentifierGenerator;
 import tech.intellispaces.jaquarius.space.domain.DomainFunctions;
-import tech.intellispaces.java.annotation.context.AnnotationProcessingContext;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.method.MethodStatement;
 
-import javax.annotation.processing.RoundEnvironment;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public class EntityCrudOntologyGenerator extends AbstractGenerator {
+public class EntityCrudOntologyGenerator extends JaquariusArtifactGenerator {
   private String identifierToEntityCid;
   private String transactionToEntityByIdentifierCid;
 
@@ -25,18 +24,18 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
   private String identifierToEntityChannelSimpleName;
   private String transactionToEntityByIdentifierChannelSimpleName;
 
-  public EntityCrudOntologyGenerator(CustomType initiatorType, CustomType entityType) {
-    super(initiatorType, entityType);
+  public EntityCrudOntologyGenerator(CustomType entityType) {
+    super( entityType);
   }
 
   @Override
-  public boolean isRelevant(AnnotationProcessingContext context) {
+  public boolean isRelevant(ArtifactGeneratorContext context) {
     return true;
   }
 
   @Override
-  public String artifactName() {
-    return EntityAnnotationFunctions.getCrudOntologyCanonicalName(annotatedType);
+  public String generatedArtifactName() {
+    return EntityAnnotationFunctions.getCrudOntologyCanonicalName(sourceArtifact());
   }
 
   @Override
@@ -48,11 +47,6 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
   protected Map<String, Object> templateVariables() {
     Map<String, Object> vars = new HashMap<>();
     vars.put("generatedAnnotation", makeGeneratedAnnotation());
-    vars.put("packageName", context.packageName());
-    vars.put("sourceCanonicalName", sourceClassCanonicalName());
-    vars.put("sourceSimpleName", sourceClassSimpleName());
-    vars.put("classSimpleName", context.generatedClassSimpleName());
-    vars.put("importedClasses", context.getImports());
 
     vars.put("entityHasIdentifier", entityHasIdentifier);
     vars.put("identifierType", identifierType);
@@ -65,12 +59,10 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
   }
 
   @Override
-  protected boolean analyzeAnnotatedType(RoundEnvironment roundEnv) {
-    context.generatedClassCanonicalName(artifactName());
-
-    context.addImport(Ontology.class);
-    context.addImport(Channel.class);
-    context.addImport(TransactionDomain.class);
+  protected boolean analyzeSourceArtifact(ArtifactGeneratorContext context) {
+    addImport(Ontology.class);
+    addImport(Channel.class);
+    addImport(TransactionDomain.class);
 
     defineIdentifiers();
     analyzeEntityIdentifier();
@@ -78,14 +70,14 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
   }
 
   private void defineIdentifiers() {
-    String did = DomainFunctions.getDomainId(annotatedType);
+    String did = DomainFunctions.getDomainId(sourceArtifact());
     var identifierGenerator = new RepetableUuidIdentifierGenerator(UUID.fromString(did));
     identifierToEntityCid = identifierGenerator.next();
     transactionToEntityByIdentifierCid = identifierGenerator.next();
   }
 
   private void analyzeEntityIdentifier() {
-    Optional<MethodStatement> identifierMethod = EntityAnnotationFunctions.findIdentifierMethod(annotatedType);
+    Optional<MethodStatement> identifierMethod = EntityAnnotationFunctions.findIdentifierMethod(sourceArtifact());
     if (identifierMethod.isEmpty()) {
       entityHasIdentifier = false;
       return;
@@ -93,13 +85,13 @@ public class EntityCrudOntologyGenerator extends AbstractGenerator {
     entityHasIdentifier = true;
 
     identifierToEntityChannelSimpleName = EntityAnnotationFunctions.getIdentifierToEntityChannelSimpleName(
-        annotatedType
+        sourceArtifact()
     );
     transactionToEntityByIdentifierChannelSimpleName = EntityAnnotationFunctions.getTransactionToEntityByIdentifierChannelSimpleName(
-        annotatedType
+        sourceArtifact()
     );
-    identifierType = context.addToImportAndGetSimpleName(
-      EntityAnnotationFunctions.getIdentifierType(annotatedType, identifierMethod.orElseThrow())
+    identifierType = addToImportAndGetSimpleName(
+      EntityAnnotationFunctions.getIdentifierType(sourceArtifact(), identifierMethod.orElseThrow())
     );
   }
 }
