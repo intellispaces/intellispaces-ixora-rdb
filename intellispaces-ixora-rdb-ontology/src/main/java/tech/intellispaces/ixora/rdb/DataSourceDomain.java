@@ -9,7 +9,7 @@ import tech.intellispaces.jaquarius.traverse.TraverseTypes;
 public interface DataSourceDomain {
 
   @Channel("ea808587-a507-40e1-9091-0c623dcb6d74")
-  DataSourcePropertiesDomain properties();
+  DataSourceSettingsDomain properties();
 
   @Channel(
       value = "7465cd7c-94bd-4aac-b220-1520907c4e9b",

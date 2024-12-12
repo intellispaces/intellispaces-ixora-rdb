@@ -10,8 +10,6 @@ import tech.intellispaces.jaquarius.space.domain.DomainFunctions;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 import tech.intellispaces.java.reflection.method.MethodStatement;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,21 +42,6 @@ public class EntityCrudOntologyGenerator extends JaquariusArtifactGenerator {
   }
 
   @Override
-  protected Map<String, Object> templateVariables() {
-    Map<String, Object> vars = new HashMap<>();
-    vars.put("generatedAnnotation", makeGeneratedAnnotation());
-
-    vars.put("entityHasIdentifier", entityHasIdentifier);
-    vars.put("identifierType", identifierType);
-    vars.put("identifierToEntityChannelSimpleName", identifierToEntityChannelSimpleName);
-    vars.put("transactionToEntityByIdentifierChannelSimpleName", transactionToEntityByIdentifierChannelSimpleName);
-
-    vars.put("identifierToEntityCid", identifierToEntityCid);
-    vars.put("transactionToEntityByIdentifierCid", transactionToEntityByIdentifierCid);
-    return vars;
-  }
-
-  @Override
   protected boolean analyzeSourceArtifact(ArtifactGeneratorContext context) {
     addImport(Ontology.class);
     addImport(Channel.class);
@@ -66,6 +49,14 @@ public class EntityCrudOntologyGenerator extends JaquariusArtifactGenerator {
 
     defineIdentifiers();
     analyzeEntityIdentifier();
+
+    addVariable("generatedAnnotation", makeGeneratedAnnotation());
+    addVariable("entityHasIdentifier", entityHasIdentifier);
+    addVariable("identifierType", identifierType);
+    addVariable("identifierToEntityChannelSimpleName", identifierToEntityChannelSimpleName);
+    addVariable("transactionToEntityByIdentifierChannelSimpleName", transactionToEntityByIdentifierChannelSimpleName);
+    addVariable("identifierToEntityCid", identifierToEntityCid);
+    addVariable("transactionToEntityByIdentifierCid", transactionToEntityByIdentifierCid);
     return true;
   }
 

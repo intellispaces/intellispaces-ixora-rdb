@@ -4,7 +4,7 @@ import tech.intellispaces.ixora.rdb.guide.IxoraParameterizedQueryToBlindQueryGui
 import tech.intellispaces.ixora.rdb.guide.IxoraResultSetToDataGuide;
 import tech.intellispaces.jaquarius.annotation.Configuration;
 import tech.intellispaces.jaquarius.annotation.Projection;
-import tech.intellispaces.jaquarius.annotation.Properties;
+import tech.intellispaces.jaquarius.annotation.Settings;
 
 @Configuration({
     IxoraParameterizedQueryToBlindQueryGuide.class,
@@ -16,8 +16,8 @@ public abstract class RdbConfiguration {
    * Data source properties.
    */
   @Projection
-  @Properties("datasource")
-  public abstract DataSourceProperties dataSourceProperties();
+  @Settings("datasource")
+  public abstract DataSourceSettings dataSourceSettings();
 
   /**
    * Transaction factory.

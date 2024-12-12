@@ -6,7 +6,7 @@ import tech.intellispaces.jaquarius.annotation.Domain;
 
 @Data
 @Domain("a0d2d709-9af1-4bcc-8a90-c3c828585198")
-public interface DataSourcePropertiesDomain {
+public interface DataSourceSettingsDomain {
 
   @Channel("04006c73-1ca9-46f3-9a5a-f8e5e1ab59e7")
   String driverClassName();

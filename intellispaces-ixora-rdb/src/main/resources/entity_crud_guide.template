@@ -1,17 +1,17 @@
-package {{$packageName}};
+package {{$generatedArtifactPackageName}};
 
 {{for importedClass : $importedClasses}}
 import {{$importedClass}};
 {{end}}
 
 /**
- * Interface of the CRUD guide for entities of the domain {@link {{$sourceCanonicalName}}}.<p/>
+ * Interface of the CRUD guide for entities of the domain {@link {{$sourceArtifactName}}}.<p/>
  *
  * This class was generated automatically. Don't try to change it.
  */
 @Guide
 {{$generatedAnnotation}}
-public interface {{$classSimpleName}} {
+public interface {{$generatedArtifactSimpleName}} {
 
 {{when $entityHasIdentifier}}
   @Mapper({{$identifierToEntityChannelSimpleName}}.class)
