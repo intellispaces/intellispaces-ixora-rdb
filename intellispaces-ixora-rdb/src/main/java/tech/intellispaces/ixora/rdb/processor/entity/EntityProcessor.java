@@ -13,9 +13,9 @@ import javax.lang.model.element.ElementKind;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityAnnotationProcessor extends ArtifactProcessor {
+public class EntityProcessor extends ArtifactProcessor {
 
-  public EntityAnnotationProcessor() {
+  public EntityProcessor() {
     super(ElementKind.INTERFACE, Entity.class, AnnotationProcessorConstants.SOURCE_VERSION);
   }
 

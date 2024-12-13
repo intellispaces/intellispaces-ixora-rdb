@@ -23,7 +23,7 @@ public class EntityCrudOntologyGenerator extends JaquariusArtifactGenerator {
   private String transactionToEntityByIdentifierChannelSimpleName;
 
   public EntityCrudOntologyGenerator(CustomType entityType) {
-    super( entityType);
+    super(entityType);
   }
 
   @Override

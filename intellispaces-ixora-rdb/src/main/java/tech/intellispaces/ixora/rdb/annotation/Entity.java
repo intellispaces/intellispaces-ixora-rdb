@@ -1,6 +1,6 @@
 package tech.intellispaces.ixora.rdb.annotation;
 
-import tech.intellispaces.ixora.rdb.processor.entity.EntityAnnotationProcessor;
+import tech.intellispaces.ixora.rdb.processor.entity.EntityProcessor;
 import tech.intellispaces.jaquarius.annotation.AnnotationProcessor;
 import tech.intellispaces.jaquarius.annotation.Data;
 
@@ -12,6 +12,6 @@ import java.lang.annotation.Target;
 @Data
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@AnnotationProcessor(EntityAnnotationProcessor.class)
+@AnnotationProcessor(EntityProcessor.class)
 public @interface Entity {
 }

@@ -1,11 +1,11 @@
 package tech.intellispaces.ixora.rdb.processor.entity;
 
-import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
-import tech.intellispaces.ixora.rdb.Transaction;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
+import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
 import tech.intellispaces.general.text.StringFunctions;
 import tech.intellispaces.ixora.data.association.Maps;
+import tech.intellispaces.ixora.rdb.Transaction;
 import tech.intellispaces.ixora.rdb.Transactions;
 import tech.intellispaces.ixora.rdb.annotation.Transactional;
 import tech.intellispaces.ixora.rdb.exception.RdbExceptions;

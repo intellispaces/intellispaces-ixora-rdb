@@ -1,8 +1,5 @@
 package tech.intellispaces.ixora.rdb.guide;
 
-import tech.intellispaces.ixora.rdb.ResultSet;
-import tech.intellispaces.ixora.rdb.ResultSetToDataChannel;
-import tech.intellispaces.ixora.rdb.ResultSetToDataListChannel;
 import jakarta.persistence.Column;
 import tech.intellispaces.general.collection.ArraysFunctions;
 import tech.intellispaces.general.exception.UnexpectedExceptions;
@@ -10,13 +7,16 @@ import tech.intellispaces.general.text.StringFunctions;
 import tech.intellispaces.general.type.ClassFunctions;
 import tech.intellispaces.ixora.data.collection.List;
 import tech.intellispaces.ixora.data.collection.Lists;
+import tech.intellispaces.ixora.rdb.ResultSet;
+import tech.intellispaces.ixora.rdb.ResultSetToDataChannel;
+import tech.intellispaces.ixora.rdb.ResultSetToDataListChannel;
 import tech.intellispaces.jaquarius.annotation.Data;
 import tech.intellispaces.jaquarius.annotation.Guide;
 import tech.intellispaces.jaquarius.annotation.Mapper;
 import tech.intellispaces.jaquarius.annotation.MapperOfMoving;
 import tech.intellispaces.jaquarius.annotation.Name;
-import tech.intellispaces.jaquarius.naming.NameConventionFunctions;
 import tech.intellispaces.jaquarius.data.DataFunctions;
+import tech.intellispaces.jaquarius.naming.NameConventionFunctions;
 import tech.intellispaces.jaquarius.object.ObjectHandleFunctions;
 
 import java.lang.reflect.Constructor;
