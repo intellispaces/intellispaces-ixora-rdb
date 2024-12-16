@@ -50,7 +50,6 @@ public class EntityCrudOntologyGenerator extends JaquariusArtifactGenerator {
     defineIdentifiers();
     analyzeEntityIdentifier();
 
-    addVariable("generatedAnnotation", makeGeneratedAnnotation());
     addVariable("entityHasIdentifier", entityHasIdentifier);
     addVariable("identifierType", identifierType);
     addVariable("identifierToEntityChannelSimpleName", identifierToEntityChannelSimpleName);

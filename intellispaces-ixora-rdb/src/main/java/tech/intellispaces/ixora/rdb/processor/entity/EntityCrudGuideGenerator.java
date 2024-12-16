@@ -51,7 +51,6 @@ public class EntityCrudGuideGenerator extends JaquariusArtifactGenerator {
 
     analyzeEntityIdentifier();
 
-    addVariable("generatedAnnotation", makeGeneratedAnnotation());
     addVariable("entityHasIdentifier", entityHasIdentifier);
     addVariable("entityHandleSimpleName", entityHandleSimpleName);
     addVariable("identifierType", identifierType);
