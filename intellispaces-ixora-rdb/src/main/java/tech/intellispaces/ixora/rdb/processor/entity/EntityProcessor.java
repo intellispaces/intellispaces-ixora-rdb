@@ -5,8 +5,8 @@ import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
 import tech.intellispaces.annotationprocessor.ArtifactProcessor;
 import tech.intellispaces.annotationprocessor.ArtifactValidator;
 import tech.intellispaces.ixora.rdb.annotation.Entity;
-import tech.intellispaces.jaquarius.annotationprocessor.AnnotationProcessorConstants;
 import tech.intellispaces.jaquarius.annotationprocessor.AnnotationProcessorFunctions;
+import tech.intellispaces.jaquarius.annotationprocessor.JaquariusArtifactProcessor;
 import tech.intellispaces.java.reflection.customtype.CustomType;
 
 import javax.lang.model.element.ElementKind;
@@ -16,7 +16,7 @@ import java.util.List;
 public class EntityProcessor extends ArtifactProcessor {
 
   public EntityProcessor() {
-    super(ElementKind.INTERFACE, Entity.class, AnnotationProcessorConstants.SOURCE_VERSION);
+    super(ElementKind.INTERFACE, Entity.class, JaquariusArtifactProcessor.SOURCE_VERSION);
   }
 
   @Override
