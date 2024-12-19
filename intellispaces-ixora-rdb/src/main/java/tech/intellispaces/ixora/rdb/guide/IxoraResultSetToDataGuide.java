@@ -17,7 +17,7 @@ import tech.intellispaces.jaquarius.annotation.MapperOfMoving;
 import tech.intellispaces.jaquarius.annotation.Name;
 import tech.intellispaces.jaquarius.data.DataFunctions;
 import tech.intellispaces.jaquarius.naming.NameConventionFunctions;
-import tech.intellispaces.jaquarius.object.ObjectHandleFunctions;
+import tech.intellispaces.jaquarius.object.handle.ObjectHandleFunctions;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
