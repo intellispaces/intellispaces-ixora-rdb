@@ -45,7 +45,7 @@ public class EntityCrudGuideGenerator extends JaquariusArtifactGenerator {
     addImport(Mapper.class);
     addImport(Transaction.class);
 
-    entityHandleSimpleName = addToImportAndGetSimpleName(
+    entityHandleSimpleName = addImportAndGetSimpleName(
         EntityAnnotationFunctions.getEntityHandleCanonicalName(sourceArtifact())
     );
 
@@ -67,7 +67,7 @@ public class EntityCrudGuideGenerator extends JaquariusArtifactGenerator {
     }
     entityHasIdentifier = true;
 
-    identifierType = addToImportAndGetSimpleName(
+    identifierType = addImportAndGetSimpleName(
         EntityAnnotationFunctions.getIdentifierType(sourceArtifact(), identifierMethod.orElseThrow())
     );
     identifierToEntityChannelSimpleName = EntityAnnotationFunctions.getIdentifierToEntityChannelSimpleName(

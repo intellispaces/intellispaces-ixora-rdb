@@ -80,7 +80,7 @@ public class EntityCrudOntologyGenerator extends JaquariusArtifactGenerator {
     transactionToEntityByIdentifierChannelSimpleName = EntityAnnotationFunctions.getTransactionToEntityByIdentifierChannelSimpleName(
         sourceArtifact()
     );
-    identifierType = addToImportAndGetSimpleName(
+    identifierType = addImportAndGetSimpleName(
       EntityAnnotationFunctions.getIdentifierType(sourceArtifact(), identifierMethod.orElseThrow())
     );
   }
