@@ -16,5 +16,5 @@ public interface PreparedStatementDomain {
   ResultSetDomain executeQuery();
 
   @Channel(value = "6edca404-da35-4b0f-b249-08964c685e81", allowedTraverse = TraverseTypes.Moving)
-  PreparedStatementDomain setInt(int parameterIndex, int value);
+  PreparedStatementDomain setInt(Integer parameterIndex, Integer value);
 }
