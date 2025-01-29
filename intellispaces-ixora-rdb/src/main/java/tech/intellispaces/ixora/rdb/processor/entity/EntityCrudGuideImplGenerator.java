@@ -5,7 +5,7 @@ import jakarta.persistence.Table;
 import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
 import tech.intellispaces.general.text.StringFunctions;
 import tech.intellispaces.ixora.data.association.Maps;
-import tech.intellispaces.ixora.rdb.Transaction;
+import tech.intellispaces.ixora.rdb.TransactionHandle;
 import tech.intellispaces.ixora.rdb.Transactions;
 import tech.intellispaces.ixora.rdb.annotation.Transactional;
 import tech.intellispaces.ixora.rdb.exception.RdbExceptions;
@@ -50,8 +50,8 @@ public class EntityCrudGuideImplGenerator extends JaquariusArtifactGenerator {
   @Override
   protected boolean analyzeSourceArtifact(ArtifactGeneratorContext context) {
     addImport(Guide.class);
-    addImport(Transaction.class);
-    addImport(tech.intellispaces.ixora.data.association.Map.class);
+    addImport(TransactionHandle.class);
+    addImport(tech.intellispaces.ixora.data.association.MapHandle.class);
     addImport(Maps.class);
     addImport(Transactional.class);
     addImport(Transactions.class);

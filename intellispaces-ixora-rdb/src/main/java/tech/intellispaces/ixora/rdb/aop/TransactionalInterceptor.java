@@ -1,7 +1,7 @@
 package tech.intellispaces.ixora.rdb.aop;
 
 import tech.intellispaces.action.Action;
-import tech.intellispaces.ixora.rdb.MovableTransactionFactory;
+import tech.intellispaces.ixora.rdb.MovableTransactionFactoryHandle;
 import tech.intellispaces.ixora.rdb.TransactionFunctions;
 import tech.intellispaces.ixora.rdb.exception.TransactionExceptions;
 import tech.intellispaces.jaquarius.aop.Interceptor;
@@ -25,13 +25,13 @@ public class TransactionalInterceptor extends Interceptor {
 
   @Override
   public Object execute(Object[] data) {
-    MovableTransactionFactory transactionFactory = getDefaultTransactionFactory();
+    MovableTransactionFactoryHandle transactionFactory = getDefaultTransactionFactory();
     Action joinAction = joinAction();
     return TransactionFunctions.transactional(transactionFactory, joinAction::execute, data);
   }
 
-  private MovableTransactionFactory getDefaultTransactionFactory() {
-    List<MovableTransactionFactory> transactionFactories = projectionProvider.getProjections(MovableTransactionFactory.class);
+  private MovableTransactionFactoryHandle getDefaultTransactionFactory() {
+    List<MovableTransactionFactoryHandle> transactionFactories = projectionProvider.getProjections(MovableTransactionFactoryHandle.class);
     if (transactionFactories.isEmpty()) {
       throw TransactionExceptions.withMessage("Transaction factory is not found");
     }

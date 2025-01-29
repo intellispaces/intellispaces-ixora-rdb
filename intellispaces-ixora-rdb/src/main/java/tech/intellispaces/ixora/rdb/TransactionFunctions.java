@@ -19,7 +19,7 @@ public class TransactionFunctions {
 
   private TransactionFunctions() {}
 
-  public static void transactional(MovableTransactionFactory factory, Runnable operation) {
+  public static void transactional(MovableTransactionFactoryHandle factory, Runnable operation) {
     transactional(factory,
         data -> {
           operation.run();
@@ -29,7 +29,7 @@ public class TransactionFunctions {
     );
   }
 
-  public static void transactional(MovableTransactionFactory factory, Consumer<Transaction> operation) {
+  public static void transactional(MovableTransactionFactoryHandle factory, Consumer<TransactionHandle> operation) {
     transactional(factory,
         data -> {
           operation.accept(Transactions.current());
@@ -40,12 +40,12 @@ public class TransactionFunctions {
   }
 
   public static <R, E extends Exception> R transactional(
-      MovableTransactionFactory factory,
+      MovableTransactionFactoryHandle factory,
       ThrowingFunction<Object[], R, E> operation,
       Object[] data
   ) {
     R result;
-    MovableTransaction tx = null;
+    MovableTransactionHandle tx = null;
     try {
       tx = factory.getTransaction();
       storeTransactionInContext(tx);
@@ -79,9 +79,9 @@ public class TransactionFunctions {
     return result;
   }
 
-  private static void storeTransactionInContext(MovableTransaction tx) {
+  private static void storeTransactionInContext(MovableTransactionHandle tx) {
     Transactions.setCurrent(tx);
-    ContextProjections.add(TRANSACTION_PROJECTION_NAME, MovableTransaction.class, tx);
+    ContextProjections.add(TRANSACTION_PROJECTION_NAME, MovableTransactionHandle.class, tx);
   }
 
   private static void removeTransactionFromContext() {
@@ -89,7 +89,7 @@ public class TransactionFunctions {
     ContextProjections.remove(TRANSACTION_PROJECTION_NAME);
   }
 
-  private static void commit(MovableTransaction tx, Throwable reason) {
+  private static void commit(MovableTransactionHandle tx, Throwable reason) {
     try {
       tx.commit();
     } catch (Throwable e) {
@@ -103,7 +103,7 @@ public class TransactionFunctions {
     }
   }
 
-  private static void rollback(MovableTransaction tx, Throwable reason) {
+  private static void rollback(MovableTransactionHandle tx, Throwable reason) {
     try {
       tx.rollback();
     } catch (Throwable e) {

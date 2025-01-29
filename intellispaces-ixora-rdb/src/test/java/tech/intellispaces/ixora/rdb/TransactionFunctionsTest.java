@@ -32,11 +32,11 @@ public class TransactionFunctionsTest {
   @Test
   public void testTransactional_whenOk() {
     // Given
-    MovableTransactionFactory transactionFactory = mock(MovableTransactionFactory.class);
-    MovableTransaction tx = mock(MovableTransaction.class);
+    MovableTransactionFactoryHandle transactionFactory = mock(MovableTransactionFactoryHandle.class);
+    MovableTransactionHandle tx = mock(MovableTransactionHandle.class);
     when(transactionFactory.getTransaction()).thenReturn(tx);
 
-    List<Transaction> appliedTransactions = new ArrayList<>();
+    List<TransactionHandle> appliedTransactions = new ArrayList<>();
 
     // When
     TransactionFunctions.transactional(transactionFactory,

@@ -17,13 +17,13 @@ public abstract class RdbConfiguration {
    */
   @Projection
   @Settings("datasource")
-  public abstract DataSourceSettings dataSourceSettings();
+  public abstract DataSourceSettingsHandle dataSourceSettings();
 
   /**
    * Transaction factory.
    */
   @Projection
-  public MovableTransactionFactory transactionFactory(MovableDataSource dataSource) {
-    return new TransactionFactoryHandleImpl(dataSource);
+  public MovableTransactionFactoryHandle transactionFactory(MovableDataSourceHandle dataSource) {
+    return new TransactionFactoryHandleOverDataSourceImpl(dataSource);
   }
 }

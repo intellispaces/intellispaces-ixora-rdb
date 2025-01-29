@@ -1,8 +1,9 @@
 package tech.intellispaces.ixora.rdb;
 
-import tech.intellispaces.ixora.data.association.Map;
-import tech.intellispaces.ixora.data.collection.List;
-import tech.intellispaces.ixora.data.cursor.Cursor;
+import tech.intellispaces.ixora.data.association.MapDomain;
+import tech.intellispaces.ixora.data.association.MapHandle;
+import tech.intellispaces.ixora.data.collection.ListHandle;
+import tech.intellispaces.ixora.data.cursor.CursorHandle;
 import tech.intellispaces.ixora.rdb.exception.RdbExceptions;
 import tech.intellispaces.jaquarius.annotation.AutoGuide;
 import tech.intellispaces.jaquarius.annotation.Inject;
@@ -11,27 +12,27 @@ import tech.intellispaces.jaquarius.annotation.Mover;
 import tech.intellispaces.jaquarius.annotation.ObjectHandle;
 
 @ObjectHandle(TransactionDomain.class)
-abstract class TransactionHandle implements MovableTransaction {
-  private final MovableConnection connection;
+abstract class TransactionHandleOverConnection implements MovableTransactionHandle {
+  private final MovableConnectionHandle connection;
 
   @Inject
   @AutoGuide
   abstract ParameterizedQueryToBlindQueryGuide parameterizedQueryToBlindQueryGuide();
 
-  TransactionHandle(MovableConnection connection) {
+  TransactionHandleOverConnection(MovableConnectionHandle connection) {
     this.connection = connection;
     connection.disableAutoCommit();
   }
 
   @Mapper
   @Override
-  public Connection connection() {
+  public ConnectionHandle connection() {
     return connection;
   }
 
   @Mover
   @Override
-  public MovableTransaction commit() {
+  public MovableTransactionHandle commit() {
     connection.commit();
     connection.close();
     return this;
@@ -39,7 +40,7 @@ abstract class TransactionHandle implements MovableTransaction {
 
   @Mover
   @Override
-  public MovableTransaction rollback() {
+  public MovableTransactionHandle rollback() {
     connection.rollback();
     connection.close();
     return this;
@@ -47,42 +48,42 @@ abstract class TransactionHandle implements MovableTransaction {
 
   @Mover
   @Override
-  public MovableTransaction modify(String query) {
+  public MovableTransactionHandle modify(String query) {
     throw new RuntimeException("Not implemented");
   }
 
   @Mapper
   @Override
-  public MovableResultSet query(String query) {
+  public MovableResultSetHandle query(String query) {
     return connection.createStatement().executeQuery(query);
   }
 
   @Mapper
   @Override
-  public <D> Cursor<D> queryData(Class<D> dataType, String query) {
+  public <D> CursorHandle<D> queryData(Class<D> dataType, String query) {
     throw new RuntimeException("Not implemented");
   }
 
   @Mapper
   @Override
   public <D> D fetchData(Class<D> dataType, String query) {
-    MovableResultSet rs = connection.createStatement().executeQuery(query);
+    MovableResultSetHandle rs = connection.createStatement().executeQuery(query);
     return fetchData(dataType, rs);
   }
 
   @Mapper
   @Override
-  public <D> D fetchData(Class<D> dataType, String query, Map<String, Object> params) {
-    BlindQueryAndParameterNames blindQueryAndParamNames = (
+  public <D> D fetchData(Class<D> dataType, String query, MapHandle<String, Object> params) {
+    BlindQueryAndParameterNamesHandle blindQueryAndParamNames = (
       parameterizedQueryToBlindQueryGuide().parameterizedQueryToBlindQuery(query)
     );
-    MovablePreparedStatement ps = connection.createPreparedStatement(blindQueryAndParamNames.blindQuery());
+    MovablePreparedStatementHandle ps = connection.createPreparedStatement(blindQueryAndParamNames.blindQuery());
     setParamValues(ps, blindQueryAndParamNames.parameterNames(), params);
-    MovableResultSet rs = ps.executeQuery();
+    MovableResultSetHandle rs = ps.executeQuery();
     return fetchData(dataType, rs);
   }
 
-  private <D> D fetchData(Class<D> dataType, MovableResultSet rs) {
+   private <D> D fetchData(Class<D> dataType, MovableResultSetHandle rs) {
     if (!rs.next()) {
       throw RdbExceptions.withMessage("No data found");
     }
@@ -93,7 +94,9 @@ abstract class TransactionHandle implements MovableTransaction {
     return data;
   }
 
-  private void setParamValues(MovablePreparedStatement ps, List<String> paramNames, Map<String, Object> params) {
+  private void setParamValues(
+          MovablePreparedStatementHandle ps, ListHandle<String> paramNames, MapHandle<String, Object> params
+  ) {
     int index = 1;
     for (Object paramName : paramNames.nativeList()) {
       if (!params.nativeMap().containsKey(paramName)) {

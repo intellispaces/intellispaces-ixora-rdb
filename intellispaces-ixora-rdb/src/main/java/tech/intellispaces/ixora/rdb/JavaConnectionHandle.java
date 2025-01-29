@@ -8,18 +8,18 @@ import tech.intellispaces.jaquarius.annotation.ObjectHandle;
 import java.sql.SQLException;
 
 @ObjectHandle( ConnectionDomain.class)
-abstract class ConnectionHandle implements MovableConnection {
+abstract class JavaConnectionHandle implements MovableConnectionHandle {
   private final java.sql.Connection connection;
 
-  ConnectionHandle(java.sql.Connection connection) {
+  JavaConnectionHandle(java.sql.Connection connection) {
     this.connection = connection;
   }
 
   @Override
   @MapperOfMoving
-  public MovableStatement createStatement() {
+  public MovableStatementHandle createStatement() {
     try {
-      return new StatementHandleImpl(connection.createStatement());
+      return new JavaStatementHandleImpl(connection.createStatement());
     } catch (SQLException e) {
       throw RdbExceptions.withCauseAndMessage(e, "Could not create statement");
     }
@@ -27,9 +27,9 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Override
   @MapperOfMoving
-  public MovablePreparedStatement createPreparedStatement(String query) {
+  public MovablePreparedStatementHandle createPreparedStatement(String query) {
     try {
-      return new PreparedStatementHandleImpl(connection.prepareStatement(query));
+      return new JavaPreparedStatementHandleImpl(connection.prepareStatement(query));
     } catch (SQLException e) {
       throw RdbExceptions.withCauseAndMessage(e, "Could not create statement");
     }
@@ -37,7 +37,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Mover
   @Override
-  public MovableConnection disableAutoCommit() {
+  public MovableConnectionHandle disableAutoCommit() {
     try {
       connection.setAutoCommit(false);
     } catch (SQLException e) {
@@ -48,7 +48,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Mover
   @Override
-  public MovableConnection commit() {
+  public MovableConnectionHandle commit() {
     try {
       connection.commit();
     } catch (SQLException e) {
@@ -59,7 +59,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Mover
   @Override
-  public MovableConnection rollback() {
+  public MovableConnectionHandle rollback() {
     try {
       connection.rollback();
     } catch (SQLException e) {
@@ -70,7 +70,7 @@ abstract class ConnectionHandle implements MovableConnection {
 
   @Mover
   @Override
-  public MovableConnection close() {
+  public MovableConnectionHandle close() {
     try {
       connection.close();
     } catch (SQLException e) {

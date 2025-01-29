@@ -1,7 +1,7 @@
 package tech.intellispaces.ixora.rdb.guide;
 
 import tech.intellispaces.ixora.data.collection.Lists;
-import tech.intellispaces.ixora.rdb.BlindQueryAndParameterNames;
+import tech.intellispaces.ixora.rdb.BlindQueryAndParameterNamesHandle;
 import tech.intellispaces.ixora.rdb.BlindQueryAndParameterNamesData;
 import tech.intellispaces.ixora.rdb.ParameterizedQueryToBlindQueryGuide;
 import tech.intellispaces.jaquarius.annotation.Guide;
@@ -13,7 +13,7 @@ import java.util.List;
 public class IxoraParameterizedQueryToBlindQueryGuide implements ParameterizedQueryToBlindQueryGuide {
 
   @Override
-  public BlindQueryAndParameterNames parameterizedQueryToBlindQuery(String query) {
+  public BlindQueryAndParameterNamesHandle parameterizedQueryToBlindQuery(String query) {
     char[] originQuery = query.toCharArray();
     char[] blindQuery = new char[query.length()];
     List<String> paramNames = new ArrayList<>();

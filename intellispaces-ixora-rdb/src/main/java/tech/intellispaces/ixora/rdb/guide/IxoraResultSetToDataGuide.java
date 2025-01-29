@@ -5,9 +5,9 @@ import tech.intellispaces.general.collection.ArraysFunctions;
 import tech.intellispaces.general.exception.UnexpectedExceptions;
 import tech.intellispaces.general.text.StringFunctions;
 import tech.intellispaces.general.type.ClassFunctions;
-import tech.intellispaces.ixora.data.collection.List;
+import tech.intellispaces.ixora.data.collection.ListHandle;
 import tech.intellispaces.ixora.data.collection.Lists;
-import tech.intellispaces.ixora.rdb.ResultSet;
+import tech.intellispaces.ixora.rdb.ResultSetHandle;
 import tech.intellispaces.ixora.rdb.ResultSetToDataChannel;
 import tech.intellispaces.ixora.rdb.ResultSetToDataListChannel;
 import tech.intellispaces.jaquarius.annotation.Data;
@@ -17,7 +17,7 @@ import tech.intellispaces.jaquarius.annotation.MapperOfMoving;
 import tech.intellispaces.jaquarius.annotation.Name;
 import tech.intellispaces.jaquarius.data.DataFunctions;
 import tech.intellispaces.jaquarius.naming.NameConventionFunctions;
-import tech.intellispaces.jaquarius.object.handle.ObjectHandleFunctions;
+import tech.intellispaces.jaquarius.object.reference.ObjectHandleFunctions;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
@@ -29,7 +29,7 @@ import java.util.Map;
 public class IxoraResultSetToDataGuide {
 
   @Mapper(ResultSetToDataChannel.class)
-  public <D> D resultSetToData(ResultSet resultSet, Class<D> dataClass) {
+  public <D> D resultSetToData(ResultSetHandle resultSet, Class<D> dataClass) {
     Class<?> domainClass = getDomainClass(dataClass);
     Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);
     Object[] arguments = makeDataHandleArguments(resultSet, dataClass, domainClass, constructor);
@@ -41,7 +41,7 @@ public class IxoraResultSetToDataGuide {
   }
 
   @MapperOfMoving(ResultSetToDataListChannel.class)
-  public <D> List<D> resultSetToDataList(ResultSet resultSet, Class<D> dataClass) {
+  public <D> ListHandle<D> resultSetToDataList(ResultSetHandle resultSet, Class<D> dataClass) {
     Class<?> domainClass = getDomainClass(dataClass);
     Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);
     java.util.List<D> values = new ArrayList<>();
@@ -81,7 +81,7 @@ public class IxoraResultSetToDataGuide {
   }
 
   private <D> Object[] makeDataHandleArguments(
-      ResultSet resultSet, Class<D> dataClass, Class<?> domainClass, Constructor<D> constructor
+      ResultSetHandle resultSet, Class<D> dataClass, Class<?> domainClass, Constructor<D> constructor
   ) {
     Map<String, String> mapping = makeChannelAliasToColumnNameMapping(domainClass);
 
@@ -101,7 +101,7 @@ public class IxoraResultSetToDataGuide {
   }
 
   private void setArgument(
-      ResultSet resultSet, Object[] arguments, int index, String columnName, Class<?> paramClass
+      ResultSetHandle resultSet, Object[] arguments, int index, String columnName, Class<?> paramClass
   ) {
     if (paramClass == int.class) {
       Integer value = resultSet.integerValue(columnName);

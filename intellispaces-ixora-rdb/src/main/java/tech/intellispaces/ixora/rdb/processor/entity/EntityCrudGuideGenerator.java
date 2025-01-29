@@ -1,7 +1,7 @@
 package tech.intellispaces.ixora.rdb.processor.entity;
 
 import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
-import tech.intellispaces.ixora.rdb.Transaction;
+import tech.intellispaces.ixora.rdb.TransactionHandle;
 import tech.intellispaces.jaquarius.annotation.Guide;
 import tech.intellispaces.jaquarius.annotation.Mapper;
 import tech.intellispaces.jaquarius.annotation.Ontology;
@@ -43,7 +43,7 @@ public class EntityCrudGuideGenerator extends JaquariusArtifactGenerator {
   protected boolean analyzeSourceArtifact(ArtifactGeneratorContext context) {
     addImport(Guide.class);
     addImport(Mapper.class);
-    addImport(Transaction.class);
+    addImport(TransactionHandle.class);
 
     entityHandleSimpleName = addImportAndGetSimpleName(
         EntityAnnotationFunctions.getEntityHandleCanonicalName(sourceArtifact())
