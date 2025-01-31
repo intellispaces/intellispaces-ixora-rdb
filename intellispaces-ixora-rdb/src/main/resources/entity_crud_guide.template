@@ -18,6 +18,6 @@ public interface {{$generatedArtifactSimpleName}} {
   {{$entityHandleSimpleName}} getById({{$identifierType}} id);
 
   @Mapper({{$transactionToEntityByIdentifierChannelSimpleName}}.class)
-  {{$entityHandleSimpleName}} getById(Transaction tx, {{$identifierType}} id);
+  {{$entityHandleSimpleName}} getById(TransactionHandle tx, {{$identifierType}} id);
 {{end}}
 }
