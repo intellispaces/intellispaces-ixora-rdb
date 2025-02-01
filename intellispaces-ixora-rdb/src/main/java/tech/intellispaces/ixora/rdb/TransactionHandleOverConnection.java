@@ -1,8 +1,6 @@
 package tech.intellispaces.ixora.rdb;
 
-import tech.intellispaces.ixora.data.association.MapDomain;
 import tech.intellispaces.ixora.data.association.MapHandle;
-import tech.intellispaces.ixora.data.collection.ListHandle;
 import tech.intellispaces.ixora.data.cursor.CursorHandle;
 import tech.intellispaces.ixora.rdb.exception.RdbExceptions;
 import tech.intellispaces.jaquarius.annotation.AutoGuide;
@@ -10,6 +8,7 @@ import tech.intellispaces.jaquarius.annotation.Inject;
 import tech.intellispaces.jaquarius.annotation.Mapper;
 import tech.intellispaces.jaquarius.annotation.Mover;
 import tech.intellispaces.jaquarius.annotation.ObjectHandle;
+import tech.intellispaces.jaquarius.ixora.data.collection.ListHandle;
 
 @ObjectHandle(TransactionDomain.class)
 abstract class TransactionHandleOverConnection implements MovableTransactionHandle {
@@ -95,7 +94,7 @@ abstract class TransactionHandleOverConnection implements MovableTransactionHand
   }
 
   private void setParamValues(
-          MovablePreparedStatementHandle ps, ListHandle<String> paramNames, MapHandle<String, Object> params
+      MovablePreparedStatementHandle ps, ListHandle<String> paramNames, MapHandle<String, Object> params
   ) {
     int index = 1;
     for (Object paramName : paramNames.nativeList()) {

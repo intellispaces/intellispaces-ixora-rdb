@@ -1,9 +1,9 @@
 package tech.intellispaces.ixora.rdb;
 
-import tech.intellispaces.ixora.data.collection.ListDomain;
 import tech.intellispaces.jaquarius.annotation.Channel;
 import tech.intellispaces.jaquarius.annotation.Data;
 import tech.intellispaces.jaquarius.annotation.Domain;
+import tech.intellispaces.jaquarius.ixora.data.collection.ListDomain;
 
 @Data
 @Domain("db6fbe62-df10-41d8-8192-f3324af11ef4")

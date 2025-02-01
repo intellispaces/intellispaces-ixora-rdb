@@ -1,8 +1,8 @@
 package tech.intellispaces.ixora.rdb;
 
-import tech.intellispaces.ixora.data.collection.ListDomain;
 import tech.intellispaces.jaquarius.annotation.Channel;
 import tech.intellispaces.jaquarius.annotation.Domain;
+import tech.intellispaces.jaquarius.ixora.data.collection.ListDomain;
 import tech.intellispaces.jaquarius.traverse.TraverseTypes;
 
 @Domain("80898b0a-6a68-4693-bc86-17d7c5bb6a64")
