@@ -1,10 +1,10 @@
 package tech.intellispaces.ixora.rdb.guide;
 
 import jakarta.persistence.Column;
-import tech.intellispaces.general.collection.ArraysFunctions;
-import tech.intellispaces.general.exception.UnexpectedExceptions;
-import tech.intellispaces.general.text.StringFunctions;
-import tech.intellispaces.general.type.ClassFunctions;
+import tech.intellispaces.commons.base.collection.ArraysFunctions;
+import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
+import tech.intellispaces.commons.base.text.StringFunctions;
+import tech.intellispaces.commons.base.type.ClassFunctions;
 import tech.intellispaces.ixora.data.collection.Lists;
 import tech.intellispaces.ixora.rdb.ResultSetHandle;
 import tech.intellispaces.ixora.rdb.ResultSetToDataChannel;

@@ -1,13 +1,13 @@
 package tech.intellispaces.ixora.rdb.processor.entity;
 
-import tech.intellispaces.annotationprocessor.ArtifactGenerator;
-import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
-import tech.intellispaces.annotationprocessor.ArtifactProcessor;
-import tech.intellispaces.annotationprocessor.ArtifactValidator;
+import tech.intellispaces.commons.annotation.processor.ArtifactGenerator;
+import tech.intellispaces.commons.annotation.processor.ArtifactGeneratorContext;
+import tech.intellispaces.commons.annotation.processor.ArtifactProcessor;
+import tech.intellispaces.commons.annotation.processor.ArtifactValidator;
+import tech.intellispaces.commons.java.reflection.customtype.CustomType;
 import tech.intellispaces.ixora.rdb.annotation.Entity;
 import tech.intellispaces.jaquarius.annotationprocessor.AnnotationProcessorFunctions;
 import tech.intellispaces.jaquarius.annotationprocessor.JaquariusArtifactProcessor;
-import tech.intellispaces.java.reflection.customtype.CustomType;
 
 import javax.lang.model.element.ElementKind;
 import java.util.ArrayList;

@@ -2,8 +2,10 @@ package tech.intellispaces.ixora.rdb.processor.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
-import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
-import tech.intellispaces.general.text.StringFunctions;
+import tech.intellispaces.commons.annotation.processor.ArtifactGeneratorContext;
+import tech.intellispaces.commons.base.text.StringFunctions;
+import tech.intellispaces.commons.java.reflection.customtype.CustomType;
+import tech.intellispaces.commons.java.reflection.method.MethodStatement;
 import tech.intellispaces.ixora.data.association.Maps;
 import tech.intellispaces.ixora.rdb.TransactionHandle;
 import tech.intellispaces.ixora.rdb.Transactions;
@@ -12,8 +14,6 @@ import tech.intellispaces.ixora.rdb.exception.RdbExceptions;
 import tech.intellispaces.jaquarius.annotation.Guide;
 import tech.intellispaces.jaquarius.annotation.Ontology;
 import tech.intellispaces.jaquarius.annotationprocessor.JaquariusArtifactGenerator;
-import tech.intellispaces.java.reflection.customtype.CustomType;
-import tech.intellispaces.java.reflection.method.MethodStatement;
 
 import java.util.Optional;
 

@@ -1,14 +1,14 @@
 package tech.intellispaces.ixora.rdb.processor.entity;
 
-import tech.intellispaces.annotationprocessor.ArtifactGeneratorContext;
+import tech.intellispaces.commons.annotation.processor.ArtifactGeneratorContext;
+import tech.intellispaces.commons.java.reflection.customtype.CustomType;
+import tech.intellispaces.commons.java.reflection.method.MethodStatement;
 import tech.intellispaces.ixora.rdb.TransactionDomain;
 import tech.intellispaces.jaquarius.annotation.Channel;
 import tech.intellispaces.jaquarius.annotation.Ontology;
 import tech.intellispaces.jaquarius.annotationprocessor.JaquariusArtifactGenerator;
 import tech.intellispaces.jaquarius.id.RepetableUuidIdentifierGenerator;
 import tech.intellispaces.jaquarius.space.domain.DomainFunctions;
-import tech.intellispaces.java.reflection.customtype.CustomType;
-import tech.intellispaces.java.reflection.method.MethodStatement;
 
 import java.util.Optional;
 import java.util.UUID;

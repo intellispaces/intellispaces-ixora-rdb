@@ -2,8 +2,8 @@ package tech.intellispaces.ixora.rdb;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.intellispaces.general.exception.WrappedExceptions;
-import tech.intellispaces.general.function.ThrowingFunction;
+import tech.intellispaces.commons.base.exception.WrappedExceptions;
+import tech.intellispaces.commons.base.function.ThrowingFunction;
 import tech.intellispaces.ixora.rdb.exception.TransactionException;
 import tech.intellispaces.ixora.rdb.exception.TransactionExceptions;
 import tech.intellispaces.jaquarius.system.projection.ContextProjections;

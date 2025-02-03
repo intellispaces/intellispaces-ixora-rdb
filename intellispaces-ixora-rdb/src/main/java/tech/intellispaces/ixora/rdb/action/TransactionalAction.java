@@ -1,7 +1,7 @@
 package tech.intellispaces.ixora.rdb.action;
 
-import tech.intellispaces.action.Action;
-import tech.intellispaces.action.wrapper.AbstractWrapperAction;
+import tech.intellispaces.commons.action.Action;
+import tech.intellispaces.commons.action.wrapper.AbstractWrapperAction;
 import tech.intellispaces.ixora.rdb.MovableTransactionFactoryHandle;
 import tech.intellispaces.ixora.rdb.TransactionFunctions;
 

@@ -1,8 +1,8 @@
 package tech.intellispaces.ixora.rdb.guide;
 
 import tech.intellispaces.ixora.data.collection.Lists;
-import tech.intellispaces.ixora.rdb.BlindQueryAndParameterNamesHandle;
 import tech.intellispaces.ixora.rdb.BlindQueryAndParameterNamesData;
+import tech.intellispaces.ixora.rdb.BlindQueryAndParameterNamesHandle;
 import tech.intellispaces.ixora.rdb.ParameterizedQueryToBlindQueryGuide;
 import tech.intellispaces.jaquarius.annotation.Guide;
 
