@@ -1,10 +1,10 @@
 package tech.intellispaces.ixora.rdb;
 
-import tech.intellispaces.ixora.data.association.MapDomain;
-import tech.intellispaces.ixora.data.cursor.CursorDomain;
 import tech.intellispaces.jaquarius.annotation.Channel;
 import tech.intellispaces.jaquarius.annotation.Domain;
 import tech.intellispaces.jaquarius.annotation.Movable;
+import tech.intellispaces.jaquarius.ixora.data.association.MapDomain;
+import tech.intellispaces.jaquarius.ixora.data.cursor.CursorDomain;
 import tech.intellispaces.jaquarius.traverse.TraverseTypes;
 
 @Domain("8f174862-2fab-48cb-af12-b8e264f19257")

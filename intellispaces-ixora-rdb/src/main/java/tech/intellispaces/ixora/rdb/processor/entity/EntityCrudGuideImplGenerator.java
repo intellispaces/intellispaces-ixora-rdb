@@ -51,7 +51,7 @@ public class EntityCrudGuideImplGenerator extends JaquariusArtifactGenerator {
   protected boolean analyzeSourceArtifact(ArtifactGeneratorContext context) {
     addImport(Guide.class);
     addImport(TransactionHandle.class);
-    addImport(tech.intellispaces.ixora.data.association.MapHandle.class);
+    addImport(tech.intellispaces.jaquarius.ixora.data.association.MapHandle.class);
     addImport(Maps.class);
     addImport(Transactional.class);
     addImport(Transactions.class);
