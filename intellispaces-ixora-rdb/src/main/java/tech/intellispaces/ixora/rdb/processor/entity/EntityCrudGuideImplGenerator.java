@@ -6,7 +6,6 @@ import tech.intellispaces.commons.annotation.processor.ArtifactGeneratorContext;
 import tech.intellispaces.commons.base.text.StringFunctions;
 import tech.intellispaces.commons.java.reflection.customtype.CustomType;
 import tech.intellispaces.commons.java.reflection.method.MethodStatement;
-import tech.intellispaces.ixora.data.association.Maps;
 import tech.intellispaces.ixora.rdb.TransactionHandle;
 import tech.intellispaces.ixora.rdb.Transactions;
 import tech.intellispaces.ixora.rdb.annotation.Transactional;
@@ -14,6 +13,7 @@ import tech.intellispaces.ixora.rdb.exception.RdbExceptions;
 import tech.intellispaces.jaquarius.annotation.Guide;
 import tech.intellispaces.jaquarius.annotation.Ontology;
 import tech.intellispaces.jaquarius.annotationprocessor.JaquariusArtifactGenerator;
+import tech.intellispaces.jaquarius.ixora.data.association.Maps;
 
 import java.util.Optional;
 

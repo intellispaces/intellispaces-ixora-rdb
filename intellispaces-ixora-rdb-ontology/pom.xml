@@ -31,11 +31,6 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>tech.intellispaces.ixora</groupId>
-            <artifactId>intellispaces-ixora-data-ontology</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>tech.intellispaces.jaquarius</groupId>
             <artifactId>intellispaces-jaquarius-ixora-data-ontology</artifactId>
             <version>0.0.1-SNAPSHOT</version>
