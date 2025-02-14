@@ -2,8 +2,8 @@ package tech.intellispaces.ixora.rdb.action;
 
 import tech.intellispaces.commons.action.Action;
 import tech.intellispaces.commons.action.wrapper.AbstractWrapperAction;
-import tech.intellispaces.ixora.rdb.MovableTransactionFactoryHandle;
 import tech.intellispaces.ixora.rdb.TransactionFunctions;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableTransactionFactoryHandle;
 
 public class TransactionalAction extends AbstractWrapperAction {
   private final MovableTransactionFactoryHandle transactionFactory;

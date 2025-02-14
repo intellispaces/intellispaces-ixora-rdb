@@ -23,7 +23,7 @@ public class {{$generatedArtifactSimpleName}} implements {{$guideType}} {
   @Override
   public {{$entityHandleSimpleName}} getById(TransactionHandle tx, {{$identifierType}} id) {
     MapHandle<String, Object> params = Maps.of(String.class, Object.class, "id", id);
-    return tx.fetchData({{$entityHandleSimpleName}}.class, "SELECT * FROM {{$entityTable}} {{$entityAlias}} WHERE {{$entityAlias}}.{{$identifierColumn}} = :id", params);
+    return tx.fetchData(Types.get({{$entityHandleSimpleName}}.class), "SELECT * FROM {{$entityTable}} {{$entityAlias}} WHERE {{$entityAlias}}.{{$identifierColumn}} = :id", params);
   }
 {{end}}
 }

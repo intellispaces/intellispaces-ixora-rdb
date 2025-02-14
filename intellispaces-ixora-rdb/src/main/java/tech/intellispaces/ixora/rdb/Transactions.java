@@ -1,6 +1,7 @@
 package tech.intellispaces.ixora.rdb;
 
 import tech.intellispaces.jaquarius.exception.TraverseExceptions;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableTransactionHandle;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

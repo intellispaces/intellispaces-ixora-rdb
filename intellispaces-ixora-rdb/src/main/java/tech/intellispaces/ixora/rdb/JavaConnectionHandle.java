@@ -4,10 +4,14 @@ import tech.intellispaces.ixora.rdb.exception.RdbExceptions;
 import tech.intellispaces.jaquarius.annotation.MapperOfMoving;
 import tech.intellispaces.jaquarius.annotation.Mover;
 import tech.intellispaces.jaquarius.annotation.ObjectHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.ConnectionDomain;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableConnectionHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovablePreparedStatementHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableStatementHandle;
 
 import java.sql.SQLException;
 
-@ObjectHandle( ConnectionDomain.class)
+@ObjectHandle(ConnectionDomain.class)
 abstract class JavaConnectionHandle implements MovableConnectionHandle {
   private final java.sql.Connection connection;
 
@@ -19,7 +23,7 @@ abstract class JavaConnectionHandle implements MovableConnectionHandle {
   @MapperOfMoving
   public MovableStatementHandle createStatement() {
     try {
-      return new JavaStatementHandleImpl(connection.createStatement());
+      return new JavaStatementHandleWrapper(connection.createStatement());
     } catch (SQLException e) {
       throw RdbExceptions.withCauseAndMessage(e, "Could not create statement");
     }
@@ -29,7 +33,7 @@ abstract class JavaConnectionHandle implements MovableConnectionHandle {
   @MapperOfMoving
   public MovablePreparedStatementHandle createPreparedStatement(String query) {
     try {
-      return new JavaPreparedStatementHandleImpl(connection.prepareStatement(query));
+      return new JavaPreparedStatementHandleWrapper(connection.prepareStatement(query));
     } catch (SQLException e) {
       throw RdbExceptions.withCauseAndMessage(e, "Could not create statement");
     }

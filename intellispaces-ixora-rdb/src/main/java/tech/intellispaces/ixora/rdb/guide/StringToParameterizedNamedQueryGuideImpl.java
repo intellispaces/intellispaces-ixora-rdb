@@ -1,19 +1,19 @@
 package tech.intellispaces.ixora.rdb.guide;
 
-import tech.intellispaces.ixora.rdb.BlindQueryAndParameterNamesData;
-import tech.intellispaces.ixora.rdb.BlindQueryAndParameterNamesHandle;
-import tech.intellispaces.ixora.rdb.ParameterizedQueryToBlindQueryGuide;
+import tech.intellispaces.ixora.rdb.sql.ParameterizedNamedQueries;
 import tech.intellispaces.jaquarius.annotation.Guide;
 import tech.intellispaces.jaquarius.ixora.data.collection.Lists;
+import tech.intellispaces.jaquarius.ixora.rdb.sql.ParameterizedNamedQueryHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.StringToParameterizedNamedQueryGuide;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Guide
-public class IxoraParameterizedQueryToBlindQueryGuide implements ParameterizedQueryToBlindQueryGuide {
+public class StringToParameterizedNamedQueryGuideImpl implements StringToParameterizedNamedQueryGuide {
 
   @Override
-  public BlindQueryAndParameterNamesHandle parameterizedQueryToBlindQuery(String query) {
+  public ParameterizedNamedQueryHandle stringToParameterizedNamedQuery(String query) {
     char[] originQuery = query.toCharArray();
     char[] blindQuery = new char[query.length()];
     List<String> paramNames = new ArrayList<>();
@@ -32,9 +32,9 @@ public class IxoraParameterizedQueryToBlindQueryGuide implements ParameterizedQu
         blindQuery[index2++] = ch;
       }
     }
-    return new BlindQueryAndParameterNamesData(
-      new String(blindQuery, 0, index2),
-      Lists.of(paramNames, String.class)
+    return ParameterizedNamedQueries.get(
+        new String(blindQuery, 0, index2),
+        Lists.of(paramNames, String.class)
     );
   }
 }

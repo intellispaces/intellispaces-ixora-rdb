@@ -4,6 +4,9 @@ import tech.intellispaces.ixora.rdb.exception.RdbExceptions;
 import tech.intellispaces.jaquarius.annotation.Mapper;
 import tech.intellispaces.jaquarius.annotation.Mover;
 import tech.intellispaces.jaquarius.annotation.ObjectHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovablePreparedStatementHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableResultSetHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.PreparedStatementDomain;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -21,7 +24,7 @@ abstract class JavaPreparedStatementHandle implements MovablePreparedStatementHa
   public MovableResultSetHandle executeQuery() {
     try {
       java.sql.ResultSet rs = preparedStatement.executeQuery();
-      return new JavaResultSetHandleImpl(rs);
+      return new JavaResultSetHandleWrapper(rs);
     } catch (SQLException e) {
       throw RdbExceptions.withCauseAndMessage(e, "Could not execute prepared statement");
     }

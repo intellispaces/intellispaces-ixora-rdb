@@ -3,11 +3,11 @@ package tech.intellispaces.ixora.rdb.processor.entity;
 import tech.intellispaces.commons.annotation.processor.ArtifactGeneratorContext;
 import tech.intellispaces.commons.java.reflection.customtype.CustomType;
 import tech.intellispaces.commons.java.reflection.method.MethodStatement;
-import tech.intellispaces.ixora.rdb.TransactionHandle;
 import tech.intellispaces.jaquarius.annotation.Guide;
 import tech.intellispaces.jaquarius.annotation.Mapper;
 import tech.intellispaces.jaquarius.annotation.Ontology;
 import tech.intellispaces.jaquarius.annotationprocessor.JaquariusArtifactGenerator;
+import tech.intellispaces.jaquarius.ixora.rdb.TransactionHandle;
 
 import java.util.Optional;
 

@@ -5,9 +5,7 @@ import tech.intellispaces.commons.base.collection.ArraysFunctions;
 import tech.intellispaces.commons.base.exception.UnexpectedExceptions;
 import tech.intellispaces.commons.base.text.StringFunctions;
 import tech.intellispaces.commons.base.type.ClassFunctions;
-import tech.intellispaces.ixora.rdb.ResultSetHandle;
-import tech.intellispaces.ixora.rdb.ResultSetToDataChannel;
-import tech.intellispaces.ixora.rdb.ResultSetToDataListChannel;
+import tech.intellispaces.commons.base.type.Type;
 import tech.intellispaces.jaquarius.annotation.Data;
 import tech.intellispaces.jaquarius.annotation.Guide;
 import tech.intellispaces.jaquarius.annotation.Mapper;
@@ -16,6 +14,9 @@ import tech.intellispaces.jaquarius.annotation.Name;
 import tech.intellispaces.jaquarius.data.DataFunctions;
 import tech.intellispaces.jaquarius.ixora.data.collection.ListHandle;
 import tech.intellispaces.jaquarius.ixora.data.collection.Lists;
+import tech.intellispaces.jaquarius.ixora.rdb.ResultSetHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.ResultSetToDataChannel;
+import tech.intellispaces.jaquarius.ixora.rdb.ResultSetToDataListChannel;
 import tech.intellispaces.jaquarius.naming.NameConventionFunctions;
 import tech.intellispaces.jaquarius.object.reference.ObjectHandleFunctions;
 
@@ -29,7 +30,9 @@ import java.util.Map;
 public class IxoraResultSetToDataGuide {
 
   @Mapper(ResultSetToDataChannel.class)
-  public <D> D resultSetToData(ResultSetHandle resultSet, Class<D> dataClass) {
+  @SuppressWarnings("unchecked")
+  public <D> D resultSetToData(ResultSetHandle resultSet, Type<D> dataType) {
+    var dataClass = (Class<D>) dataType.asClassType().baseClass();
     Class<?> domainClass = getDomainClass(dataClass);
     Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);
     Object[] arguments = makeDataHandleArguments(resultSet, dataClass, domainClass, constructor);
@@ -41,7 +44,9 @@ public class IxoraResultSetToDataGuide {
   }
 
   @MapperOfMoving(ResultSetToDataListChannel.class)
-  public <D> ListHandle<D> resultSetToDataList(ResultSetHandle resultSet, Class<D> dataClass) {
+  @SuppressWarnings("unchecked")
+  public <D> ListHandle<D> resultSetToDataList(ResultSetHandle resultSet, Type<D> dataType) {
+    var dataClass = (Class<D>) dataType.asClassType().baseClass();
     Class<?> domainClass = getDomainClass(dataClass);
     Constructor<D> constructor = getDataHandleConstructor(dataClass, domainClass);
     java.util.List<D> values = new ArrayList<>();
@@ -104,14 +109,14 @@ public class IxoraResultSetToDataGuide {
       ResultSetHandle resultSet, Object[] arguments, int index, String columnName, Class<?> paramClass
   ) {
     if (paramClass == int.class) {
-      Integer value = resultSet.integerValue(columnName);
+      Integer value = resultSet.integer32Value(columnName);
       if (value == null) {
         throw UnexpectedExceptions.withMessage("Null value of the primitive integer value by name {0}",
             columnName);
       }
       arguments[index] = value;
     } else if (paramClass == Integer.class) {
-      arguments[index] = resultSet.integerValue(columnName);
+      arguments[index] = resultSet.integer32Value(columnName);
     } else if (paramClass == String.class) {
       arguments[index] = resultSet.stringValue(columnName);
     }

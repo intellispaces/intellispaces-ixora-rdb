@@ -1,13 +1,16 @@
 package tech.intellispaces.ixora.rdb;
 
-import tech.intellispaces.ixora.rdb.guide.IxoraParameterizedQueryToBlindQueryGuide;
+import tech.intellispaces.ixora.rdb.guide.StringToParameterizedNamedQueryGuideImpl;
 import tech.intellispaces.ixora.rdb.guide.IxoraResultSetToDataGuide;
 import tech.intellispaces.jaquarius.annotation.Configuration;
 import tech.intellispaces.jaquarius.annotation.Projection;
 import tech.intellispaces.jaquarius.annotation.Settings;
+import tech.intellispaces.jaquarius.ixora.rdb.DataSourceSettingsHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableDataSourceHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableTransactionFactoryHandle;
 
 @Configuration({
-    IxoraParameterizedQueryToBlindQueryGuide.class,
+    StringToParameterizedNamedQueryGuideImpl.class,
     IxoraResultSetToDataGuide.class
 })
 public abstract class RdbConfiguration {
@@ -24,6 +27,6 @@ public abstract class RdbConfiguration {
    */
   @Projection
   public MovableTransactionFactoryHandle transactionFactory(MovableDataSourceHandle dataSource) {
-    return new TransactionFactoryHandleOverDataSourceImpl(dataSource);
+    return new TransactionFactoryHandleOverDataSourceWrapper(dataSource);
   }
 }

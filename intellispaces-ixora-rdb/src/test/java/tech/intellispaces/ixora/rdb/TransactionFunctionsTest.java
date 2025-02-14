@@ -3,6 +3,9 @@ package tech.intellispaces.ixora.rdb;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableTransactionFactoryHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableTransactionHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.TransactionHandle;
 import tech.intellispaces.jaquarius.system.Modules;
 
 import java.util.ArrayList;

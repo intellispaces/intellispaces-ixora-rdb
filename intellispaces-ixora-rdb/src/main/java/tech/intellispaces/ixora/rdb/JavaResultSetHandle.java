@@ -4,6 +4,8 @@ import tech.intellispaces.jaquarius.annotation.Mapper;
 import tech.intellispaces.jaquarius.annotation.MapperOfMoving;
 import tech.intellispaces.jaquarius.annotation.ObjectHandle;
 import tech.intellispaces.jaquarius.exception.TraverseExceptions;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableResultSetHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.ResultSetDomain;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +30,7 @@ abstract class JavaResultSetHandle implements MovableResultSetHandle {
 
   @Mapper
   @Override
-  public Integer integerValue(String name) {
+  public Integer integer32Value(String name) {
     try {
       int value = rs.getInt(name);
       if (rs.wasNull()) {

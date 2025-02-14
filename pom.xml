@@ -12,7 +12,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>intellispaces-ixora-rdb-ontology</module>
         <module>intellispaces-ixora-rdb</module>
     </modules>
 

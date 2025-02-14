@@ -4,6 +4,12 @@ import tech.intellispaces.ixora.rdb.exception.TransactionException;
 import tech.intellispaces.jaquarius.annotation.Mapper;
 import tech.intellispaces.jaquarius.annotation.MapperOfMoving;
 import tech.intellispaces.jaquarius.annotation.ObjectHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.DataSourceHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableConnectionHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableDataSourceHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableTransactionFactoryHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableTransactionHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.TransactionFactoryDomain;
 
 @ObjectHandle(TransactionFactoryDomain.class)
 abstract class TransactionFactoryHandleOverDataSource implements MovableTransactionFactoryHandle {
@@ -23,6 +29,6 @@ abstract class TransactionFactoryHandleOverDataSource implements MovableTransact
   @MapperOfMoving
   public MovableTransactionHandle getTransaction() throws TransactionException {
     MovableConnectionHandle connection = dataSource.getConnection();
-    return new TransactionHandleOverConnectionImpl(connection);
+    return new TransactionHandleOverConnectionWrapper(connection);
   }
 }

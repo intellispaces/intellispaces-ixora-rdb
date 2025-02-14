@@ -6,6 +6,9 @@ import tech.intellispaces.commons.base.exception.WrappedExceptions;
 import tech.intellispaces.commons.base.function.ThrowingFunction;
 import tech.intellispaces.ixora.rdb.exception.TransactionException;
 import tech.intellispaces.ixora.rdb.exception.TransactionExceptions;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableTransactionFactoryHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.MovableTransactionHandle;
+import tech.intellispaces.jaquarius.ixora.rdb.TransactionHandle;
 import tech.intellispaces.jaquarius.system.projection.ContextProjections;
 
 import java.util.function.Consumer;
